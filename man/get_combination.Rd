@@ -5,8 +5,8 @@
 \title{获得组合列表}
 \usage{
 get_combination(
-  ma = c("JD12", "JD17"),
-  pa = c("ZJD6001", "ZJD6024"),
+  ma = c("JD12", "JD17", "JD32"),
+  pa = c("ZJD6001", "ZJD6019", "ZJD6024"),
   memo = NA,
   prefix = "ZJ",
   startN = 1

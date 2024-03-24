@@ -1,4 +1,11 @@
-
+#' 升级群体
+#'
+#' 从杂交组合中或群体中升级群体
+#' @param my_combi 数据框，从get_combination或get_population函数所产生数据
+#' @param prefix 字符串，群体名称前缀
+#' @return 下阶段值为“群体”记录升级为群体
+#
+#
 
 get_population <- function(my_combi, prefix = "QT24") {
   my_pop <- subset(my_combi, my_combi$next_stage == "群体")

@@ -4,7 +4,7 @@ get_line <- function(my_plant, prefix = "ZH") {
   #处理各列
   my_line$id <- get_ID(n1 = 1, n2 = nrow(my_line))
 
-  my_line$source <- my_line$stageid
+  #my_line$source <- my_line$name
 
   my_line$stageid <-
     get_prefix_linename(

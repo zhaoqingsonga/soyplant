@@ -171,8 +171,8 @@ get_prefix_linename <- function(prefix = "ZJ",
 #' @examples
 #' get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),memo = "转基因",prefix="ZJ",startN=1)
 #' get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),prefix="ZJ",startN=101)
-get_combination <- function(ma = c("JD12", "JD17"),
-                            pa = c("ZJD6001", "ZJD6024"),
+get_combination <- function(ma = c("JD12", "JD17","JD32"),
+                            pa = c("ZJD6001",  "ZJD6019","ZJD6024"),
                             memo = NA,
                             prefix = "ZJ",
                             startN = 1)
@@ -243,8 +243,10 @@ get_combination_fromfile<-function(filename,prefix = "ZJ24"){
 #'  获得组合矩阵
 #'
 #' @param my_combi data.frame, 里面要有三列数据:分别为 ma, pa, stageid
+#' @return 返回组合矩阵
+#' @examples
+#' combination_matrix(data.frame(ma=c("JD12","JD17","JD32"),pa=c("ZLD6001","ZLD6003","ZLD6024"),stageid=c("ZJ001","ZJ002","ZJ003")))
 
-# my_combi <- get_combination(prefix = "ZJ24")
 #组合矩阵
 combination_matrix <- function(my_combi) {
   ma <- my_combi$ma[!duplicated(my_combi$ma)]
@@ -271,4 +273,7 @@ combination_matrix <- function(my_combi) {
   rownames(mapamatri)<-NULL
   return(mapamatri)
 }
+
+my_combi<-get_combination()
+
 
