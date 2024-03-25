@@ -146,7 +146,7 @@ planting <- function(my_primary,
                      rp = 2,
                      place = c("石家庄", "德州"),
                      ckfixed = TRUE) {
-  library(dplyr)
+
   #ck固定
   if (ckfixed) {
     my_primary %>%

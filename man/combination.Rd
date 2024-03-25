@@ -5,8 +5,8 @@
 \title{杂交组合}
 \usage{
 combination(
-  ma = c("冀豆12", "冀豆17"),
-  pa = c("中联豆6001", "中联豆6024", "中联豆6033"),
+  ma = c("JD12", "JD17"),
+  pa = c("ZLD6001", "ZLD6024", "ZLD6033"),
   memo = NA
 )
 }

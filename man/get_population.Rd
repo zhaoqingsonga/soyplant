@@ -17,3 +17,7 @@ get_population(my_combi, prefix = "QT24")
 \description{
 从杂交组合中或群体中升级群体
 }
+\examples{
+get_population(my_combi,prefix="QT24")
+
+}

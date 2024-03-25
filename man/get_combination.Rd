@@ -30,6 +30,6 @@ get_combination(
 根据父母本获得组合列表
 }
 \examples{
-get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),memo = "转基因",prefix="ZJ",startN=1)
+get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),memo = "transgene",prefix="ZJ",startN=1)
 get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),prefix="ZJ",startN=101)
 }

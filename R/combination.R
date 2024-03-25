@@ -9,8 +9,8 @@
 #' @examples
 #' combination(ma=c("冀豆12", "冀豆17"),pa=c("中联豆6001", "中联豆6024", "中联豆6033"),memo = "转基因")
 #' combination(ma=c("冀豆12", "冀豆17"),pa=c("中联豆6001", "中联豆6024", "中联豆6033"),memo = NA)
-combination <- function(ma = c("冀豆12", "冀豆17"),
-                        pa = c("中联豆6001", "中联豆6024", "中联豆6033"),
+combination <- function(ma = c("JD12", "JD17"),
+                        pa = c("ZLD6001", "ZLD6024", "ZLD6033"),
                         memo = NA) {
   all_combinations <- expand.grid(ma, pa)
   names(all_combinations) <- c("ma", "pa")
@@ -20,13 +20,7 @@ combination <- function(ma = c("冀豆12", "冀豆17"),
   return(all_combinations)
 }
 
-
-#' get ID prefix
-#'
-#' @param name description
-#'
-#'
-#'
+#
 ID_prefix <- function() {
   onlyID <- format(Sys.time(), "%Y%m%d%H%M%S")
   return(onlyID)
@@ -169,7 +163,7 @@ get_prefix_linename <- function(prefix = "ZJ",
 #' @param startN 起始编号
 #' @return 返回杂交列表
 #' @examples
-#' get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),memo = "转基因",prefix="ZJ",startN=1)
+#' get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),memo = "transgene",prefix="ZJ",startN=1)
 #' get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),prefix="ZJ",startN=101)
 get_combination <- function(ma = c("JD12", "JD17","JD32"),
                             pa = c("ZJD6001",  "ZJD6019","ZJD6024"),
@@ -276,4 +270,4 @@ combination_matrix <- function(my_combi) {
 
 my_combi<-get_combination()
 
-
+#write.table(my_combi,"E:\\FangCloudSync\\R_WD360\\Project\\soyplant\\data\\my_combi.txt")
