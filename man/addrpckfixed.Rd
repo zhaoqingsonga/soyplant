@@ -7,6 +7,8 @@
 addrpckfixed(my_plant, ck = "JD12", interval = 3, s_prefix = "GC", rp = 2)
 }
 \arguments{
+\item{my_plant}{数据框，数据框中要包含id,stageid,name三列}
+
 \item{ck}{向量，对照名称,可一个对照或多个对照}
 
 \item{interval}{插入对照的材料间隔数}
@@ -14,8 +16,6 @@ addrpckfixed(my_plant, ck = "JD12", interval = 3, s_prefix = "GC", rp = 2)
 \item{s_prefix}{材料前缀}
 
 \item{rp}{种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同}
-
-\item{my_primary}{数据框，数据框中要包含id,stageid,name三列}
 }
 \value{
 返回插入对照和重复的数据框，给材料进行了编号

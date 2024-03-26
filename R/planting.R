@@ -1,7 +1,7 @@
 #' 添加编码重复对照（按间隔插入）
 #'
 #'
-#' @param my_primary 数据框，数据框中要包含id,stageid,name三列
+#' @param my_plant 数据框，数据框中要包含id,stageid,name三列
 #' @param ck 向量，对照名称,可一个对照或多个对照
 #' @param interval 插入对照的材料间隔数
 #' @param s_prefix 材料前缀
@@ -79,7 +79,7 @@ addrpckfixed <- function(my_plant,
 #' 添加编码重复对照（对照随机）
 #'
 #'
-#' @param my_primary 数据框，数据框中要包含id,stageid,name三列
+#' @param my_plant 数据框，数据框中要包含id,stageid,name三列
 #' @param ck 向量，对照名称
 #' @param interval 插入对照的材料间隔数
 #' @param s_prefix 材料前缀

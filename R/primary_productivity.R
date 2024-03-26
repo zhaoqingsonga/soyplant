@@ -1,3 +1,5 @@
+
+
 get_primary <- function(my_line) {
   my_primary <- subset(my_line, my_line$next_stage == "初级产比")
   #处理各列
