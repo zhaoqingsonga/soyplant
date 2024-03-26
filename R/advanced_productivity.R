@@ -1,9 +1,9 @@
-get_advanced <- function(my_primary, prefix = "JD") {
+get_advanced <- function(my_primary) {
   my_advanced <- subset(my_primary, my_primary$next_stage == "高级产比")
   #处理各列
   my_advanced$id <- get_ID(n1 = 1, n2 = nrow(my_advanced))
 
-  my_advanced$source <- my_advanced$stageid
+  my_advanced$source <- my_advanced$name
   #处理名称
   if (!all(my_advanced$stage == "株行")) {
     my_advanced$name <-
@@ -16,13 +16,6 @@ get_advanced <- function(my_primary, prefix = "JD") {
       paste(my_advanced$name, "F", (my_advanced$f + 1),  sep = "")
   }
 
-  my_advanced$stageid <-
-    get_prefix_linename(
-      prefix = prefix,
-      n1 = 1,
-      n2 = nrow(my_advanced),
-      digits = 3
-    )
   my_advanced$stage <- "高级产比"
   my_advanced$next_stage <- "多点鉴定"
   my_advanced$f <- my_advanced$f + 1
@@ -35,6 +28,6 @@ get_advanced <- function(my_primary, prefix = "JD") {
   return(my_advanced)
 }
 
-# my_advanced <- get_advanced(my_primary, "JD27")
+# my_advanced <- get_advanced(my_primary)
 #
 # my_advanced

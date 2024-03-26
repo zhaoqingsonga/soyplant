@@ -109,48 +109,6 @@ get_prefix_linename <- function(prefix = "ZJ",
 #添加名称
 
 
-# get_combination_list<-function(
-    #     mylist=list(
-#     com1=list(ma=c("冀豆12","冀豆17"),
-#               pa=c("中联豆6001","中联豆6024","中联豆6033"),
-#               memo="high protein"),
-#     com2=list(ma=c("冀豆15","冀豆20"),
-#               pa=c("中联豆6001","中联豆6024","中联豆6033")
-#               )
-#     ),
-#     prefix="ZJ",
-#     startN=1,
-#     only=FALSE
-# ){
-#   mapa<-data.frame()
-#   for(i in 1:length(mylist)){
-#    if(length(mylist[[i]]$memo)==0) {
-#      mapa<-rbind(mapa,combination(mylist[[i]]$ma,mylist[[i]]$pa))
-#      }
-#     else{
-#       mapa<-rbind(mapa,combination(mylist[[i]]$ma,mylist[[i]]$pa,mylist[[i]]$memo))
-#         }
-#     }
-#
-#   if(only){mapa<-mapa[!duplicated(mapa$mapa),]}
-#   my_len<-length(mapa$mapa)
-#   user<-get_computer_nodename()
-#   name<-get_prefix_linename(prefix=prefix,n1=startN,n2=my_len+startN-1)
-#   id<-get_ID(1,my_len)
-#   f<-rep(0,my_len)
-#   re_v<-data.frame(
-#     id=id,
-#     user=rep(user,my_len),
-#     name=name,
-#     f=f
-#   )
-#   re_v<-cbind(re_v,mapa)
-#   re_v$stage<-"杂交"
-#   re_v$next_stage<-"群体"
-#   re_v$process<-id
-#   re_v$path<-re_v$name
-#   return(re_v)
-# }
 
 
 #' 获得组合列表
@@ -175,18 +133,18 @@ get_combination <- function(ma = c("JD12", "JD17","JD32"),
   mapa$memo = memo
   my_len <- length(mapa$mapa)
   user <- get_computer_nodename()
-  stageid <-
+  name <-
     get_prefix_linename(prefix = prefix,
                         n1 = startN,
                         n2 = my_len + startN - 1)#合并时注意，要重新生成
-  name <- paste(stageid, "F0", sep = "")#合并时注意，要重新生成
+  name <- paste(name, "F0", sep = "")#合并时注意，要重新生成
 
   id <- get_ID(1, my_len)
   f <- rep(0, my_len)
   re_v <- data.frame(
     id = id,
     user = rep(user, my_len),
-    stageid = stageid,
+    stageid = NA,
     name = name,
     f = f
   )
@@ -194,12 +152,11 @@ get_combination <- function(ma = c("JD12", "JD17","JD32"),
   re_v$stage <- "杂交"
   re_v$next_stage <- "群体"
   re_v$process <- id
-  re_v$path <- re_v$stageid#合并时要重新生成
+  re_v$path <- re_v$name#合并时要重新生成
   return(re_v)
 }
 ##
 combi_bind <- function(...,
-                       prefix = "ZJ",
                        only = TRUE,
                        order = FALSE) {
   # 在函数内部，你可以通过...来访问不定参数
@@ -210,10 +167,10 @@ combi_bind <- function(...,
   if (order) {
     re_v <- re_v[order(re_v$mapa),]
   }
-  #合并这两个字段时重命名
-  re_v$stageid <- get_prefix_linename(prefix, n2 = nrow(re_v))
-  re_v$name <- paste(re_v$stageid, "F0", sep = "")
-  re_v$path <- re_v$stageid
+  #合并时这个字段时重命名
+  re_v$name <- get_prefix_linename(prefix, n2 = nrow(re_v))
+  re_v$name <- paste(re_v$name, "F0", sep = "")
+  re_v$path <- re_v$name
   rownames(re_v)<-NULL
   return(re_v)
 }
@@ -233,13 +190,12 @@ get_combination_fromfile<-function(filename,prefix = "ZJ24"){
   do.call(combi_bind, c(mylist,extra_params))
 }
 
-
 #'  获得组合矩阵
 #'
-#' @param my_combi data.frame, 里面要有三列数据:分别为 ma, pa, stageid
+#' @param my_combi data.frame, 里面要有三列数据:分别为 ma, pa, name
 #' @return 返回组合矩阵
 #' @examples
-#' combination_matrix(data.frame(ma=c("JD12","JD17","JD32"),pa=c("ZLD6001","ZLD6003","ZLD6024"),stageid=c("ZJ001","ZJ002","ZJ003")))
+#' combination_matrix(data.frame(ma=c("JD12","JD17","JD32"),pa=c("ZLD6001","ZLD6003","ZLD6024"),name=c("ZJ001","ZJ002","ZJ003")))
 
 #组合矩阵
 combination_matrix <- function(my_combi) {
@@ -255,10 +211,10 @@ combination_matrix <- function(my_combi) {
 
   for (i in 1:nrow(my_combi)) {
     if (is.na(mapamatri[my_combi$ma[i], my_combi$pa[i]])) {
-      mapamatri[my_combi$ma[i], my_combi$pa[i]] <- my_combi$stageid[i]
+      mapamatri[my_combi$ma[i], my_combi$pa[i]] <- my_combi$name[i]
     } else{
       mapamatri[my_combi$ma[i], my_combi$pa[i]] <-
-        paste(mapamatri[my_combi$ma[i], my_combi$pa[i]], my_combi$stageid[i], sep =
+        paste(mapamatri[my_combi$ma[i], my_combi$pa[i]], my_combi$name[i], sep =
                 "/")
     }
   }
@@ -268,6 +224,8 @@ combination_matrix <- function(my_combi) {
   return(mapamatri)
 }
 
-my_combi<-get_combination()
+#my_combi<-get_combination()
 
 #write.table(my_combi,"E:\\FangCloudSync\\R_WD360\\Project\\soyplant\\data\\my_combi.txt")
+
+

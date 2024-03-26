@@ -7,7 +7,7 @@
 combination_matrix(my_combi)
 }
 \arguments{
-\item{my_combi}{data.frame, 里面要有三列数据:分别为 ma, pa, stageid}
+\item{my_combi}{data.frame, 里面要有三列数据:分别为 ma, pa, name}
 }
 \value{
 返回组合矩阵
@@ -16,5 +16,5 @@ combination_matrix(my_combi)
 获得组合矩阵
 }
 \examples{
-combination_matrix(data.frame(ma=c("JD12","JD17","JD32"),pa=c("ZLD6001","ZLD6003","ZLD6024"),stageid=c("ZJ001","ZJ002","ZJ003")))
+combination_matrix(data.frame(ma=c("JD12","JD17","JD32"),pa=c("ZLD6001","ZLD6003","ZLD6024"),name=c("ZJ001","ZJ002","ZJ003")))
 }
