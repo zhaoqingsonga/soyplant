@@ -4,12 +4,10 @@
 \alias{get_population}
 \title{升级群体}
 \usage{
-get_population(my_combi, prefix = "QT24")
+get_population(my_combi)
 }
 \arguments{
 \item{my_combi}{数据框，从get_combination或get_population函数所产生数据}
-
-\item{prefix}{字符串，群体名称前缀}
 }
 \value{
 下阶段值为“群体”记录升级为群体
@@ -18,6 +16,6 @@ get_population(my_combi, prefix = "QT24")
 从杂交组合中或群体中升级群体
 }
 \examples{
-get_population(my_combi,prefix="QT24")
+get_population(my_combi)
 
 }

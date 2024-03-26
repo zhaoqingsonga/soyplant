@@ -5,31 +5,27 @@
 \title{获得组合列表}
 \usage{
 get_combination(
-  ma = c("JD12", "JD17", "JD32"),
-  pa = c("ZJD6001", "ZJD6019", "ZJD6024"),
-  memo = NA,
+  filename,
   prefix = "ZJ",
-  startN = 1
+  startN = 1,
+  only = TRUE,
+  order = FALSE
 )
 }
 \arguments{
-\item{ma}{向量，母本列表}
-
-\item{pa}{向量，父本列表}
-
-\item{memo}{字符串， 备注}
+\item{filename}{文件名，里面包括3列，顺序为为母本，父本和备注，其它列无要求，文件格式为xlsx}
 
 \item{prefix}{组合前缀}
 
 \item{startN}{起始编号}
+
+\item{only}{逻辑值 是否去重}
+
+\item{order}{逻辑值，是否按亲本排序}
 }
 \value{
-返回杂交列表
+返回杂交表
 }
 \description{
 根据父母本获得组合列表
-}
-\examples{
-get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),memo = "transgene",prefix="ZJ",startN=1)
-get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),prefix="ZJ",startN=101)
 }

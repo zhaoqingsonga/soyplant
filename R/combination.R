@@ -1,4 +1,5 @@
 
+
 #' 杂交组合
 #'
 #' 根据父母本配制杂交组合
@@ -19,6 +20,36 @@ combination <- function(ma = c("JD12", "JD17"),
   all_combinations$memo = memo
   return(all_combinations)
 }
+
+#'文件中杂交组合
+#'
+#' @param filename 文件名，里面包括3列，顺序为为母本，父本和备注，其它列无要求，文件格式为xlsx
+#' @param prefix 组合的前缀
+#' @param only 逻辑值，是否去除重复组合
+#' @param order 是否配制的组合进行排序
+#' @return 返回从文件中配制的杂交合组
+combination_fromfile <- function(filename,only=TRUE,order=FALSE) {
+  library(openxlsx)
+  mydata <- read.xlsx(filename, 1)
+  mylist <- list()
+  for (i in 1:nrow(mydata)) {
+    mylist[[i]] <-
+      combination(ma = mydata[i, 1],
+                  pa = mydata[i, 2],
+                  memo = mydata[i, 3])
+  }
+  #extra_params<-list(prefix = prefix, only = only,order = order)
+  #re_v<-do.call(combi_bind, c(mylist,extra_params))
+  re_v <- do.call(rbind, mylist)
+  if (only)
+    re_v <- re_v[!duplicated(re_v$mapa), ]
+  if (order) {
+    re_v <- re_v[order(re_v$mapa), ]
+  }
+  rownames(re_v) <- NULL
+  return(re_v)
+}
+
 
 #
 ID_prefix <- function() {
@@ -114,25 +145,23 @@ get_prefix_linename <- function(prefix = "ZJ",
 #' 获得组合列表
 #'
 #' 根据父母本获得组合列表
-#' @param ma 向量，母本列表
-#' @param pa 向量，父本列表
-#' @param memo 字符串， 备注
+#' @param filename 文件名，里面包括3列，顺序为为母本，父本和备注，其它列无要求，文件格式为xlsx
 #' @param prefix 组合前缀
 #' @param startN 起始编号
-#' @return 返回杂交列表
-#' @examples
-#' get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),memo = "transgene",prefix="ZJ",startN=1)
-#' get_combination(ma=c("JD12", "JD17"),pa=c("ZLD6001", "ZLD6024", "ZLD6033"),prefix="ZJ",startN=101)
-get_combination <- function(ma = c("JD12", "JD17","JD32"),
-                            pa = c("ZJD6001",  "ZJD6019","ZJD6024"),
-                            memo = NA,
+#' @param only 逻辑值 是否去重
+#' @param order 逻辑值，是否按亲本排序
+#' @return 返回杂交表
+
+get_combination <- function(filename,
                             prefix = "ZJ",
-                            startN = 1)
+                            startN = 1,
+                            only=TRUE,
+                            order=FALSE)
 {
-  mapa <- combination(ma, pa)
-  mapa$memo = memo
+  mapa <- combination_fromfile(filename)
   my_len <- length(mapa$mapa)
   user <- get_computer_nodename()
+  #
   name <-
     get_prefix_linename(prefix = prefix,
                         n1 = startN,
@@ -151,44 +180,15 @@ get_combination <- function(ma = c("JD12", "JD17","JD32"),
   re_v <- cbind(re_v, mapa)
   re_v$stage <- "杂交"
   re_v$next_stage <- "群体"
-  re_v$process <- id
+  re_v$process <- id#合并时要重新生成
   re_v$path <- re_v$name#合并时要重新生成
   return(re_v)
 }
 ##
-combi_bind <- function(...,
-                       only = TRUE,
-                       order = FALSE) {
-  # 在函数内部，你可以通过...来访问不定参数
-  arg <- list(...)
-  re_v <- do.call(rbind, arg)
-  if (only)
-    re_v <- re_v[!duplicated(re_v$mapa),]
-  if (order) {
-    re_v <- re_v[order(re_v$mapa),]
-  }
-  #合并时这个字段时重命名
-  re_v$name <- get_prefix_linename(prefix, n2 = nrow(re_v))
-  re_v$name <- paste(re_v$name, "F0", sep = "")
-  re_v$path <- re_v$name
-  rownames(re_v)<-NULL
-  return(re_v)
-}
 
-#'配置杂交组合
-#'
-#' @param filename 文件名，里面包括3列，分别为母本，父本和备注，其它列无要求，文件格式为xlsx.
-#' @param prefix 组合的前缀。
-get_combination_fromfile<-function(filename,prefix = "ZJ24"){
-  library(openxlsx)
-  mydata<-read.xlsx(filename,1)
-  mylist<-list()
-  for(i in 1:nrow(mydata)){
-    mylist[[i]]<-get_combination(ma=mydata$母本[i],pa=mydata$父本[i],memo=mydata$备注[i])
-  }
-  extra_params<-list(prefix = prefix, only = TRUE,order = FALSE)
-  do.call(combi_bind, c(mylist,extra_params))
-}
+
+
+
 
 #'  获得组合矩阵
 #'
@@ -220,12 +220,11 @@ combination_matrix <- function(my_combi) {
   }
   mapamatri <- as.data.frame(mapamatri)
   mapamatri <- cbind(data.frame(母本 = ma), mapamatri)
-  rownames(mapamatri)<-NULL
+  rownames(mapamatri) <- NULL
   return(mapamatri)
 }
 
-#my_combi<-get_combination()
+#filename="E:\\FangCloudSync\\★大豆试验设计及总结\\2024年试验设计及总结\\design2024\\2024杂交亲本--.xlsx"
+#my_combi<-get_combination(filename,prefix = "ZJ24")
 
 #write.table(my_combi,"E:\\FangCloudSync\\R_WD360\\Project\\soyplant\\data\\my_combi.txt")
-
-
