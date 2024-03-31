@@ -1,24 +1,37 @@
+
+#' 行数转行号
+#'
+#' @param hangshu 向量，各材料种植的行数
+#' @return 返回各材料的行号
+#' @example
+#' number_to_linenumber(1:10)
+
+rows_to_linenumber<-function(number=1:10){
+  end_number<-cumsum(number)
+  start_number<- end_number-number+1
+  paste(start_number,end_number,sep="-")
+}
+
+
 #' 添加编码重复对照（按间隔插入）
 #'
-#'
-#' @param my_plant 数据框，数据框中要包含id,stageid,name三列
+#' @param my_primary 数据框，数据框中要包含id,stageid,name三列
 #' @param ck 向量，对照名称,可一个对照或多个对照
 #' @param interval 插入对照的材料间隔数
 #' @param s_prefix 材料前缀
 #' @param rp 种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同
 #' @return 返回插入对照和重复的数据框，给材料进行了编号
-
-
-addrpckfixed <- function(my_plant,
-                             ck = "JD12",
-                             interval = 3,
-                             s_prefix="GC",
-                             rp = 2)
+addrpckfixed <- function(my_primary,
+                         ck = "JD12",
+                         interval = 3,
+                         s_prefix = "GC",
+                         rp = 2,
+                         digits = 3)
 
 {
-  mym <- my_primary[c("id", "stageid", "name")]
+  mym <- my_primary#[c("id", "stageid", "name")]
 
-  #加对照(如果有对照且interval>=1)
+  #加对照(如果有对照且interval>1)
   if (interval > 0 & length(ck) > 0) {
     patten <- rep(1:ceiling(nrow(mym) / interval),
                   each = interval,
@@ -29,9 +42,12 @@ addrpckfixed <- function(my_plant,
     add_row <-
       function(df, myck = ck) {
         for (iname in myck) {
-          mdf <- data.frame(id = NA,
-                            stageid = NA,
-                            name = iname)#与前面要对应
+          mdf <- df
+          mdf <- mdf[1, ]
+          mdf[1, ] <- NA
+          mdf$id = NA
+          mdf$stageid = NA
+          mdf$name = iname#
           df <- rbind(df, mdf)
         }
         return(df)
@@ -40,14 +56,20 @@ addrpckfixed <- function(my_plant,
     df_list <- lapply(df_list, add_row)
     df_list <- do.call(rbind, df_list)
 
-  }else{
-    df_list<-mym
+  } else{
+    df_list <- mym
   }
 
-  #加stageid，默认第一次重复
-  df_list$code <- 1:nrow(df_list)
-  df_list$stageid <- get_prefix_linename(prefix =s_prefix,n1 = 1,n2 = nrow(df_list),digits = 3)
-  df_list$rp <- 1
+  #第一重复加stageid,rp,code
+  df_list$code <- 1:nrow(df_list)#编号
+  df_list$stageid <-
+    get_prefix_linename(
+      prefix = s_prefix,
+      n1 = 1,
+      n2 = nrow(df_list),
+      digits = digits
+    )
+  df_list$rp <- 1#重复
   re_v = df_list
   rownames(re_v) <- NULL
 
@@ -62,9 +84,9 @@ addrpckfixed <- function(my_plant,
       #对照code
       ckcode <- df_list$code[df_list$name %in% ck]
       #删非对照，这个地方想了好长时间
-      df_list2[excode,] <- NA
+      df_list2[excode, ] <- NA
       #随机，这个地方想了好长时间
-      df_list2[excode,] <- df_list[sample(excode),]
+      df_list2[excode, ] <- df_list[sample(excode), ]
       df_list2$rp <- rpi + 1
       multirp[[rpi]] <- df_list2
     }
@@ -87,14 +109,16 @@ addrpckfixed <- function(my_plant,
 #' @return 返回插入对照和重复的数据框，给材料进行了编号，对照随机
 
 #ck随机,相邻两个重复，并排时不会相同
-addrpck <- function(my_plant,
-                        ck = c("冀豆12", "冀豆17"),
-                        interval = 3,
-                       s_prefix="GC",
-                        rp = 3)
+addrpck <- function(my_primary,
+                    ck = c("冀豆12", "冀豆17"),
+                    interval = 3,
+                    s_prefix = "GC",
+                    rp = 3,
+                    digits = 3
+                    )
 
 {
-  mym <- my_primary[c("id", "stageid", "name")]
+  mym <- my_primary#[c("id", "stageid", "name")]
 
   #加对照(如果有对照且interval>=1)
   if (interval > 0 & length(ck) > 0) {
@@ -107,9 +131,13 @@ addrpck <- function(my_plant,
     add_row <-
       function(df, myck = ck) {
         for (iname in myck) {
-          mdf <- data.frame(id = NA,
-                            stageid = NA,
-                            name = iname)#与前面要对应
+          mdf <- df
+          mdf <- mdf[1, ]
+          mdf[1, ] <- NA
+
+          mdf$id = NA
+          mdf$stageid = NA
+          mdf$name = iname
           df <- rbind(df, mdf)
         }
         return(df)
@@ -118,14 +146,20 @@ addrpck <- function(my_plant,
     df_list <- lapply(df_list, add_row)
     df_list <- do.call(rbind, df_list)
 
-  }else{
-    df_list<-mym
+  } else{
+    df_list <- mym
   }
 
-  #加stageid，默认第一次重复
-  df_list$code <- 1:nrow(df_list)
-  df_list$stageid <- get_prefix_linename(prefix =s_prefix,n1 = 1,n2 = nrow(df_list),digits = 3)
-  df_list$rp <- 1
+  #第一重复加stageid,rp,code
+  df_list$code <- 1:nrow(df_list)#编号
+  df_list$stageid <-
+    get_prefix_linename(
+      prefix = s_prefix,
+      n1 = 1,
+      n2 = nrow(df_list),
+      digits = digits
+    )
+  df_list$rp <- 1#重复
   re_v = df_list
   rownames(re_v) <- NULL
 
@@ -137,11 +171,11 @@ addrpck <- function(my_plant,
       df_list2 <- df_list
 
       #随机一次
-      df_list2 <- df_list[sample(df_list$code),]
+      df_list2 <- df_list[sample(df_list$code), ]
       #直到全不一样，并排两个重复不相同
       outj <- 0
       while (any(curr$code == df_list2$code)) {
-        df_list2 <- df_list[sample(df_list$code),]
+        df_list2 <- df_list[sample(df_list$code), ]
         outj <- outj + 1
         if (outj >= 20) {
           break
@@ -174,7 +208,8 @@ addplace <- function(my_primary, place = c("石家庄", "德州")) {
 }
 
 addfieldid <- function(my_primary) {
-  fieldid <- data.frame(fieldid = get_ID(n2 = nrow(my_primary)))
+  fieldid <-
+    data.frame(fieldid = get_ID(n2 = nrow(my_primary), planting = TRUE))
   re_v <- cbind(fieldid, my_primary)
   return(re_v)
 }
@@ -195,24 +230,31 @@ addfieldid <- function(my_primary) {
 planting <- function(my_primary,
                      ck = c("冀豆12", "冀豆17"),
                      interval = 3,
-                     s_prefix="GC",
+                     s_prefix = "GC",
                      rp = 2,
                      place = c("石家庄", "德州"),
-                     ckfixed = TRUE) {
+                     ckfixed = TRUE,
+                     digits = 3,
+                     rows=6
+                     ) {
   library(dplyr)
   #ck固定
   if (ckfixed) {
-    my_primary %>%
-      addrpckfixed(ck, interval,s_prefix,rp) %>%
+    re_v<-my_primary %>%
+      addrpckfixed(ck, interval, s_prefix, rp, digits) %>%
       addplace(place) %>%
       addfieldid()
   } else{
-    my_primary %>%
-      addrpck(ck, interval,s_prefix,rp) %>%
+    re_v<-my_primary %>%
+      addrpck(ck, interval, s_prefix, rp, digits) %>%
       addplace(place) %>%
       addfieldid()
   }
+  re_v$rows<-rows
+  re_v$line_number<-rows_to_linenumber(re_v$rows)
+  return(re_v)
 }
+
 
 # # 材料在石家庄种3个重复，在德州种2个重复
 # library(dplyr)

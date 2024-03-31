@@ -38,6 +38,7 @@ get_population <- function(my_combi) {
   re_v$process <- paste(my_pop$process, "/", id, sep = "")
   re_v$path <- paste(my_pop$path, 0, sep = "-")
   re_v$source <- my_pop$name
+  re_v$memo<-my_pop$memo
   return(re_v)
 }
 

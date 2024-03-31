@@ -1,5 +1,6 @@
 
 
+
 #' 杂交组合
 #'
 #' 根据父母本配制杂交组合
@@ -28,9 +29,12 @@ combination <- function(ma = c("JD12", "JD17"),
 #' @param only 逻辑值，是否去除重复组合
 #' @param order 是否配制的组合进行排序
 #' @return 返回从文件中配制的杂交合组
-combination_fromfile <- function(filename,only=TRUE,order=FALSE) {
+combination_fromfile <- function(filename,
+                                 only = TRUE,
+                                 order = FALSE) {
   library(openxlsx)
-  mydata <- read.xlsx(filename, 1)
+  mydata <- read.xlsx(filename, 1, colNames = TRUE)
+
   mylist <- list()
   for (i in 1:nrow(mydata)) {
     mylist[[i]] <-
@@ -42,9 +46,9 @@ combination_fromfile <- function(filename,only=TRUE,order=FALSE) {
   #re_v<-do.call(combi_bind, c(mylist,extra_params))
   re_v <- do.call(rbind, mylist)
   if (only)
-    re_v <- re_v[!duplicated(re_v$mapa), ]
+    re_v <- re_v[!duplicated(re_v$mapa),]
   if (order) {
-    re_v <- re_v[order(re_v$mapa), ]
+    re_v <- re_v[order(re_v$mapa),]
   }
   rownames(re_v) <- NULL
   return(re_v)
@@ -52,8 +56,13 @@ combination_fromfile <- function(filename,only=TRUE,order=FALSE) {
 
 
 #
-ID_prefix <- function() {
-  onlyID <- format(Sys.time(), "%Y%m%d%H%M%S")
+ID_prefix <- function(planting = FALSE) {
+  onlyID <- format(Sys.time(), "%y%m%d%H%M%S")
+  if (planting) {
+    onlyID <- paste("f", onlyID, sep = "")
+  } else{
+    onlyID <- paste("g", onlyID, sep = "")
+  }
   return(onlyID)
 }
 #
@@ -90,12 +99,7 @@ ID_suffix4 <- function(n1 = 1, n2 = 9999) {
   }
 }
 
-get_ID <- function(n1 = 1, n2 = 6) {
-  my_id_prefix <- ID_prefix()
-  my_id_sufix <- ID_suffix5(n1, n2)
-  re_v <- paste(my_id_prefix, my_id_sufix, sep = "")
-  return(re_v)
-}
+
 
 ID_suffix3 <- function(n1 = 1, n2 = 999) {
   id1 <- paste("00", 1:9, sep = "")
@@ -112,7 +116,16 @@ ID_suffix3 <- function(n1 = 1, n2 = 999) {
   }
 }
 
-
+get_ID <- function(n1 = 1,
+                   n2 = 6,
+                   planting = FALSE,
+                   id_prefix=NULL) {
+  my_id_prefix <- ID_prefix(planting)
+  if(!is.null(id_prefix)) my_id_prefix <-id_prefix
+  my_id_sufix <- ID_suffix5(n1, n2)
+  re_v <- paste(my_id_prefix, my_id_sufix, sep = "")
+  return(re_v)
+}
 
 
 #paste(ID_prefix(),ID_suffix(1,9),sep="")
@@ -155,18 +168,18 @@ get_prefix_linename <- function(prefix = "ZJ",
 get_combination <- function(filename,
                             prefix = "ZJ",
                             startN = 1,
-                            only=TRUE,
-                            order=FALSE)
+                            only = TRUE,
+                            order = FALSE)
 {
   mapa <- combination_fromfile(filename)
   my_len <- length(mapa$mapa)
   user <- get_computer_nodename()
   #
-  name <-
+  name_path <-
     get_prefix_linename(prefix = prefix,
                         n1 = startN,
                         n2 = my_len + startN - 1)#合并时注意，要重新生成
-  name <- paste(name, "F0", sep = "")#合并时注意，要重新生成
+  name <- paste(name_path, "F0", sep = "")#合并时注意，要重新生成
 
   id <- get_ID(1, my_len)
   f <- rep(0, my_len)
@@ -181,7 +194,7 @@ get_combination <- function(filename,
   re_v$stage <- "杂交"
   re_v$next_stage <- "群体"
   re_v$process <- id#合并时要重新生成
-  re_v$path <- re_v$name#合并时要重新生成
+  re_v$path <- name_path#合并时要重新生成
   return(re_v)
 }
 ##
