@@ -16,8 +16,8 @@ savewb <-
     wb <-
       traitstable(trait_col = ncol(myview),
                   validation_number = nrow(myview))
-    addWorksheet(wb, "planting", visible = TRUE)
-    addWorksheet(wb, "origin", visible = FALSE)
+    addWorksheet(wb, "planting", visible = TRUE,tabColour = "darkred")
+    addWorksheet(wb, "origin", visible = TRUE,tabColour = "red")
     #wb中有
     #addWorksheet(wb, "traits", visible = TRUE)
 
@@ -34,7 +34,9 @@ savewb <-
       )
     bodyStyle <-
       createStyle(border = "TopBottom", borderColour = "red")
-    #########add style
+
+
+    ##add style for "planting"
     headerStyle <- hs1
     addStyle(
       wb,
@@ -46,7 +48,6 @@ savewb <-
     )
     ## style for body
     ##设置内容主题的模板
-
     addStyle(
       wb,
       sheet = "planting",
@@ -61,7 +62,38 @@ savewb <-
                   "planting",
                   rows = 1:(nrow(planting) + 2),
                   heights = 17.5)
-    #
+    ###
+
+    ##add style for "origin"
+    headerStyle <- hs1
+    addStyle(
+      wb,
+      sheet = "origin",
+      headerStyle,
+      rows = 1:1,
+      cols = 1:(9 + ncol(planting)),
+      gridExpand = TRUE
+    )
+    ## style for body
+    ##设置内容主题的模板
+    addStyle(
+      wb,
+      sheet = "origin",
+      bodyStyle,
+      rows = 2:(nrow(planting) + 2),
+      cols = 1:(9 + ncol(planting)),
+      gridExpand = TRUE
+    )
+    ####
+    setColWidths(wb, "origin", cols = 1, widths = 10)
+    setRowHeights(wb,
+                  "origin",
+                  rows = 1:(nrow(planting) + 2),
+                  heights = 17.5)
+    ###
+
+
+
     saveWorkbook(wb, overwrite = overwrite, filename)
     return("Ok!")
   }

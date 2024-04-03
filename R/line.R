@@ -1,8 +1,8 @@
 #只有单株进入株行，单株进入株行时，世代不增加
-get_line <- function(my_plant) {
+get_line <- function(my_plant,n1=1,id_prefix=NULL) {
   my_line <- subset(my_plant, my_plant$next_stage == "株行")
   #处理各列
-  my_line$id <- get_ID(n1 = 1, n2 = nrow(my_line))
+  my_line$id <- get_ID(n1 = n1, n2 = nrow(my_line)+n1-1,id_prefix=id_prefix)
 
   #my_line$source <- my_line$name
   my_line$stage <- "株行"

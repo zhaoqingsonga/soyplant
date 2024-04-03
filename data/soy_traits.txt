@@ -36,3 +36,4 @@
 35 "做花数" "zuohuashu" "0_1000" 35 "combination" NA NA "soybean" "N"
 36 "成活荚数" "chenghuojiashu" "0_1000" 36 "combination" NA NA "soybean" "N"
 37 "收获粒数" "shouhuolishu" "0_1000" 37 "combination" NA NA "soybean" "N"
+38 "抗孢囊线虫" "kangbaonangxianchong" "0:免疫_1:高抗_3:抗_7:感_9:高感" 11 "field" NA NA "soybean" "C"

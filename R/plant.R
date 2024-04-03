@@ -1,4 +1,4 @@
-get_plant <- function(my_pop) {
+get_plant <- function(my_pop,n1=1,id_prefix=NULL) {
   my_pop<-subset(my_pop,my_pop$sele>0)
   new_df <- data.frame()
   # 循环遍历每一行，并按给定的次数复制
@@ -17,7 +17,7 @@ get_plant <- function(my_pop) {
   # 重置行索引
   rownames(new_df) <- NULL
   #处理各列
-  new_df$id <- get_ID(n1 = 1, n2 = nrow(new_df))
+  new_df$id <- get_ID(n1 = n1, n2 = nrow(new_df)+n1-1,id_prefix=id_prefix)
   new_df$stage <- "单株"
 
   new_df$next_stage <- "株行"
