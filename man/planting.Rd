@@ -11,7 +11,9 @@ planting(
   s_prefix = "GC",
   rp = 2,
   place = c("石家庄", "德州"),
-  ckfixed = TRUE
+  ckfixed = TRUE,
+  digits = 3,
+  rows = 6
 )
 }
 \arguments{

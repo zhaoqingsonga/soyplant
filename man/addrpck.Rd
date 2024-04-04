@@ -5,16 +5,15 @@
 \title{添加编码重复对照（对照随机）}
 \usage{
 addrpck(
-  my_plant,
+  my_primary,
   ck = c("冀豆12", "冀豆17"),
   interval = 3,
   s_prefix = "GC",
-  rp = 3
+  rp = 3,
+  digits = 3
 )
 }
 \arguments{
-\item{my_plant}{数据框，数据框中要包含id,stageid,name三列}
-
 \item{ck}{向量，对照名称}
 
 \item{interval}{插入对照的材料间隔数}
@@ -22,6 +21,8 @@ addrpck(
 \item{s_prefix}{材料前缀}
 
 \item{rp}{种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同}
+
+\item{my_plant}{数据框，数据框中要包含id,stageid,name三列}
 }
 \value{
 返回插入对照和重复的数据框，给材料进行了编号，对照随机

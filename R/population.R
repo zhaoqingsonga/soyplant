@@ -6,10 +6,8 @@
 #' @examples
 #' get_population(my_combi)
 #'
-#
-#
 
-get_population <- function(my_combi,n1=1,id_prefix=NULL) {
+get_population <- function(my_combi,start_num=1) {
   my_pop <- subset(my_combi, my_combi$next_stage == "群体")
   #如果是杂交到群体或群体到群体则F后增加，如果不是株行则后面直接加 Fn,单株不能进入群体，path字段有bug
   if (all(my_pop$stage == "群体")|all(my_pop$stage == "杂交")) {
@@ -23,7 +21,7 @@ get_population <- function(my_combi,n1=1,id_prefix=NULL) {
   }
 
   user <- get_computer_nodename()
-  id <- get_ID(n1=n1, n2=nrow(my_pop)+n1-1,id_prefix=id_prefix)
+  id <- generate_id(start_num, end_num =nrow(my_pop)+start_num-1)
   re_v <- data.frame(
     id = id,
     user = rep(user, length(name)),

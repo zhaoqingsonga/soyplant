@@ -4,10 +4,17 @@
 \alias{addrpckfixed}
 \title{添加编码重复对照（按间隔插入）}
 \usage{
-addrpckfixed(my_plant, ck = "JD12", interval = 3, s_prefix = "GC", rp = 2)
+addrpckfixed(
+  my_primary,
+  ck = "JD12",
+  interval = 3,
+  s_prefix = "GC",
+  rp = 2,
+  digits = 3
+)
 }
 \arguments{
-\item{my_plant}{数据框，数据框中要包含id,stageid,name三列}
+\item{my_primary}{数据框，数据框中要包含id,stageid,name三列}
 
 \item{ck}{向量，对照名称,可一个对照或多个对照}
 

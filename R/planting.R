@@ -63,11 +63,11 @@ addrpckfixed <- function(my_primary,
   #第一重复加stageid,rp,code
   df_list$code <- 1:nrow(df_list)#编号
   df_list$stageid <-
-    get_prefix_linename(
-      prefix = s_prefix,
-      n1 = 1,
-      n2 = nrow(df_list),
-      digits = digits
+    generate_stageid(
+      start_num = 1,
+      end_num = nrow(df_list),
+      char= s_prefix,
+      digit_length = digits
     )
   df_list$rp <- 1#重复
   re_v = df_list
@@ -153,11 +153,11 @@ addrpck <- function(my_primary,
   #第一重复加stageid,rp,code
   df_list$code <- 1:nrow(df_list)#编号
   df_list$stageid <-
-    get_prefix_linename(
-      prefix = s_prefix,
-      n1 = 1,
-      n2 = nrow(df_list),
-      digits = digits
+    generate_stageid(
+      start_num  = 1,
+      end_num  = nrow(df_list),
+      char = s_prefix,
+      digit_length = digits
     )
   df_list$rp <- 1#重复
   re_v = df_list
@@ -209,7 +209,7 @@ addplace <- function(my_primary, place = c("石家庄", "德州")) {
 
 addfieldid <- function(my_primary) {
   fieldid <-
-    data.frame(fieldid = get_ID(n2 = nrow(my_primary), planting = TRUE))
+    data.frame(fieldid = generate_id(start_num = 1,end_num  = nrow(my_primary),char = "f"))
   re_v <- cbind(fieldid, my_primary)
   return(re_v)
 }

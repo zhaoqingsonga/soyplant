@@ -4,7 +4,7 @@
 \alias{get_population}
 \title{升级群体}
 \usage{
-get_population(my_combi)
+get_population(my_combi, n1 = 1, id_prefix = NULL)
 }
 \arguments{
 \item{my_combi}{数据框，从get_combination或get_population函数所产生数据}

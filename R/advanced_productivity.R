@@ -1,8 +1,7 @@
-get_advanced <- function(my_primary,n1=1,id_prefix=NULL) {
+get_advanced <- function(my_primary,start_num=1) {
   my_advanced <- subset(my_primary, my_primary$next_stage == "高级产比")
   #处理各列
-  my_advanced$id <- get_ID(n1 = n1, n2 = nrow(my_advanced)+n1-1,id_prefix=id_prefix)
-
+  my_advanced$id <- generate_id(start_num,  end_num = nrow(my_advanced)+start_num-1)
   my_advanced$source <- my_advanced$name
   #处理名称小于9代时处理，大于9代时不再追加
   my_advanced$name <-
