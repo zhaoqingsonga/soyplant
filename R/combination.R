@@ -77,12 +77,10 @@ get_combination <- function(filename,
   user <- get_computer_nodename()
   #
   name_path <-
-    get_prefix_linename(prefix = prefix,
-                        n1 = startN,
-                        n2 = my_len + startN - 1)#合并时注意，要重新生成
+   generate_stageid(start_num = startN,end_num = my_len + startN - 1,char = prefix,digit_length = 3 )#合并时注意，要重新生成
   name <- paste(name_path, "F0", sep = "")#合并时注意，要重新生成
 
-  id <- get_ID(1, my_len)
+  id <- generate_id(start_num = 1, end_num = my_len)
   f <- rep(0, my_len)
   re_v <- data.frame(
     id = id,

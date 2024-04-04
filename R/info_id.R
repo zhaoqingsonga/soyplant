@@ -1,105 +1,109 @@
 
-#
-ID_prefix <- function(planting = FALSE) {
-  onlyID <- format(Sys.time(), "%y%m%d%H%M%S")
-  if (planting) {
-    onlyID <- paste("f", onlyID, sep = "")
-  } else{
-    onlyID <- paste("g", onlyID, sep = "")
-  }
-  return(onlyID)
-}
-#
-ID_suffix5 <- function(n1 = 1, n2 = 99999) {
-  id1 <- paste("0000", 1:9, sep = "")
-  id2 <- paste("000", 10:99, sep = "")
-  id3 <- paste("00", 100:999, sep = "")
-  id4 <- paste("0", 1000:9999, sep = "")
-  id5 <- 10000:99999
-  alln <- c(id1, id2, id3, id4, id5)
-  if (is.numeric(n1) & is.numeric(n2) & n2 >= n1 & n1 >= 1 &
-      n2 <= 99999)
-  {
-    re_v <- alln[n1:n2]
-    return(re_v)
-  } else{
-    return(NA)
-  }
-}
-#
-ID_suffix4 <- function(n1 = 1, n2 = 9999) {
-  id1 <- paste("000", 1:9, sep = "")
-  id2 <- paste("00", 10:99, sep = "")
-  id3 <- paste("0", 100:999, sep = "")
-  id4 <- 1000:9999
-  alln <- c(id1, id2, id3, id4)
-  if (is.numeric(n1) &
-      is.numeric(n2) & n2 >= n1 & n1 >= 1 & n2 <= 9999)
-  {
-    re_v <- alln[n1:n2]
-    return(re_v)
-  } else{
-    return(NA)
-  }
-}
-
-
-
-ID_suffix3 <- function(n1 = 1, n2 = 999) {
-  id1 <- paste("00", 1:9, sep = "")
-  id2 <- paste("0", 10:99, sep = "")
-  id3 <- 100:999
-  alln <- c(id1, id2, id3)
-  if (is.numeric(n1) &
-      is.numeric(n2) & n2 >= n1 & n1 >= 1 & n2 <= 999)
-  {
-    re_v <- alln[n1:n2]
-    return(re_v)
-  } else{
-    return(NA)
-  }
-}
-
-get_ID <- function(n1 = 1,
-                   n2 = 6,
-                   planting = FALSE,
-                   id_prefix=NULL) {
-  my_id_prefix <- ID_prefix(planting)
-  if(!is.null(id_prefix)) my_id_prefix <-id_prefix
-  my_id_sufix <- ID_suffix5(n1, n2)
-  re_v <- paste(my_id_prefix, my_id_sufix, sep = "")
-  return(re_v)
-}
-
-
-#paste(ID_prefix(),ID_suffix(1,9),sep="")
 #获得电脑nodename
 get_computer_nodename <- function() {
   return(Sys.info()["nodename"])
 }
 
-#获得prefix_linename
-get_prefix_linename <- function(prefix = "ZJ",
-                                n1 = 1,
-                                n2 = 6,
-                                digits = 3) {
-  if (digits == 3) {
-    re_v <- paste(prefix, ID_suffix3(n1, n2), sep = "")
-  }
-  else if (digits == 4) {
-    re_v <- paste(prefix, ID_suffix4(n1, n2), sep = "")
-  }
-  else{
-    re_v <- paste(prefix, ID_suffix3(n1, n2), sep = "")
-  }
-  return(re_v)
+#' Get the next ID from a primary ID
+#'
+#' This function extracts the current ID and returns the next ID.
+#'
+#' @param my_primary A data frame containing primary IDs.
+#' @return A list containing the next numeric part of the ID and the prefix part of the ID.
+#'
+#' @examples
+#' \dontrun{
+#' # Example usage:
+#' my_primary <- data.frame(ID = c("g24040412094300123", "g24040412094300124"))
+#' result <- get_next_id(my_primary)
+#' }
+#'
+#' @export
+get_next_id <- function(my_primary) {
+  # Extract the last ID from the data frame
+  mystr <- my_primary[nrow(my_primary), "ID"]
+
+  # Extract the prefix and numeric parts of the ID
+  id_p <- substr(mystr, 1, 13)
+  id_n <- as.numeric(substr(mystr, 14, 18)) + 1
+
+  # Return the next numeric part and prefix part of the ID as a list
+  return(list(id_n = id_n, id_p = id_p))
 }
 
-get_next_id<-function(my_primary){
-  mystr<-last(my_primary)[1,1]
-  id_p<-substr(mystr,1,13)
-  id_n<-as.numeric(substr(mystr,14,18))+1
-  return(list(id_n=id_n,id_p=id_p))
+
+
+#' Generate IDs with specified parameters
+#'
+#' This function generates a series of IDs based on the specified parameters.
+#'
+#' @param start_num An integer indicating the starting number of the ID sequence.
+#' @param end_num An integer indicating the ending number of the ID sequence.
+#' @param char A character placed at the beginning of each ID.
+#' @param digit_length An integer specifying the length of the numeric part, controlling the padding.
+#' @param include_datetime A logical value indicating whether to include the current year, month, day, hour, minute, and second in the ID.
+#'
+#' @return A vector containing all the generated IDs between start_num and end_num.
+#'
+#' @examples
+#' \dontrun{
+#' start <- 123
+#' end <- 135
+#' character <- "A"
+#' digit_length <- 5
+#' result_ids <- generate_id(start, end, character, digit_length, include_datetime = TRUE)
+#' for (result_id in result_ids) {
+#'   print(paste("Resulting ID:", result_id))
+#' }
+#' }
+#'
+#' @export
+generate_id <- function(start_num=1, end_num, char="g", digit_length=5, include_datetime = TRUE) {
+  # Generate a series of IDs, each consisting of specified parameters
+
+  ids <- c()  # Store the generated IDs
+
+  if (include_datetime) {
+    current_time <- format(Sys.time(), "%y%m%d%H%M%S")
+  } else {
+    current_time <- ""
+  }
+
+  # Iterate through the range of numbers to generate IDs
+  for (num in start_num:end_num) {
+    # Convert the number to a string with the specified number of digits
+    num_str <- sprintf(paste0("%0", digit_length, "d"), num)
+    # Construct the ID and add it to the vector
+    ids <- c(ids, paste0(char, current_time, num_str))
+  }
+
+  return(ids)
 }
+
+# start <- 123
+# end <- 135
+# character <- "A"
+# digit_length <- 5
+# result_ids <- generate_id(start, end, character, digit_length, include_datetime = FALSE)
+# for (result_id in result_ids) {
+#   print(paste("Resulting ID:", result_id))
+# }
+#
+#
+
+generate_stageid <- function(start_num=1, end_num, char="24GC", digit_length=4) {
+  # Generate a series of IDs, each consisting of specified parameters
+  ids <- c()  # Store the generated IDs
+  # Iterate through the range of numbers to generate IDs
+  for (num in start_num:end_num) {
+    # Convert the number to a string with the specified number of digits
+    num_str <- sprintf(paste0("%0", digit_length, "d"), num)
+    # Construct the ID and add it to the vector
+    ids <- c(ids, paste0(char, num_str))
+  }
+
+  return(ids)
+}
+
 
 
