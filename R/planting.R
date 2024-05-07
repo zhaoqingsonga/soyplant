@@ -207,6 +207,18 @@ addplace <- function(my_primary, place = c("石家庄", "德州")) {
   return(myd)
 }
 
+addtreatment <- function(my_primary, treatment = c("高密", "低密")) {
+  mat <- my_primary
+  myd <- data.frame()
+  for (iname in treatment) {
+    mat$treatment = iname
+    myd <- rbind(myd, mat)
+  }
+  return(myd)
+}
+
+
+
 addfieldid <- function(my_primary) {
   fieldid <-
     data.frame(fieldid = generate_id(start_num = 1,end_num  = nrow(my_primary),char = "f"))
