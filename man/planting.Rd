@@ -10,6 +10,7 @@ planting(
   interval = 3,
   s_prefix = "GC",
   rp = 2,
+  treatment = c(""),
   place = c("石家庄", "德州"),
   ckfixed = TRUE,
   digits = 3,
@@ -26,6 +27,8 @@ planting(
 \item{s_prefix}{材料前缀}
 
 \item{rp}{种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同}
+
+\item{treatment}{向量，处理，可以多个水平}
 
 \item{place}{向量，试验地点，可多个试验地点}
 

@@ -235,6 +235,7 @@ addfieldid <- function(my_primary) {
 #' @param s_prefix 材料前缀
 #' @param rp 种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同
 #' @param place 向量，试验地点，可多个试验地点
+#' @param treatment 向量，处理，可以多个水平
 #' @param ckfixed 逻辑值，对照是否固定，是固定则按等材料数插入
 #' @return 返回插入对照和重复的数据框，给材料进行了编号，对照随机
 
@@ -244,6 +245,7 @@ planting <- function(my_primary,
                      interval = 3,
                      s_prefix = "GC",
                      rp = 2,
+                     treatment= c(""),
                      place = c("石家庄", "德州"),
                      ckfixed = TRUE,
                      digits = 3,
@@ -254,11 +256,13 @@ planting <- function(my_primary,
   if (ckfixed) {
     re_v<-my_primary %>%
       addrpckfixed(ck, interval, s_prefix, rp, digits) %>%
+      addtreatment(treatment) %>%
       addplace(place) %>%
       addfieldid()
   } else{
     re_v<-my_primary %>%
       addrpck(ck, interval, s_prefix, rp, digits) %>%
+      addtreatment(treatment) %>%
       addplace(place) %>%
       addfieldid()
   }
