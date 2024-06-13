@@ -5,11 +5,11 @@
 \title{Generate IDs with specified parameters}
 \usage{
 generate_id(
-  start_num,
+  start_num = 1,
   end_num,
-  char,
-  digit_length = 4,
-  include_datetime = FALSE
+  char = "g",
+  digit_length = 5,
+  include_datetime = TRUE
 )
 }
 \arguments{
