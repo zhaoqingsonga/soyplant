@@ -19,8 +19,5 @@ plant(fi = designPlot(), seed = makelist(), returnfi = TRUE)
 将设计图中相应的位置替换为种子的详细信息。
 }
 \examples{
-design <- matrix(1:12, nrow = 3)
-seeds <- matrix(c("TypeA", "Seed1", "TypeB", "Seed2"), ncol = 2)
-colnames(design) <- c("V1", "V2", "V3", "V4")
-plant(design, seeds)
+plant()
 }

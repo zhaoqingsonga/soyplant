@@ -8,14 +8,13 @@
 #' @return 保存生成的workbook类型数据到excel中
 
 savewb <-
-  function(origin = NA,
-           planting = NA,
-           myview = NA,
+  function(origin = NULL,
+           planting = NULL,
+           myview = NULL,
+           combi_matrix=NULL,
            filename,
            overwrite = FALSE) {
-    wb <-
-      traitstable(trait_col = ncol(myview),
-                  validation_number = nrow(myview))
+    wb <- traitstable(trait_col = ncol(myview), validation_number = nrow(myview))
     addWorksheet(wb, "planting", visible = TRUE,tabColour = "darkred")
     addWorksheet(wb, "origin", visible = TRUE,tabColour = "red")
     #wb中有
@@ -24,6 +23,13 @@ savewb <-
     writeData(wb, "planting", planting, startRow = 2)
     writeData(wb, "origin", origin, startRow = 1)
     writeData(wb, "traits", myview, startRow = 2)
+
+    #增加组合矩阵表
+    if(!is.null(combi_matrix)){
+      addWorksheet(wb, "combi_matrix", visible = TRUE,tabColour = "blue")
+      writeData(wb, "combi_matrix", combi_matrix, startRow = 1)
+    }
+
     #设置格式
     hs1 <-
       createStyle(
@@ -32,8 +38,7 @@ savewb <-
         textDecoration = "bold",
         border = "Bottom"
       )
-    bodyStyle <-
-      createStyle(border = "TopBottom", borderColour = "red")
+    bodyStyle <- createStyle(border = "TopBottom", borderColour = "red")
 
 
     ##add style for "planting"
@@ -97,3 +102,15 @@ savewb <-
     saveWorkbook(wb, overwrite = overwrite, filename)
     return("Ok!")
   }
+
+
+
+
+
+
+
+
+
+
+
+

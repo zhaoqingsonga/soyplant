@@ -4,7 +4,14 @@
 \alias{savewb}
 \title{保存数据表}
 \usage{
-savewb(origin = NA, planting = NA, myview = NA, filename, overwrite = FALSE)
+savewb(
+  origin = NULL,
+  planting = NULL,
+  myview = NULL,
+  combi_matrix = NULL,
+  filename,
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{origin}{数据框，保存生成的原始数据}

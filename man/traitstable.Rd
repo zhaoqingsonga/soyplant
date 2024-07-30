@@ -15,5 +15,5 @@ traitstable(trait_col = 3, validation_number = 100)
 返回openxlsx包createWorkbook()创建对象
 }
 \description{
-返回openxlsx包createWorkbook()创建对象，包括两个表，性状分类表和带验证功能的性状表
+返回openxlsx包createWorkbook()创建对象，一个表带验证功能的性状表
 }

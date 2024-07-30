@@ -2,32 +2,32 @@
 % Please edit documentation in R/info_id.R
 \name{generate_id}
 \alias{generate_id}
-\title{Generate IDs with specified parameters}
+\title{根据指定参数生成ID序列}
 \usage{
 generate_id(
   start_num = 1,
-  end_num,
+  end_num = 10,
   char = "g",
   digit_length = 5,
   include_datetime = TRUE
 )
 }
 \arguments{
-\item{start_num}{An integer indicating the starting number of the ID sequence.}
+\item{start_num}{整数，表示ID序列的起始号码。}
 
-\item{end_num}{An integer indicating the ending number of the ID sequence.}
+\item{end_num}{整数，表示ID序列的结束号码。}
 
-\item{char}{A character placed at the beginning of each ID.}
+\item{char}{字符，放在每个ID的开头。}
 
-\item{digit_length}{An integer specifying the length of the numeric part, controlling the padding.}
+\item{digit_length}{整数，指定数字部分的长度，控制填充。}
 
-\item{include_datetime}{A logical value indicating whether to include the current year, month, day, hour, minute, and second in the ID.}
+\item{include_datetime}{逻辑值，是否在ID中包含当前的年份、月份、日期、小时、分钟和秒。}
 }
 \value{
-A vector containing all the generated IDs between start_num and end_num.
+一个包含所有生成ID的向量，从start_num到end_num。
 }
 \description{
-This function generates a series of IDs based on the specified parameters.
+该函数根据指定的参数生成一系列ID。
 }
 \examples{
 \dontrun{
@@ -37,7 +37,7 @@ character <- "A"
 digit_length <- 5
 result_ids <- generate_id(start, end, character, digit_length, include_datetime = TRUE)
 for (result_id in result_ids) {
-  print(paste("Resulting ID:", result_id))
+  print(paste("生成的ID:", result_id))
 }
 }
 
