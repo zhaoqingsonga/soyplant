@@ -4,16 +4,10 @@
 \alias{get_combination}
 \title{获得组合列表}
 \usage{
-get_combination(
-  filename,
-  prefix = "ZJ",
-  startN = 1,
-  only = TRUE,
-  order = FALSE
-)
+get_combination(mydata, prefix = "ZJ", startN = 1, only = TRUE, order = FALSE)
 }
 \arguments{
-\item{filename}{文件名，里面包括3列，顺序为为母本，父本和备注，其它列无要求，文件格式为xlsx}
+\item{mydata}{数据框，里面包括3列，顺序为为母本，父本和备注，其它列无要求}
 
 \item{prefix}{组合前缀}
 

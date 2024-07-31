@@ -22,17 +22,16 @@ combination <- function(ma = c("JD12", "JD17"),
 }
 
 #'文件中杂交组合
-#'
-#' @param filename 文件名，里面包括3列，顺序为为母本，父本和备注，其它列无要求，文件格式为xlsx
+#' @param mydata 数据框，里面包括3列，顺序为为母本，父本和备注，其它列无要求
 #' @param prefix 组合的前缀
 #' @param only 逻辑值，是否去除重复组合
 #' @param order 是否配制的组合进行排序
 #' @return 返回从文件中配制的杂交合组
-combination_fromfile <- function(filename,
+combination_from_dataframe <- function(mydata,
                                  only = TRUE,
                                  order = FALSE) {
-  library(openxlsx)
-  mydata <- read.xlsx(filename, 1, colNames = TRUE)
+  # library(openxlsx)
+  # mydata <- read.xlsx(filename, 1, colNames = TRUE)
 
   mylist <- list()
   for (i in 1:nrow(mydata)) {
@@ -59,20 +58,20 @@ combination_fromfile <- function(filename,
 #' 获得组合列表
 #'
 #' 根据父母本获得组合列表
-#' @param filename 文件名，里面包括3列，顺序为为母本，父本和备注，其它列无要求，文件格式为xlsx
+#' @param mydata 数据框，里面包括3列，顺序为为母本，父本和备注，其它列无要求
 #' @param prefix 组合前缀
 #' @param startN 起始编号
 #' @param only 逻辑值 是否去重
 #' @param order 逻辑值，是否按亲本排序
 #' @return 返回杂交表
 
-get_combination <- function(filename,
+get_combination <- function(mydata,
                             prefix = "ZJ",
                             startN = 1,
                             only = TRUE,
                             order = FALSE)
 {
-  mapa <- combination_fromfile(filename)
+  mapa <- combination_from_dataframe(mydata)
   my_len <- length(mapa$mapa)
   user <- get_computer_nodename()
   #
@@ -94,6 +93,8 @@ get_combination <- function(filename,
   re_v$next_stage <- "群体"
   re_v$process <- id#合并时要重新生成
   re_v$path <- name_path#合并时要重新生成
+  re_v$sele<-0
+  re_v$source<-NA
   return(re_v)
 }
 ##

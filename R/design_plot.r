@@ -69,6 +69,33 @@ getWaterLaneProtected <- function(blockStructure = "w/23/2r/w/2p/w/2p/23/w") {
   return(mylist)
 }
 
+modibridges <- function(bridges) {
+  # 将逗号分隔的字符串拆分成向量
+  ori <- unlist(strsplit(bridges, ","))
+  lengthori <- length(ori)
+
+  # 预分配列表以存储中间结果
+  bri_list <- vector("list", lengthori)
+
+  for (i in seq_len(lengthori)) {
+    # 将每个部分进一步拆分成数字向量
+    unit1 <- as.numeric(unlist(strsplit(ori[i], "/")))
+
+    # 根据拆分结果的长度决定如何处理
+    bri_list[[i]] <- if (length(unit1) == 1) {
+      unit1  # 如果只有一个元素，直接添加
+    } else {
+      rep(unit1[1], unit1[2])  # 否则，重复第一个元素指定次数
+    }
+  }
+
+  # 将列表折叠成一个向量
+  bri <- unlist(bri_list)
+  return(bri)
+}
+
+
+
 #' 根据子组标记矩阵
 #'
 #' 将输入矩阵按行分组，并根据条件对组内元素进行标记。
@@ -367,6 +394,46 @@ makelist2 <- function(myd = data.frame(num = 1:3, name = c('JD12', 'JD17', '五�
   }
   return(result)
 }
+
+# 加载必要的包
+library(dplyr)
+
+#' 根据最后一列的值复制数据框的行
+#'
+#' 该函数根据数据框最后一列中的整数值来复制行。每一行将根据对应的
+#' 最后一列的值重复相应的次数。
+#'
+#' @param df 一个数据框，其中最后一列包含指示每行复制次数的整数值。
+#'
+#' @return 一个根据最后一列的值复制行的新数据框。
+#'
+#' @examples
+#' df <- data.frame(
+#'   name = c("A", "B", "C"),
+#'   value = c(10, 20, 30),
+#'   times = c(1, 3, 2)
+#' )
+#' replicate_rows(df)
+#'
+#' @export
+replicate_rows <- function(df) {
+  # 确定最后一列为复制次数
+  rep_times <- df[[ncol(df)]]
+
+  # 检查rep_times是否为正整数
+  if (!all(rep_times == floor(rep_times) & rep_times > 0)) {
+    stop("最后一列中的所有值必须为正整数")
+  }
+
+
+  # 通过行号进行复制
+  replicated_df <- df[rep(seq_len(nrow(df)), rep_times), ]
+
+  return(replicated_df)
+}
+
+
+
 
 #' 获取子组
 #'
