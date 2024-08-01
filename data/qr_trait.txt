@@ -1,88 +1,93 @@
-"traitid" "trait" "class" "class_C" "class_E" "trait_code" "class_code" "number"
-"3_1_Highly-resistant" "抗草甘膦" "1:高抗" "高抗" "Highly-resistant" 3 1 1
-"3_3_Resistant" "抗草甘膦" "3:抗" "抗" "Resistant" 3 3 2
-"3_99_Segregating" "抗草甘膦" "99:分离" "分离" "Segregating" 3 99 3
-"3_5_Moderately-resistant" "抗草甘膦" "5:中抗" "中抗" "Moderately-resistant" 3 5 4
-"3_7_Not-resistant" "抗草甘膦" "7:不抗" "不抗" "Not-resistant" 3 7 5
-"8_1_White" "上胚轴色" "1:白" "白" "White" 8 1 6
-"8_2_Purple" "上胚轴色" "2:紫" "紫" "Purple" 8 2 7
-"8_99_Segregating" "上胚轴色" "99:分离" "分离" "Segregating" 8 99 8
-"9_1_White" "下胚轴色" "1:白" "白" "White" 9 1 9
-"9_2_Purple" "下胚轴色" "2:紫" "紫" "Purple" 9 2 10
-"9_99_Segregating" "下胚轴色" "99:分离" "分离" "Segregating" 9 99 11
-"10_2_Excellent" "苗期评价" "2:优" "优" "Excellent" 10 2 12
-"10_1_Good" "苗期评价" "1:良" "良" "Good" 10 1 13
-"10_0_Fair" "苗期评价" "0:中" "中" "Fair" 10 0 14
-"10_-1_Poor" "苗期评价" "-1:差" "差" "Poor" 10 -1 15
-"11_1_White" "花色" "1:白" "白" "White" 11 1 16
-"11_2_Purple" "花色" "2:紫" "紫" "Purple" 11 2 17
-"11_99_Segregating" "花色" "99:分离" "分离" "Segregating" 11 99 18
-"12_2_Excellent" "花期评价" "2:优" "优" "Excellent" 12 2 19
-"12_1_Good" "花期评价" "1:良" "良" "Good" 12 1 20
-"12_0_Fair" "花期评价" "0:中" "中" "Fair" 12 0 21
-"12_-1_Poor" "花期评价" "-1:差" "差" "Poor" 12 -1 22
-"13_0_Immune" "抗花叶病毒" "0:免疫" "免疫" "Immune" 13 0 23
-"13_1_Highly-resistant" "抗花叶病毒" "1:高抗" "高抗" "Highly-resistant" 13 1 24
-"13_3_Resistant" "抗花叶病毒" "3:抗" "抗" "Resistant" 13 3 25
-"13_7_Susceptible" "抗花叶病毒" "7:感" "感" "Susceptible" 13 7 26
-"13_9_Highly-susceptible" "抗花叶病毒" "9:高感" "高感" "Highly-susceptible" 13 9 27
-"14_0_Immune" "抗孢囊线虫" "0:免疫" "免疫" "Immune" 14 0 28
-"14_1_Highly-resistant" "抗孢囊线虫" "1:高抗" "高抗" "Highly-resistant" 14 1 29
-"14_3_Resistant" "抗孢囊线虫" "3:抗" "抗" "Resistant" 14 3 30
-"14_7_Susceptible" "抗孢囊线虫" "7:感" "感" "Susceptible" 14 7 31
-"14_9_Highly-susceptible" "抗孢囊线虫" "9:高感" "高感" "Highly-susceptible" 14 9 32
-"15_1_No-lodging" "倒伏性" "1:不倒" "不倒" "No-lodging" 15 1 33
-"15_3_Slight-lodging" "倒伏性" "3:轻倒" "轻倒" "Slight-lodging" 15 3 34
-"15_5_Moderate-lodging" "倒伏性" "5:中倒" "中倒" "Moderate-lodging" 15 5 35
-"15_7_Severe-lodging" "倒伏性" "7:重倒" "重倒" "Severe-lodging" 15 7 36
-"15_9_Very-severe-lodging" "倒伏性" "9:严重倒" "严重倒" "Very-severe-lodging" 15 9 37
-"16_2_Excellent" "成熟期评价" "2:优" "优" "Excellent" 16 2 38
-"16_1_Good" "成熟期评价" "1:良" "良" "Good" 16 1 39
-"16_0_Fair" "成熟期评价" "0:中" "中" "Fair" 16 0 40
-"16_-1_Poor" "成熟期评价" "-1:差" "差" "Poor" 16 -1 41
-"18_2_Excellent" "植株评价" "2:优" "优" "Excellent" 18 2 42
-"18_1_Good" "植株评价" "1:良" "良" "Good" 18 1 43
-"18_0_Fair" "植株评价" "0:中" "中" "Fair" 18 0 44
-"18_-1_Poor" "植株评价" "-1:差" "差" "Poor" 18 -1 45
-"19_3_Indeterminate" "结荚习性" "3:无限" "无限" "Indeterminate" 19 3 46
-"19_5_Semi-determinate" "结荚习性" "5:亚有限" "亚有限" "Semi-determinate" 19 5 47
-"19_7_Determinate" "结荚习性" "7:有限" "有限" "Determinate" 19 7 48
-"20_1_Gray" "茸毛色" "1:灰" "灰" "Gray" 20 1 49
-"20_2_Brown" "茸毛色" "2:棕" "棕" "Brown" 20 2 50
-"20_99_Segregating" "茸毛色" "99:分离" "分离" "Segregating" 20 99 51
-"21_1_Gray-brown" "荚熟色" "1:灰褐" "灰褐" "Gray-brown" 21 1 52
-"21_2_Yellow-brown" "荚熟色" "2:黄褐" "黄褐" "Yellow-brown" 21 2 53
-"21_3_Brown" "荚熟色" "3:褐" "褐" "Brown" 21 3 54
-"21_4_Dark-brown" "荚熟色" "4:深褐" "深褐" "Dark-brown" 21 4 55
-"21_5_Black" "荚熟色" "5:黑" "黑" "Black" 21 5 56
-"30_1_Round" "粒型" "1:圆" "圆" "Round" 30 1 57
-"30_2_Flattened-round" "粒型" "2:扁圆" "扁圆" "Flattened-round" 30 2 58
-"30_3_Oval" "粒型" "3:椭圆" "椭圆" "Oval" 30 3 59
-"30_4_Flattened-oval" "粒型" "4:扁椭圆" "扁椭圆" "Flattened-oval" 30 4 60
-"30_5_Long-oval" "粒型" "5:长椭圆" "长椭圆" "Long-oval" 30 5 61
-"30_6_Kidney" "粒型" "6:肾" "肾" "Kidney" 30 6 62
-"31_1_Yellow" "种皮色" "1:黄" "黄" "Yellow" 31 1 63
-"31_2_Black" "种皮色" "2:黑" "黑" "Black" 31 2 64
-"31_3_Greenish-yellow" "种皮色" "3:青黄" "青黄" "Greenish-yellow" 31 3 65
-"32_1_Yellow" "子叶色" "1:黄" "黄" "Yellow" 32 1 66
-"32_2_Green" "子叶色" "2:绿" "绿" "Green" 32 2 67
-"33_1_Yellow" "脐色" "1:黄" "黄" "Yellow" 33 1 68
-"33_2_Light-brown" "脐色" "2:淡褐" "淡褐" "Light-brown" 33 2 69
-"33_3_Brown" "脐色" "3:褐" "褐" "Brown" 33 3 70
-"33_4_Dark-brown" "脐色" "4:深褐" "深褐" "Dark-brown" 33 4 71
-"33_5_Blue" "脐色" "5:蓝" "蓝" "Blue" 33 5 72
-"33_6_Light-black" "脐色" "6:淡黑" "淡黑" "Light-black" 33 6 73
-"33_7_Black" "脐色" "7:黑" "黑" "Black" 33 7 74
-"33_99_Segregating" "脐色" "99:分离" "分离" "Segregating" 33 99 75
-"34_0_None" "种皮光泽" "0:无" "无" "None" 34 0 76
-"34_1_Slight" "种皮光泽" "1:微" "微" "Slight" 34 1 77
-"34_2_Strong" "种皮光泽" "2:强" "强" "Strong" 34 2 78
-"35_2_Excellent" "籽粒评价" "2:优" "优" "Excellent" 35 2 79
-"35_1_Good" "籽粒评价" "1:良" "良" "Good" 35 1 80
-"35_0_Fair" "籽粒评价" "0:中" "中" "Fair" 35 0 81
-"35_-1_Poor" "籽粒评价" "-1:差" "差" "Poor" 35 -1 82
-"36_1_Lanceolate" "叶形" "1:披针" "披针" "Lanceolate" 36 1 83
-"36_2_Ovate" "叶形" "2:卵圆" "卵圆" "Ovate" 36 2 84
-"36_3_Oval" "叶形" "3:椭圆" "椭圆" "Oval" 36 3 85
-"36_4_Round" "叶形" "4:圆" "圆" "Round" 36 4 86
-"36_99_Segregating" "叶形" "99:分离" "分离" "Segregating" 36 99 87
+"traitid" "trait" "class" "class_C" "xingzhuang" "class_E" "trait_code" "class_code" "number"
+"36_1_Lanceolate" "叶形" "1-披针" "披针" "yexing" "Lanceolate" 36 1 88
+"36_2_Ovate" "叶形" "2-卵圆" "卵圆" "yexing" "Ovate" 36 2 89
+"36_3_Oval" "叶形" "3-椭圆" "椭圆" "yexing" "Oval" 36 3 90
+"36_4_Round" "叶形" "4-圆" "圆" "yexing" "Round" 36 4 91
+"36_99_Segregating" "叶形" "99-分离" "分离" "yexing" "Segregating" 36 99 92
+"3_1_Highly-resistant" "抗草甘膦" "1-高抗" "高抗" "kangcaogangpin" "Highly-resistant" 3 1 1
+"3_3_Resistant" "抗草甘膦" "3-抗" "抗" "kangcaogangpin" "Resistant" 3 3 2
+"3_99_Segregating" "抗草甘膦" "99-分离" "分离" "kangcaogangpin" "Segregating" 3 99 3
+"3_5_Moderately-resistant" "抗草甘膦" "5-中抗" "中抗" "kangcaogangpin" "Moderately-resistant" 3 5 4
+"3_7_Not-resistant" "抗草甘膦" "7-不抗" "不抗" "kangcaogangpin" "Not-resistant" 3 7 5
+"8_1_White" "上胚轴色" "1-白" "白" "shangpeizhouse" "White" 8 1 6
+"8_2_Purple" "上胚轴色" "2-紫" "紫" "shangpeizhouse" "Purple" 8 2 7
+"8_99_Segregating" "上胚轴色" "99-分离" "分离" "shangpeizhouse" "Segregating" 8 99 8
+"9_1_White" "下胚轴色" "1-白" "白" "xiapeizhouse" "White" 9 1 9
+"9_2_Purple" "下胚轴色" "2-紫" "紫" "xiapeizhouse" "Purple" 9 2 10
+"9_99_Segregating" "下胚轴色" "99-分离" "分离" "xiapeizhouse" "Segregating" 9 99 11
+"10_2_Excellent" "苗期评价" "2-优" "优" "miaoqipingjia" "Excellent" 10 2 12
+"10_1_Good" "苗期评价" "1-良" "良" "miaoqipingjia" "Good" 10 1 13
+"10_0_Fair" "苗期评价" "0-中" "中" "miaoqipingjia" "Fair" 10 0 14
+"10_-1_Poor" "苗期评价" "-1-差" "差" "miaoqipingjia" "Poor" 10 -1 15
+"11_1_White" "花色" "1-白" "白" "huase" "White" 11 1 16
+"11_2_Purple" "花色" "2-紫" "紫" "huase" "Purple" 11 2 17
+"11_99_Segregating" "花色" "99-分离" "分离" "huase" "Segregating" 11 99 18
+"12_2_Excellent" "花期评价" "2-优" "优" "huaqipingjia" "Excellent" 12 2 19
+"12_1_Good" "花期评价" "1-良" "良" "huaqipingjia" "Good" 12 1 20
+"12_0_Fair" "花期评价" "0-中" "中" "huaqipingjia" "Fair" 12 0 21
+"12_-1_Poor" "花期评价" "-1-差" "差" "huaqipingjia" "Poor" 12 -1 22
+"13_0_Immune" "抗花叶病毒" "0-免疫" "免疫" "kanghuayebingdu" "Immune" 13 0 23
+"13_1_Highly-resistant" "抗花叶病毒" "1-高抗" "高抗" "kanghuayebingdu" "Highly-resistant" 13 1 24
+"13_3_Resistant" "抗花叶病毒" "3-抗" "抗" "kanghuayebingdu" "Resistant" 13 3 25
+"13_7_Susceptible" "抗花叶病毒" "7-感" "感" "kanghuayebingdu" "Susceptible" 13 7 26
+"13_9_Highly-susceptible" "抗花叶病毒" "9-高感" "高感" "kanghuayebingdu" "Highly-susceptible" 13 9 27
+"14_0_Immune" "抗孢囊线虫" "0-免疫" "免疫" "kangbaonangxianchong" "Immune" 14 0 28
+"14_1_Highly-resistant" "抗孢囊线虫" "1-高抗" "高抗" "kangbaonangxianchong" "Highly-resistant" 14 1 29
+"14_3_Resistant" "抗孢囊线虫" "3-抗" "抗" "kangbaonangxianchong" "Resistant" 14 3 30
+"14_7_Susceptible" "抗孢囊线虫" "7-感" "感" "kangbaonangxianchong" "Susceptible" 14 7 31
+"14_9_Highly-susceptible" "抗孢囊线虫" "9-高感" "高感" "kangbaonangxianchong" "Highly-susceptible" 14 9 32
+"15_1_No-lodging" "倒伏性" "1-不倒" "不倒" "daofuxing" "No-lodging" 15 1 33
+"15_3_Slight-lodging" "倒伏性" "3-轻倒" "轻倒" "daofuxing" "Slight-lodging" 15 3 34
+"15_5_Moderate-lodging" "倒伏性" "5-中倒" "中倒" "daofuxing" "Moderate-lodging" 15 5 35
+"15_7_Severe-lodging" "倒伏性" "7-重倒" "重倒" "daofuxing" "Severe-lodging" 15 7 36
+"15_9_Very-severe-lodging" "倒伏性" "9-严重倒" "严重倒" "daofuxing" "Very-severe-lodging" 15 9 37
+"16_2_Excellent" "成熟期评价" "2-优" "优" "chengshuqipingjia" "Excellent" 16 2 38
+"16_1_Good" "成熟期评价" "1-良" "良" "chengshuqipingjia" "Good" 16 1 39
+"16_0_Fair" "成熟期评价" "0-中" "中" "chengshuqipingjia" "Fair" 16 0 40
+"16_-1_Poor" "成熟期评价" "-1-差" "差" "chengshuqipingjia" "Poor" 16 -1 41
+"18_2_Excellent" "植株评价" "2-优" "优" "zhizhupingjia" "Excellent" 18 2 42
+"18_1_Good" "植株评价" "1-良" "良" "zhizhupingjia" "Good" 18 1 43
+"18_0_Fair" "植株评价" "0-中" "中" "zhizhupingjia" "Fair" 18 0 44
+"18_-1_Poor" "植株评价" "-1-差" "差" "zhizhupingjia" "Poor" 18 -1 45
+"19_3_Indeterminate" "结荚习性" "3-无限" "无限" "jiejiaxixing" "Indeterminate" 19 3 46
+"19_5_Semi-determinate" "结荚习性" "5-亚有限" "亚有限" "jiejiaxixing" "Semi-determinate" 19 5 47
+"19_7_Determinate" "结荚习性" "7-有限" "有限" "jiejiaxixing" "Determinate" 19 7 48
+"19_99_Segregating" "结荚习性" "99-分离" "分离" "jiejiaxixing" "Segregating" 19 99 49
+"20_1_Gray" "茸毛色" "1-灰" "灰" "rongmaose" "Gray" 20 1 50
+"20_2_Brown" "茸毛色" "2-棕" "棕" "rongmaose" "Brown" 20 2 51
+"20_99_Segregating" "茸毛色" "99-分离" "分离" "rongmaose" "Segregating" 20 99 52
+"21_1_Gray-brown" "荚熟色" "1-灰褐" "灰褐" "jiashuse" "Gray-brown" 21 1 53
+"21_2_Yellow-brown" "荚熟色" "2-黄褐" "黄褐" "jiashuse" "Yellow-brown" 21 2 54
+"21_3_Brown" "荚熟色" "3-褐" "褐" "jiashuse" "Brown" 21 3 55
+"21_4_Dark-brown" "荚熟色" "4-深褐" "深褐" "jiashuse" "Dark-brown" 21 4 56
+"21_5_Black" "荚熟色" "5-黑" "黑" "jiashuse" "Black" 21 5 57
+"21_99_Segregating" "荚熟色" "99-分离" "分离" "jiashuse" "Segregating" 21 99 58
+"30_1_Round" "粒型" "1-圆" "圆" "lixing" "Round" 30 1 59
+"30_2_Flattened-round" "粒型" "2-扁圆" "扁圆" "lixing" "Flattened-round" 30 2 60
+"30_3_Oval" "粒型" "3-椭圆" "椭圆" "lixing" "Oval" 30 3 61
+"30_4_Flattened-oval" "粒型" "4-扁椭圆" "扁椭圆" "lixing" "Flattened-oval" 30 4 62
+"30_5_Long-oval" "粒型" "5-长椭圆" "长椭圆" "lixing" "Long-oval" 30 5 63
+"30_6_Kidney" "粒型" "6-肾" "肾" "lixing" "Kidney" 30 6 64
+"30_99_Segregating" "粒型" "99-分离" "分离" "lixing" "Segregating" 30 99 65
+"31_1_Yellow" "种皮色" "1-黄" "黄" "zhongpise" "Yellow" 31 1 66
+"31_2_Black" "种皮色" "2-黑" "黑" "zhongpise" "Black" 31 2 67
+"31_3_Greenish-yellow" "种皮色" "3-青黄" "青黄" "zhongpise" "Greenish-yellow" 31 3 68
+"31_99_Segregating" "种皮色" "99-分离" "分离" "zhongpise" "Segregating" 31 99 69
+"32_1_Yellow" "子叶色" "1-黄" "黄" "ziyese" "Yellow" 32 1 70
+"32_2_Green" "子叶色" "2-绿" "绿" "ziyese" "Green" 32 2 71
+"31_99_Segregating" "子叶色" "99-分离" "分离" "ziyese" "Segregating" 31 99 72
+"33_1_Yellow" "脐色" "1-黄" "黄" "qise" "Yellow" 33 1 73
+"33_2_Light-brown" "脐色" "2-淡褐" "淡褐" "qise" "Light-brown" 33 2 74
+"33_3_Brown" "脐色" "3-褐" "褐" "qise" "Brown" 33 3 75
+"33_4_Dark-brown" "脐色" "4-深褐" "深褐" "qise" "Dark-brown" 33 4 76
+"33_5_Blue" "脐色" "5-蓝" "蓝" "qise" "Blue" 33 5 77
+"33_6_Light-black" "脐色" "6-淡黑" "淡黑" "qise" "Light-black" 33 6 78
+"33_7_Black" "脐色" "7-黑" "黑" "qise" "Black" 33 7 79
+"33_99_Segregating" "脐色" "99-分离" "分离" "qise" "Segregating" 33 99 80
+"34_0_None" "种皮光泽" "0-无" "无" "zhongpiguangze" "None" 34 0 81
+"34_1_Slight" "种皮光泽" "1-微" "微" "zhongpiguangze" "Slight" 34 1 82
+"34_2_Strong" "种皮光泽" "2-强" "强" "zhongpiguangze" "Strong" 34 2 83
+"35_2_Excellent" "籽粒评价" "2-优" "优" "zilipingjia" "Excellent" 35 2 84
+"35_1_Good" "籽粒评价" "1-良" "良" "zilipingjia" "Good" 35 1 85
+"35_0_Fair" "籽粒评价" "0-中" "中" "zilipingjia" "Fair" 35 0 86
+"35_-1_Poor" "籽粒评价" "-1-差" "差" "zilipingjia" "Poor" 35 -1 87

@@ -38,7 +38,7 @@ create_multiple_pairs_from_df <- function(df) {
 
   # 初始化临时变量和结果数据框
   temp_f <- NULL
-  result <- data.frame(f_elements = character(), non_f_elements = character(), stringsAsFactors = FALSE)
+  result <- data.frame(fieldid = character(), non_fieldid = character(), stringsAsFactors = FALSE)
 
   # 正则表达式，匹配f开头，后跟7个任意字符，最后是5位数字
   pattern <- "^f.{7}\\d{5}$"
@@ -51,12 +51,78 @@ create_multiple_pairs_from_df <- function(df) {
     } else {
       # 如果元素不匹配，并且临时变量不为空，则将临时变量与当前元素组合
       if (!is.null(temp_f)) {
-        result <- rbind(result, data.frame(f_elements = temp_f, non_f_elements = element, stringsAsFactors = FALSE))
+        result <- rbind(result, data.frame(fieldid = temp_f, non_fieldid = element, stringsAsFactors = FALSE))
       }
     }
   }
 
-  #result<-merge(trmd,qr_trait,all.x=TRUE,by.x="non_f_elements",by.y="traitid")
-  #result<-result[,1:4]
   return(result)
 }
+
+get_clipboard<-function(){
+  read.table("clipboard",header=TRUE)
+}
+
+
+# 加载必要的包
+library(dplyr)
+library(tidyr)
+
+#' 根据 fieldid 和 xingzhuang 组合生成 class 展示矩阵
+#'
+#' 这个函数接受一个数据框，并生成一个以 fieldid 和 xingzhuang 为行列的宽格式数据框，
+#' 其中包含每个组合的 class 值。如果有重复的 (fieldid, xingzhuang) 组合，将保留最后一个记录。
+#'
+#' @param df 一个数据框，必须包含以下列：fieldid, xingzhuang 和 class。
+#' @return 返回一个宽格式的数据框，以 fieldid 和 xingzhuang 为行列，显示 class 值。
+#' @examples
+#' df <- data.frame(
+#'   non_fieldid = c("12_2_Excellent", "20_2_Brown", "20_99_Segregating", "36_1_Lanceolate", "36_2_Ovate", "36_4_Round"),
+#'   fieldid = c("f246oa2H01028", "f246oa2H01028", "f246oa2H01028", "f246oa2H01059", "f246oa2H01059", "f246oa2H01059"),
+#'   xingzhuang = c("huaqipingjia", "rongmaose", "rongmaose", "yexing", "yexing", "yexing"),
+#'   class = c("优", "棕", "分离", "披针", "卵圆", "圆"),
+#'   class_C = c("Excellent", "Brown", "Segregating", "Lanceolate", "Ovate", "Round"),
+#'   trait_code = c(12, 20, 20, 36, 36, 36),
+#'   class_code = c(2, 2, 99, 1, 2, 4),
+#'   number = c(19, 51, 52, 88, 89, 91)
+#' )
+#' create_class_matrix(df)
+#' @export
+create_class_matrix <- function(df) {
+  # 确保输入是数据框
+  if (!is.data.frame(df)) stop("输入必须是数据框")
+
+  # 检查是否包含所需的列
+  required_cols <- c("fieldid", "xingzhuang", "class")
+  missing_cols <- setdiff(required_cols, names(df))
+
+  if (length(missing_cols) > 0) {
+    stop("数据框缺少以下必要的列: ", paste(missing_cols, collapse = ", "))
+  }
+
+  # 去除重复的 (fieldid, xingzhuang) 组合，保留最后一个记录
+  df_unique <- df %>%
+    group_by(fieldid, xingzhuang) %>%
+    slice_tail(n = 1) %>%
+    ungroup()
+
+  # 选择所需的列
+  df_selected <- df_unique %>%
+    select(fieldid, xingzhuang, class)
+
+  # 将数据转换为宽格式，以 fieldid 和 xingzhuang 为行列，展示 class
+  df_wide <- df_selected %>%
+    pivot_wider(names_from = xingzhuang, values_from = class, values_fill = list(class = NA))
+
+  return(df_wide)
+}
+
+
+
+
+
+
+
+
+
+
