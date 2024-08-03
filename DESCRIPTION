@@ -9,4 +9,4 @@ License: R3.3
 Encoding: UTF-8
 LazyData: true
 Imports: stringr,dplyr,ggplot2,reshape2,openxlsx,purrr,DBI,RSQLite
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
