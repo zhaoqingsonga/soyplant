@@ -12,8 +12,6 @@ combination_from_dataframe(mydata, only = TRUE, order = FALSE)
 \item{only}{逻辑值，是否去除重复组合}
 
 \item{order}{是否配制的组合进行排序}
-
-\item{prefix}{组合的前缀}
 }
 \value{
 返回从文件中配制的杂交合组

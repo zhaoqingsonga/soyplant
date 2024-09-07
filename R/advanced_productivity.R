@@ -54,6 +54,6 @@ get_advanced <- function(my_primary, start_num = 1) {
 
   # 移除行名
   rownames(my_advanced) <- NULL
-
-  return(my_advanced)
+  field<-subset(field,grepl("combination", table, ignore.case = TRUE))
+  return(my_advanced[as.character(field$name)])
 }

@@ -42,5 +42,6 @@ get_line <- function(my_plant, start_num = 1) {
 
   # 移除行名
   rownames(my_line) <- NULL
-  return(my_line)
+  field<-subset(field,grepl("combination", table, ignore.case = TRUE))
+  return(my_line[as.character(field$name)])
 }

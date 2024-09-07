@@ -226,6 +226,54 @@ addfieldid <- function(my_primary) {
   return(re_v)
 }
 
+#' 确保数据框包含指定字段并调整字段顺序
+#'
+#' 该函数确保数据框中包含指定的必需字段。如果数据框中缺少某个必需字段，则自动添加并填充为 `NA`。函数还将必需字段调整至数据框的前面，其余字段保持在后面。
+#'
+#' @param df 数据框，需要检查并调整字段的顺序。
+#' @param required_columns 字符串向量，包含所有需要的必需字段名。
+#'
+#' @return 返回调整后的数据框，其中必需字段在前，其他字段在后。
+#'
+#' @examples
+#' # 定义数据框
+#' df <- data.frame(name = c("A", "B"), stageid = c(1, 2))
+#'
+#' # 定义必需字段
+#' required_columns <- c("id", "user", "stageid", "name", "ma", "pa", "mapa", "memo",
+#'                       "stage", "next_stage", "f", "sele", "process", "path", "source")
+#'
+#' # 调用函数确保字段存在并重新排序
+#' df <- ensure_and_reorder_columns(df, required_columns)
+#'
+#' # 查看结果
+#' print(df)
+#'
+#' @export
+ensure_and_reorder_columns <- function(df, required_columns) {
+  for (col in required_columns) {
+    if (!col %in% colnames(df)) {
+      df[[col]] <- NA
+    }
+  }
+
+  all_columns <- colnames(df)
+  extra_columns <- setdiff(all_columns, required_columns)
+  ordered_columns <- c(required_columns, extra_columns)
+
+  df <- df[, ordered_columns]
+
+  return(df)
+}
+
+
+
+
+
+
+
+
+
 #' 计划种植试验
 #'
 #'
@@ -252,6 +300,7 @@ planting <- function(my_primary,
                      rows=6
                      ) {
   library(dplyr)
+  field<-subset(field,grepl("planting", table, ignore.case = TRUE))
   #ck固定
   if (ckfixed) {
     re_v<-my_primary %>%
@@ -268,6 +317,8 @@ planting <- function(my_primary,
   }
   re_v$rows<-rows
   re_v$line_number<-rows_to_linenumber(re_v$rows)
+  #确保必须的列都存在
+  re_v<-ensure_and_reorder_columns(re_v,as.character(field$name))
   return(re_v)
 }
 

@@ -1,2 +1,2 @@
 exportPattern("^[[:alpha:]]+")
-import(stringr,dplyr,ggplot2,reshape2,openxlsx,purrr,DBI,RSQLite)
+import(stringr,dplyr,ggplot2,reshape2,openxlsx,purrr,DBI,RSQLite,readxl)

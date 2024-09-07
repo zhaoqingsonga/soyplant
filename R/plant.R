@@ -62,7 +62,8 @@ get_plant <- function(my_pop, start_num = 1) {
   new_df$process <- paste(new_df$process, new_df$id, sep = "/")
   new_df$sele <- NA
   rownames(new_df) <- NULL
-  return(new_df)
+  field<-subset(field,grepl("combination", table, ignore.case = TRUE))
+  return(new_df[as.character(field$name)])
 }
 
 # 示例用法：

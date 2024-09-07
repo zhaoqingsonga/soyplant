@@ -58,8 +58,8 @@ get_primary <- function(my_line, start_num = 1) {
 
   # 移除行名
   rownames(my_primary) <- NULL
-
-  return(my_primary)
+  field<-subset(field,grepl("combination", table, ignore.case = TRUE))
+  return(my_primary[as.character(field$name)])
 }
 
 

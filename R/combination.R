@@ -16,14 +16,13 @@ combination <- function(ma = c("JD12", "JD17"),
   all_combinations <- expand.grid(ma, pa)
   names(all_combinations) <- c("ma", "pa")
   all_combinations$mapa <-
-    paste(all_combinations$ma, all_combinations$pa, sep = "/")
+   paste(all_combinations$ma, all_combinations$pa, sep = "/")
   all_combinations$memo <- memo
   return(all_combinations)
 }
 
 #'文件中杂交组合
 #' @param mydata 数据框，里面包括3列，顺序为为母本，父本和备注，其它列无要求
-#' @param prefix 组合的前缀
 #' @param only 逻辑值，是否去除重复组合
 #' @param order 是否配制的组合进行排序
 #' @return 返回从文件中配制的杂交合组
@@ -95,6 +94,8 @@ get_combination <- function(mydata,
   re_v$path <- name_path#合并时要重新生成
   re_v$sele<-0
   re_v$source<-NA
+  field<-subset(field,grepl("combination", table, ignore.case = TRUE))
+  re_v<-re_v[as.character(field$name)]
   return(re_v)
 }
 ##
