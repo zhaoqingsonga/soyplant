@@ -52,7 +52,3 @@ designPlot(
 \description{
 设计一个包含水沟、道路和保护行的地块布局。
 }
-\examples{
-designPlot()
-designPlot(blocks=15, y=8, waterColumns=c(4, 8))
-}

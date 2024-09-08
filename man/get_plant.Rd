@@ -17,6 +17,3 @@ get_plant(my_pop, start_num = 1)
 \description{
 从群体数据中升级单株
 }
-\examples{
-get_plant(my_pop)
-}

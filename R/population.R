@@ -3,8 +3,8 @@
 #' 从杂交组合中或群体中升级群体,数据框中必有字段：name,next_stage,f,(ma,pa,mapa,memo备选)
 #' @param my_combi 数据框，从get_combination或get_population函数所产生数据
 #' @return 下阶段值为“群体”记录升级为群体
-#' @examples
-#' get_population(my_combi)
+#@examples
+#get_population(my_combi)
 #'
 
 get_population <- function(my_combi,start_num=1) {

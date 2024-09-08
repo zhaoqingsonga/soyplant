@@ -37,8 +37,8 @@
 #' @param my_pop 数据框，必须包括name和sele和f(用于升级株行用)两个字段，sele为选择单株数
 #' @param start_num 起始编号，默认为 1
 #' @return 升级为单株的记录数据框
-#' @examples
-#' get_plant(my_pop)
+#@examples
+#get_plant(my_pop)
 
 get_plant <- function(my_pop, start_num = 1) {
   my_pop <- subset(my_pop, sele > 0)

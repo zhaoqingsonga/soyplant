@@ -159,9 +159,9 @@ plantByGroup <- function(ma=matrix(rep(0, 200), nrow = 10, ncol = 20), subg = 3,
 #'
 #' @return 返回设计的地块布局矩阵。
 #'
-#' @examples
-#' designPlot()
-#' designPlot(blocks=15, y=8, waterColumns=c(4, 8))
+#@examples
+#designPlot()
+#designPlot(blocks=15, y=8, waterColumns=c(4, 8))
 designPlot <- function(y = 10,
                        bridges = c(9, rep(6, 10), rep(3, 9)),
                        distanceBetweenBlocks1 = 1,

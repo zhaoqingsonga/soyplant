@@ -15,7 +15,3 @@ get_population(my_combi, start_num = 1)
 \description{
 从杂交组合中或群体中升级群体,数据框中必有字段：name,next_stage,f,(ma,pa,mapa,memo备选)
 }
-\examples{
-get_population(my_combi)
-
-}
