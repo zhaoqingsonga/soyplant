@@ -141,6 +141,7 @@ combination_matrix <- function(my_combi) {
 #filename="E:\\FangCloudSync\\★大豆试验设计及总结\\2024年试验设计及总结\\2024杂交圃准备2024-03-29.xlsx"
 #my_combi<-get_combination(filename,prefix = "ZJ24")
 
+<<<<<<< Updated upstream
 #write.table(my_combi,"E:\\FangCloudSync\\R_WD360\\Project\\soyplant\\data\\my_combi.txt")
 
 #' 转换二维表为母本与父本配对的数据框
@@ -209,3 +210,5 @@ convert_to_pairs <- function(data_frame_input) {
 
 
 
+=======
+>>>>>>> Stashed changes
