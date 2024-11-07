@@ -36,7 +36,7 @@
 35 "植株备注" "zhizhubeizhu" NA 36 "plant" "Plant_Notes" NA "soybean" "any"
 36 "百粒重(g)" "bailizhong" "1_50" 37 "seed" "100-Seed_Weight_(g)" NA "soybean" "N"
 37 "粒型" "lixing" "1-圆_2-扁圆_3-椭圆_4-扁椭圆_5-长椭圆_6-肾_99-分离" 38 "seed" "Seed_Shape" NA "soybean" "C"
-38 "种皮色" "zhongpise" "1-黄_2-黑_3-青黄_99-分离" 39 "seed" "Seed_Coat_Color" NA "soybean" "C"
+38 "种皮色" "zhongpise" "1-黄_2-绿_3-黑_4-褐_5-双色_99-分离" 39 "seed" "Seed_Coat_Color" NA "soybean" "C"
 39 "子叶色" "ziyese" "1-黄_2-绿_99-分离" 40 "seed" "Cotyledon_Color" NA "soybean" "C"
 40 "脐色" "qise" "1-黄_2-淡褐_3-褐_4-深褐_5-蓝_6-淡黑_7-黑_99-分离" 41 "seed" "Hilum_Color" NA "soybean" "C"
 41 "种皮光泽" "zhongpiguangze" "0-无_1-微_2-强_99-分离" 42 "seed" "Seed_Coat_Gloss" NA "soybean" "C"

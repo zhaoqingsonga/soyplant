@@ -33,7 +33,7 @@
 
 #' 升级单株
 #'
-#' 从群体数据中升级单株
+#' 从群体数据中升级单株,会增加必需字段。
 #' @param my_pop 数据框，必须包括name和sele和f(用于升级株行用)两个字段，sele为选择单株数
 #' @param start_num 起始编号，默认为 1
 #' @return 升级为单株的记录数据框
@@ -63,6 +63,13 @@ get_plant <- function(my_pop, start_num = 1) {
   new_df$sele <- NA
   rownames(new_df) <- NULL
   field<-subset(field,grepl("combination", table, ignore.case = TRUE))
+  #如果生成表中没有field中所包含的字段则补全
+  # 补齐缺失的字段
+  for (col in as.character(field$name)) {
+    if (!col %in% names(new_df)) {
+      new_df[[col]] <- NA
+    }
+  }
   return(new_df[as.character(field$name)])
 }
 

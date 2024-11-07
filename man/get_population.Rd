@@ -13,5 +13,5 @@ get_population(my_combi, start_num = 1)
 下阶段值为“群体”记录升级为群体
 }
 \description{
-从杂交组合中或群体中升级群体,数据框中必有字段：name,next_stage,f,(ma,pa,mapa,memo备选)
+从杂交组合中或群体中升级群体,数据框中必有字段：name,next_stage,f，没有的字段会根据群体中必须字段补齐。
 }

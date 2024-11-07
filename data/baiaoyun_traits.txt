@@ -36,7 +36,7 @@
 "T093" "植株备注_C" "zhizhubeizhu" 4 NA NA NA NA 35 NA "ChinaSeed" "plant" NA
 "T094" "百粒重(g)_C" "bailizhong" 1 "g" 1 50 2 36 NA "ChinaSeed" "seed" NA
 "T095" "粒型_C" "lixing" 3 NA NA NA NA 37 "1-圆,2-扁圆,3-椭圆,4-扁椭圆,5-长椭圆,6-肾,99-分离" "ChinaSeed" "seed" NA
-"T096" "种皮色_C" "zhongpise" 3 NA NA NA NA 38 "1-黄,2-黑,3-青黄,99-分离" "ChinaSeed" "seed" NA
+"T096" "种皮色_C" "zhongpise" 3 NA NA NA NA 38 "1-黄,2-绿,3-黑,4-褐,5-双色,99-分离" "ChinaSeed" "seed" NA
 "T097" "子叶色_C" "ziyese" 3 NA NA NA NA 39 "1-黄,2-绿,99-分离" "ChinaSeed" "seed" NA
 "T098" "脐色_C" "qise" 3 NA NA NA NA 40 "1-黄,2-淡褐,3-褐,4-深褐,5-蓝,6-淡黑,7-黑,99-分离" "ChinaSeed" "seed" NA
 "T099" "种皮光泽_C" "zhongpiguangze" 3 NA NA NA NA 41 "0-无,1-微,2-强,99-分离" "ChinaSeed" "seed" NA
@@ -56,3 +56,8 @@
 "T113" "核心亲本_C" "hexinqinben" 3 NA NA NA NA 54 "0-否,1-是" "ChinaSeed" "field" NA
 "T114" "抗病_C" "kangbing" 3 NA NA NA NA 55 "0-免疫,1-高抗,3-抗,7-感,9-高感" "ChinaSeed" "field" NA
 "T115" "抗虫_C" "kangchong" 3 NA NA NA NA 56 "0-免疫,1-高抗,3-抗,5-中抗,7-感,9-高感" "ChinaSeed" "field" NA
+"T116" "活秆成熟_C" "huoganchengshu" 3 NA NA NA NA NA NA "ChinaSeed" "field" NA
+"T117" "早衰_C" "zaoshuai" 3 NA NA NA NA NA NA "ChinaSeed" "field" NA
+"T118" "产量_C" "chanliang" 1 NA NA NA NA NA NA "ChinaSeed" "field" NA
+"T119" "测产株数_C" "cechanzhushu" 1 NA 0 1000 NA NA NA "ChinaSeed" "field" NA
+"T120" "选单株数_C" "xuandanzhushu" 1 NA 0 1000 NA NA NA "ChinaSeed" "field" NA
