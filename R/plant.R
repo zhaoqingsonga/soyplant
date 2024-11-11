@@ -34,13 +34,22 @@
 #' 升级单株
 #'
 #' 从群体数据中升级单株,会增加必需字段。
-#' @param my_pop 数据框，必须包括name和sele和f(用于升级株行用)两个字段，sele为选择单株数
+#' @param my_pop 数据框，必须包括name和sele和f(用于升级株行用)两个字段，sele为选择单株数,可过滤非数字
 #' @param start_num 起始编号，默认为 1
 #' @return 升级为单株的记录数据框
 #@examples
 #get_plant(my_pop)
 
 get_plant <- function(my_pop, start_num = 1) {
+  #如果sele中有非数字部分则去除掉
+
+  clean_and_convert_to_numbers <- function(vector) {
+    # 使用正则表达式检查元素是否仅包含数字
+    cleaned_vector <- ifelse(grepl("^[0-9]+$", vector), as.numeric(vector), NA)
+    return(cleaned_vector)
+  }
+  my_pop$sele<-clean_and_convert_to_numbers(my_pop$sele)
+
   my_pop <- subset(my_pop, sele > 0)
   if(is.null(my_pop$path)) my_pop$path<-my_pop$name
   new_df <- do.call(rbind, lapply(1:nrow(my_pop), function(i) {

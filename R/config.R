@@ -6,7 +6,6 @@
  #
 
 library(openxlsx)
-<<<<<<< Updated upstream
 write.table(read.xlsx("temp_traits_qr.xlsx"),"data/qr_trait.txt",row.names=FALSE)
 write.table(read.xlsx("temp_traits.xlsx"),"data/soy_traits.txt",row.names=FALSE)
 write.table(read.xlsx("temp_traits_baiaoyun.xlsx",startRow = 2),"data/baiaoyun_traits.txt",row.names=FALSE)
@@ -45,9 +44,3 @@ download_model<-function(){
   mydir<-paste(getwd(),"/","soyplant_model.xlsx",sep="")
   saveWorkbook(wb,mydir,overwrite = TRUE)
 }
-=======
-write.table(read.xlsx("temp_qr_trait.xlsx"),"data/qr_trait.txt",row.names=FALSE)
-write.table(read.xlsx("temp_soy_traits.xlsx"),"data/soy_traits.txt",row.names=FALSE)
-write.table(read.xlsx("temp_stage_prefix.xlsx"),"data/stage_prefix.txt",row.names=FALSE)
-write.table(read.xlsx("temp_ex_type.xlsx"),"data/ex_type.txt",row.names=FALSE)
->>>>>>> Stashed changes

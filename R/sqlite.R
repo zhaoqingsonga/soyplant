@@ -160,7 +160,6 @@ update_table_from_df <- function(db_path, table_name, data_df) {
 #' @import DBI
 #' @import RSQLite
 #' @export
-<<<<<<< Updated upstream
 # add_fields_to_table <- function(db_path, table_name, new_field_names) {
 #   # 连接到SQLite数据库
 #   conn <- dbConnect(RSQLite::SQLite(), dbname = db_path)
@@ -213,7 +212,6 @@ update_table_from_df <- function(db_path, table_name, data_df) {
 #   return(list(success = success, failed = failed))
 # }
 #
-=======
 add_fields_to_table <- function(db_path, table_name, new_field_names) {
   # 连接到SQLite数据库
   conn <- dbConnect(RSQLite::SQLite(), dbname = db_path)
@@ -266,7 +264,7 @@ add_fields_to_table <- function(db_path, table_name, new_field_names) {
   return(list(success = success, failed = failed))
 }
 
->>>>>>> Stashed changes
+
 
 
 
