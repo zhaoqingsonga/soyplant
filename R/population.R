@@ -43,6 +43,7 @@ get_population <- function(my_combi,start_num=1) {
   re_v$path <- paste(my_pop$path, 0, sep = "-")
   re_v$source <- my_pop$name
   re_v$memo<-my_pop$memo
+  re_v$former_fieldid<-my_pop$fieldid
   field<-subset(field,grepl("combination", table, ignore.case = TRUE))
   #如果生成表中没有field中所包含的字段则补全
   # 补齐缺失的字段

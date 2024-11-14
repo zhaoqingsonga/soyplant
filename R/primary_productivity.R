@@ -40,9 +40,9 @@ get_primary <- function(my_line, start_num = 1) {
   # 生成唯一ID
   my_primary$id <- generate_id(start_num, end_num = nrow(my_primary) + start_num - 1)
 
-  # 记录来源名称
+  # 记录来源名称,和前fieldid
   my_primary$source <- my_primary$name
-
+  my_primary$former_fieldid <- my_primary$fieldid
   # 处理名称，小于9代时处理，大于9代时不再追加
   my_primary$name <- ifelse(my_primary$f < 9,
                             paste(my_primary$name, ":", (my_primary$f + 1), sep = ""),
@@ -59,6 +59,14 @@ get_primary <- function(my_line, start_num = 1) {
   # 移除行名
   rownames(my_primary) <- NULL
   field<-subset(field,grepl("combination", table, ignore.case = TRUE))
+  #如果生成表中没有field中所包含的字段则补全
+  # 补齐缺失的字段
+  for (col in as.character(field$name)) {
+    if (!col %in% names(my_primary)) {
+      my_primary[[col]] <- NA
+    }
+  }
+
   return(my_primary[as.character(field$name)])
 }
 

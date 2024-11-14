@@ -81,6 +81,7 @@ get_combination <- function(mydata,
   id <- generate_id(start_num = 1, end_num = my_len)
   f <- rep(0, my_len)
   re_v <- data.frame(
+    fieldid=NA,
     id = id,
     user = rep(user, my_len),
     stageid = NA,
@@ -94,7 +95,16 @@ get_combination <- function(mydata,
   re_v$path <- name_path#合并时要重新生成
   re_v$sele<-0
   re_v$source<-NA
+  re_v$former_fieldid<-NA
   field<-subset(field,grepl("combination", table, ignore.case = TRUE))
+  #如果生成表中没有field中所包含的字段则补全
+  # 补齐缺失的字段
+  for (col in as.character(field$name)) {
+    if (!col %in% names(re_v)) {
+      re_v[[col]] <- NA
+    }
+  }
+
   re_v<-re_v[as.character(field$name)]
   return(re_v)
 }

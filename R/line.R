@@ -43,5 +43,16 @@ get_line <- function(my_plant, start_num = 1) {
   # 移除行名
   rownames(my_line) <- NULL
   field<-subset(field,grepl("combination", table, ignore.case = TRUE))
+  #如果生成表中没有field中所包含的字段则补全
+  # 补齐缺失的字段
+  for (col in as.character(field$name)) {
+    if (!col %in% names(my_line)) {
+      my_line[[col]] <- NA
+    }
+  }
+
+
+
+
   return(my_line[as.character(field$name)])
 }
