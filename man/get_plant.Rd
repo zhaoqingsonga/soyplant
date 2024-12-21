@@ -7,7 +7,7 @@
 get_plant(my_pop, start_num = 1)
 }
 \arguments{
-\item{my_pop}{数据框，必须包括name和sele和f(用于升级株行用)两个字段，sele为选择单株数}
+\item{my_pop}{数据框，必须包括name和sele和f(用于升级株行用)两个字段，sele为选择单株数,可过滤非数字}
 
 \item{start_num}{起始编号，默认为 1}
 }
@@ -15,5 +15,5 @@ get_plant(my_pop, start_num = 1)
 升级为单株的记录数据框
 }
 \description{
-从群体数据中升级单株
+从群体数据中升级单株,会增加必需字段。
 }

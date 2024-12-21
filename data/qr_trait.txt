@@ -1,116 +1,200 @@
-"traitid" "trait" "class" "class_C" "xingzhuang" "class_E" "trait_code" "class_code" "number"
-"3_1_Highly-resistant" "抗草甘膦" "1-高抗" "高抗" "kangcaogangpin" "Highly-resistant" 3 1 1
-"3_3_Resistant" "抗草甘膦" "3-抗" "抗" "kangcaogangpin" "Resistant" 3 3 2
-"3_99_Segregating" "抗草甘膦" "99-分离" "分离" "kangcaogangpin" "Segregating" 3 99 3
-"3_5_Moderately-resistant" "抗草甘膦" "5-中抗" "中抗" "kangcaogangpin" "Moderately-resistant" 3 5 4
-"3_7_Not-resistant" "抗草甘膦" "7-不抗" "不抗" "kangcaogangpin" "Not-resistant" 3 7 5
-"8_1_White" "上胚轴色" "1-白" "白" "shangpeizhouse" "White" 8 1 6
-"8_2_Purple" "上胚轴色" "2-紫" "紫" "shangpeizhouse" "Purple" 8 2 7
-"8_99_Segregating" "上胚轴色" "99-分离" "分离" "shangpeizhouse" "Segregating" 8 99 8
-"9_1_White" "下胚轴色" "1-白" "白" "xiapeizhouse" "White" 9 1 9
-"9_2_Purple" "下胚轴色" "2-紫" "紫" "xiapeizhouse" "Purple" 9 2 10
-"9_99_Segregating" "下胚轴色" "99-分离" "分离" "xiapeizhouse" "Segregating" 9 99 11
-"10_2_Excellent" "苗期评价" "2-优" "优" "miaoqipingjia" "Excellent" 10 2 12
-"10_1_Good" "苗期评价" "1-良" "良" "miaoqipingjia" "Good" 10 1 13
-"10_0_Fair" "苗期评价" "0-中" "中" "miaoqipingjia" "Fair" 10 0 14
-"10_-1_Poor" "苗期评价" "-1-差" "差" "miaoqipingjia" "Poor" 10 -1 15
-"11_1_White" "花色" "1-白" "白" "huase" "White" 11 1 16
-"11_2_Purple" "花色" "2-紫" "紫" "huase" "Purple" 11 2 17
-"11_99_Segregating" "花色" "99-分离" "分离" "huase" "Segregating" 11 99 18
-"12_2_Excellent" "花期评价" "2-优" "优" "huaqipingjia" "Excellent" 12 2 19
-"12_1_Good" "花期评价" "1-良" "良" "huaqipingjia" "Good" 12 1 20
-"12_0_Fair" "花期评价" "0-中" "中" "huaqipingjia" "Fair" 12 0 21
-"12_-1_Poor" "花期评价" "-1-差" "差" "huaqipingjia" "Poor" 12 -1 22
-"13_0_Immune" "抗花叶病毒" "0-免疫" "免疫" "kanghuayebingdu" "Immune" 13 0 23
-"13_1_Highly-resistant" "抗花叶病毒" "1-高抗" "高抗" "kanghuayebingdu" "Highly-resistant" 13 1 24
-"13_3_Resistant" "抗花叶病毒" "3-抗" "抗" "kanghuayebingdu" "Resistant" 13 3 25
-"13_7_Susceptible" "抗花叶病毒" "7-感" "感" "kanghuayebingdu" "Susceptible" 13 7 26
-"13_9_Highly-susceptible" "抗花叶病毒" "9-高感" "高感" "kanghuayebingdu" "Highly-susceptible" 13 9 27
-"14_0_Immune" "抗孢囊线虫" "0-免疫" "免疫" "kangbaonangxianchong" "Immune" 14 0 28
-"14_1_Highly-resistant" "抗孢囊线虫" "1-高抗" "高抗" "kangbaonangxianchong" "Highly-resistant" 14 1 29
-"14_3_Resistant" "抗孢囊线虫" "3-抗" "抗" "kangbaonangxianchong" "Resistant" 14 3 30
-"14_7_Susceptible" "抗孢囊线虫" "7-感" "感" "kangbaonangxianchong" "Susceptible" 14 7 31
-"14_9_Highly-susceptible" "抗孢囊线虫" "9-高感" "高感" "kangbaonangxianchong" "Highly-susceptible" 14 9 32
-"15_1_No-lodging" "倒伏性" "1-不倒" "不倒" "daofuxing" "No-lodging" 15 1 33
-"15_3_Slight-lodging" "倒伏性" "3-轻倒" "轻倒" "daofuxing" "Slight-lodging" 15 3 34
-"15_5_Moderate-lodging" "倒伏性" "5-中倒" "中倒" "daofuxing" "Moderate-lodging" 15 5 35
-"15_7_Severe-lodging" "倒伏性" "7-重倒" "重倒" "daofuxing" "Severe-lodging" 15 7 36
-"15_9_Very-severe-lodging" "倒伏性" "9-严重倒" "严重倒" "daofuxing" "Very-severe-lodging" 15 9 37
-"16_2_Excellent" "成熟期评价" "2-优" "优" "chengshuqipingjia" "Excellent" 16 2 38
-"16_1_Good" "成熟期评价" "1-良" "良" "chengshuqipingjia" "Good" 16 1 39
-"16_0_Fair" "成熟期评价" "0-中" "中" "chengshuqipingjia" "Fair" 16 0 40
-"16_-1_Poor" "成熟期评价" "-1-差" "差" "chengshuqipingjia" "Poor" 16 -1 41
-"18_2_Excellent" "植株评价" "2-优" "优" "zhizhupingjia" "Excellent" 18 2 42
-"18_1_Good" "植株评价" "1-良" "良" "zhizhupingjia" "Good" 18 1 43
-"18_0_Fair" "植株评价" "0-中" "中" "zhizhupingjia" "Fair" 18 0 44
-"18_-1_Poor" "植株评价" "-1-差" "差" "zhizhupingjia" "Poor" 18 -1 45
-"19_3_Indeterminate" "结荚习性" "3-无限" "无限" "jiejiaxixing" "Indeterminate" 19 3 46
-"19_5_Semi-determinate" "结荚习性" "5-亚有限" "亚有限" "jiejiaxixing" "Semi-determinate" 19 5 47
-"19_7_Determinate" "结荚习性" "7-有限" "有限" "jiejiaxixing" "Determinate" 19 7 48
-"19_99_Segregating" "结荚习性" "99-分离" "分离" "jiejiaxixing" "Segregating" 19 99 49
-"20_1_Gray" "茸毛色" "1-灰" "灰" "rongmaose" "Gray" 20 1 50
-"20_2_Brown" "茸毛色" "2-棕" "棕" "rongmaose" "Brown" 20 2 51
-"20_99_Segregating" "茸毛色" "99-分离" "分离" "rongmaose" "Segregating" 20 99 52
-"21_1_Gray-brown" "荚熟色" "1-灰褐" "灰褐" "jiashuse" "Gray-brown" 21 1 53
-"21_2_Yellow-brown" "荚熟色" "2-黄褐" "黄褐" "jiashuse" "Yellow-brown" 21 2 54
-"21_3_Brown" "荚熟色" "3-褐" "褐" "jiashuse" "Brown" 21 3 55
-"21_4_Dark-brown" "荚熟色" "4-深褐" "深褐" "jiashuse" "Dark-brown" 21 4 56
-"21_5_Black" "荚熟色" "5-黑" "黑" "jiashuse" "Black" 21 5 57
-"21_99_Segregating" "荚熟色" "99-分离" "分离" "jiashuse" "Segregating" 21 99 58
-"30_1_Round" "粒型" "1-圆" "圆" "lixing" "Round" 30 1 59
-"30_2_Flattened-round" "粒型" "2-扁圆" "扁圆" "lixing" "Flattened-round" 30 2 60
-"30_3_Oval" "粒型" "3-椭圆" "椭圆" "lixing" "Oval" 30 3 61
-"30_4_Flattened-oval" "粒型" "4-扁椭圆" "扁椭圆" "lixing" "Flattened-oval" 30 4 62
-"30_5_Long-oval" "粒型" "5-长椭圆" "长椭圆" "lixing" "Long-oval" 30 5 63
-"30_6_Kidney" "粒型" "6-肾" "肾" "lixing" "Kidney" 30 6 64
-"30_99_Segregating" "粒型" "99-分离" "分离" "lixing" "Segregating" 30 99 65
-"31_1_Yellow" "种皮色" "1-黄" "黄" "zhongpise" "Yellow" 31 1 66
-"31_2_Green" "种皮色" "2-绿" "绿" "zhongpise" "Green" 31 2 67
-"31_3_Black" "种皮色" "3-黑" "黑" "zhongpise" "Black" 31 3 68
-"31_4_Brown" "种皮色" "4-褐" "褐" "zhongpise" "Brown" 31 4 69
-"31_5_Bicolor" "种皮色" "5-双色" "双色" "zhongpise" "Bicolor" 31 5 70
-"31_99_Segregating" "种皮色" "99-分离" "分离" "zhongpise" "Segregating" 31 99 71
-"32_1_Yellow" "子叶色" "1-黄" "黄" "ziyese" "Yellow" 32 1 72
-"32_2_Green" "子叶色" "2-绿" "绿" "ziyese" "Green" 32 2 73
-"31_99_Segregating" "子叶色" "99-分离" "分离" "ziyese" "Segregating" 31 99 74
-"33_1_Yellow" "脐色" "1-黄" "黄" "qise" "Yellow" 33 1 75
-"33_2_Light-brown" "脐色" "2-淡褐" "淡褐" "qise" "Light-brown" 33 2 76
-"33_3_Brown" "脐色" "3-褐" "褐" "qise" "Brown" 33 3 77
-"33_4_Dark-brown" "脐色" "4-深褐" "深褐" "qise" "Dark-brown" 33 4 78
-"33_5_Blue" "脐色" "5-蓝" "蓝" "qise" "Blue" 33 5 79
-"33_6_Light-black" "脐色" "6-淡黑" "淡黑" "qise" "Light-black" 33 6 80
-"33_7_Black" "脐色" "7-黑" "黑" "qise" "Black" 33 7 81
-"33_99_Segregating" "脐色" "99-分离" "分离" "qise" "Segregating" 33 99 82
-"34_0_None" "种皮光泽" "0-无" "无" "zhongpiguangze" "None" 34 0 83
-"34_1_Slight" "种皮光泽" "1-微" "微" "zhongpiguangze" "Slight" 34 1 84
-"34_2_Strong" "种皮光泽" "2-强" "强" "zhongpiguangze" "Strong" 34 2 85
-"35_2_Excellent" "籽粒评价" "2-优" "优" "zilipingjia" "Excellent" 35 2 86
-"35_1_Good" "籽粒评价" "1-良" "良" "zilipingjia" "Good" 35 1 87
-"35_0_Fair" "籽粒评价" "0-中" "中" "zilipingjia" "Fair" 35 0 88
-"35_-1_Poor" "籽粒评价" "-1-差" "差" "zilipingjia" "Poor" 35 -1 89
-"36_1_Lanceolate" "叶形" "1-披针" "披针" "yexing" "Lanceolate" 36 1 90
-"36_2_Ovate" "叶形" "2-卵圆" "卵圆" "yexing" "Ovate" 36 2 91
-"36_3_Oval" "叶形" "3-椭圆" "椭圆" "yexing" "Oval" 36 3 92
-"36_4_Round" "叶形" "4-圆" "圆" "yexing" "Round" 36 4 93
-"36_99_Segregating" "叶形" "99-分离" "分离" "yexing" "Segregating" 36 99 94
-"37_0_Immune" "抗拟茎点种腐" "0-免疫" "免疫" "kangnijingdianzhongfu" "Immune" 37 0 95
-"37_1_Highly-resistant" "抗拟茎点种腐" "1-高抗" "高抗" "kangnijingdianzhongfu" "Highly-resistant" 37 1 96
-"37_3_Resistant" "抗拟茎点种腐" "3-抗" "抗" "kangnijingdianzhongfu" "Resistant" 37 3 97
-"37_7_Susceptible" "抗拟茎点种腐" "7-感" "感" "kangnijingdianzhongfu" "Susceptible" 37 7 98
-"37_9_Highly-susceptible" "抗拟茎点种腐" "9-高感" "高感" "kangnijingdianzhongfu" "Highly-susceptible" 37 9 99
-"38_0_Core-parent" "核心亲本" "0-否" "否" "hexinqinben" "Core-parent" 38 0 100
-"38_1_Core-parent" "核心亲本" "1-是" "是" "hexinqinben" "Core-parent" 38 1 101
-"39_2_Excellent" "鼓粒期评价" "2-优" "优" "guliqipingjia" "Excellent" 39 2 102
-"39_1_Good" "鼓粒期评价" "1-良" "良" "guliqipingjia" "Good" 39 1 103
-"39_0_Fair" "鼓粒期评价" "0-中" "中" "guliqipingjia" "Fair" 39 0 104
-"39_-1_Poor" "鼓粒期评价" "-1-差" "差" "guliqipingjia" "Poor" 39 -1 105
-"40_0_Immune" "抗病" "0-免疫" "免疫" "kangbing" "Immune" 40 0 106
-"40_1_Highly-resistant" "抗病" "1-高抗" "高抗" "kangbing" "Highly-resistant" 40 1 107
-"40_3_Resistant" "抗病" "3-抗" "抗" "kangbing" "Resistant" 40 3 108
-"40_7_Susceptible" "抗病" "7-感" "感" "kangbing" "Susceptible" 40 7 109
-"40_9_Highly-susceptible" "抗病" "9-高感" "高感" "kangbing" "Highly-susceptible" 40 9 110
-"41_0_Immune" "抗虫" "0-免疫" "免疫" "kangchong" "Immune" 41 0 111
-"41_1_Highly-resistant" "抗虫" "1-高抗" "高抗" "kangchong" "Highly-resistant" 41 1 112
-"41_3_Resistant" "抗虫" "3-抗" "抗" "kangchong" "Resistant" 41 3 113
-"41_7_Susceptible" "抗虫" "7-感" "感" "kangchong" "Susceptible" 41 7 114
-"41_9_Highly-susceptible" "抗虫" "9-高感" "高感" "kangchong" "Highly-susceptible" 41 9 115
+"ID" "name_C" "name_Lib" "level_C" "order" "class" "name_E" "level_E" "species" "field_type" "name_code" "name_baiaoyun" "class_standard" "level_code"
+1 "播种期" "bozhongqi" NA 1 "field" "Sowing_Period" NA "soybean" "D" "T059" "播种期_C" 101 "T059-NA"
+2 "出苗期" "chumiaoqi" NA 2 "field" "Germination_Period" NA "soybean" "D" "T060" "出苗期_C" 102 "T060-NA"
+3 "上胚轴色" "shangpeizhouse" "1-白" 3 "field" "Color_of_the_Upper_Hypocotyl" "1-white_2-purple_99-segregating" "soybean" "C" "T061" "上胚轴色_C" 1 "T061-1-"
+3 "上胚轴色" "shangpeizhouse" "2-紫" 3 "field" "Color_of_the_Upper_Hypocotyl" "1-white_2-purple_99-segregating" "soybean" "C" "T061" "上胚轴色_C" 1 "T061-2-"
+3 "上胚轴色" "shangpeizhouse" "99-分离" 3 "field" "Color_of_the_Upper_Hypocotyl" "1-white_2-purple_99-segregating" "soybean" "C" "T061" "上胚轴色_C" 1 "T061-99-"
+4 "下胚轴色" "xiapeizhouse" "1-白" 4 "field" "Color_of_the_Lower_Hypocotyl" "1-white_2-purple_99-segregating" "soybean" "C" "T062" "下胚轴色_C" 1 "T062-1-"
+4 "下胚轴色" "xiapeizhouse" "2-紫" 4 "field" "Color_of_the_Lower_Hypocotyl" "1-white_2-purple_99-segregating" "soybean" "C" "T062" "下胚轴色_C" 1 "T062-2-"
+4 "下胚轴色" "xiapeizhouse" "99-分离" 4 "field" "Color_of_the_Lower_Hypocotyl" "1-white_2-purple_99-segregating" "soybean" "C" "T062" "下胚轴色_C" 1 "T062-99-"
+5 "抗草甘膦" "kangcaoganlin" "1-高抗" 5 "field" "Glyphosate_Resistance" "1-highlyResistant_3-resistant_5-moderatelyResistant_7-noResistant_99-segregating" "soybean" "C" "T063" "抗草甘膦_C" 1 "T063-1-"
+5 "抗草甘膦" "kangcaoganlin" "3-抗" 5 "field" "Glyphosate_Resistance" "1-highlyResistant_3-resistant_5-moderatelyResistant_7-noResistant_99-segregating" "soybean" "C" "T063" "抗草甘膦_C" 1 "T063-3-"
+5 "抗草甘膦" "kangcaoganlin" "5-中抗" 5 "field" "Glyphosate_Resistance" "1-highlyResistant_3-resistant_5-moderatelyResistant_7-noResistant_99-segregating" "soybean" "C" "T063" "抗草甘膦_C" 1 "T063-5-"
+5 "抗草甘膦" "kangcaoganlin" "7-不抗" 5 "field" "Glyphosate_Resistance" "1-highlyResistant_3-resistant_5-moderatelyResistant_7-noResistant_99-segregating" "soybean" "C" "T063" "抗草甘膦_C" 1 "T063-7-"
+5 "抗草甘膦" "kangcaoganlin" "99-分离" 5 "field" "Glyphosate_Resistance" "1-highlyResistant_3-resistant_5-moderatelyResistant_7-noResistant_99-segregating" "soybean" "C" "T063" "抗草甘膦_C" 1 "T063-99-"
+6 "苗期评价" "miaoqipingjia" "2-优" 6 "field" "Seedling_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T064" "苗期评价_C" 1 "T064-2-"
+6 "苗期评价" "miaoqipingjia" "1-良" 6 "field" "Seedling_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T064" "苗期评价_C" 1 "T064-1-"
+6 "苗期评价" "miaoqipingjia" "0-中" 6 "field" "Seedling_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T064" "苗期评价_C" 1 "T064-0-"
+6 "苗期评价" "miaoqipingjia" "-1-差" 6 "field" "Seedling_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T064" "苗期评价_C" 1 "T064--1-"
+7 "开花期" "kaihuaqi" NA 7 "field" "Flowering_Period" NA "soybean" "D" "T065" "开花期_C" 103 "T065-NA"
+8 "花色" "huase" "1-白" 8 "field" "Flower_Color" "1-white_2-purple_99-segregating" "soybean" "C" "T066" "花色_C" 108 "T066-1-"
+8 "花色" "huase" "2-紫" 8 "field" "Flower_Color" "1-white_2-purple_99-segregating" "soybean" "C" "T066" "花色_C" 108 "T066-2-"
+8 "花色" "huase" "99-分离" 8 "field" "Flower_Color" "1-white_2-purple_99-segregating" "soybean" "C" "T066" "花色_C" 108 "T066-99-"
+9 "叶形" "yexing" "1-披针" 9 "field" "Leaf_Shape" "1-lanceolate_2-ovate_3-oval_99-segregating" "soybean" "C" "T067" "叶形_C" 107 "T067-1-"
+9 "叶形" "yexing" "2-卵圆" 9 "field" "Leaf_Shape" "1-lanceolate_2-ovate_3-oval_99-segregating" "soybean" "C" "T067" "叶形_C" 107 "T067-2-"
+9 "叶形" "yexing" "3-椭圆" 9 "field" "Leaf_Shape" "1-lanceolate_2-ovate_3-oval_99-segregating" "soybean" "C" "T067" "叶形_C" 107 "T067-3-"
+9 "叶形" "yexing" "99-分离" 9 "field" "Leaf_Shape" "1-lanceolate_2-ovate_3-oval_99-segregating" "soybean" "C" "T067" "叶形_C" 107 "T067-99-"
+10 "叶色" " yese" "1-淡绿" 10 "field" "Leaf_Color" "1-lightGreen_2-green_3-darkGreen_99-segregating" "soybean" "C" "T068" "叶色_C" 1 "T068-1-"
+10 "叶色" " yese" "2-绿" 10 "field" "Leaf_Color" "1-lightGreen_2-green_3-darkGreen_99-segregating" "soybean" "C" "T068" "叶色_C" 1 "T068-2-"
+10 "叶色" " yese" "3-深绿" 10 "field" "Leaf_Color" "1-lightGreen_2-green_3-darkGreen_99-segregating" "soybean" "C" "T068" "叶色_C" 1 "T068-3-"
+10 "叶色" " yese" "99-分离" 10 "field" "Leaf_Color" "1-lightGreen_2-green_3-darkGreen_99-segregating" "soybean" "C" "T068" "叶色_C" 1 "T068-99-"
+11 "花期评价" "huaqipingjia" "2-优" 11 "field" "Flowering_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T069" "花期评价_C" 1 "T069-2-"
+11 "花期评价" "huaqipingjia" "1-良" 11 "field" "Flowering_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T069" "花期评价_C" 1 "T069-1-"
+11 "花期评价" "huaqipingjia" "0-中" 11 "field" "Flowering_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T069" "花期评价_C" 1 "T069-0-"
+11 "花期评价" "huaqipingjia" "-1-差" 11 "field" "Flowering_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T069" "花期评价_C" 1 "T069--1-"
+12 "抗花叶病毒" "kanghuayebingdu" "0-免疫" 12 "field" "Flower_and_Leaf_Virus_Resistance" "0-immune_1-highlyResistant_3-resistant_7-susceptible_9-highlyusceptible_99-segregating" "soybean" "C" "T070" "抗花叶病毒_C" 116 "T070-0-"
+12 "抗花叶病毒" "kanghuayebingdu" "1-高抗" 12 "field" "Flower_and_Leaf_Virus_Resistance" "0-immune_1-highlyResistant_3-resistant_7-susceptible_9-highlyusceptible_99-segregating" "soybean" "C" "T070" "抗花叶病毒_C" 116 "T070-1-"
+12 "抗花叶病毒" "kanghuayebingdu" "3-抗" 12 "field" "Flower_and_Leaf_Virus_Resistance" "0-immune_1-highlyResistant_3-resistant_7-susceptible_9-highlyusceptible_99-segregating" "soybean" "C" "T070" "抗花叶病毒_C" 116 "T070-3-"
+12 "抗花叶病毒" "kanghuayebingdu" "7-感" 12 "field" "Flower_and_Leaf_Virus_Resistance" "0-immune_1-highlyResistant_3-resistant_7-susceptible_9-highlyusceptible_99-segregating" "soybean" "C" "T070" "抗花叶病毒_C" 116 "T070-7-"
+12 "抗花叶病毒" "kanghuayebingdu" "9-高感" 12 "field" "Flower_and_Leaf_Virus_Resistance" "0-immune_1-highlyResistant_3-resistant_7-susceptible_9-highlyusceptible_99-segregating" "soybean" "C" "T070" "抗花叶病毒_C" 116 "T070-9-"
+12 "抗花叶病毒" "kanghuayebingdu" "99-分离" 12 "field" "Flower_and_Leaf_Virus_Resistance" "0-immune_1-highlyResistant_3-resistant_7-susceptible_9-highlyusceptible_99-segregating" "soybean" "C" "T070" "抗花叶病毒_C" 116 "T070-99-"
+13 "抗孢囊线虫" "kangbaonangxianchong" "0-免疫" 14 "field" "Cyst_Nematode_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highlySusceptible_99-segregating" "soybean" "C" "T071" "抗孢囊线虫_C" 1 "T071-0-"
+13 "抗孢囊线虫" "kangbaonangxianchong" "1-高抗" 14 "field" "Cyst_Nematode_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highlySusceptible_99-segregating" "soybean" "C" "T071" "抗孢囊线虫_C" 1 "T071-1-"
+13 "抗孢囊线虫" "kangbaonangxianchong" "3-抗" 14 "field" "Cyst_Nematode_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highlySusceptible_99-segregating" "soybean" "C" "T071" "抗孢囊线虫_C" 1 "T071-3-"
+13 "抗孢囊线虫" "kangbaonangxianchong" "7-感" 14 "field" "Cyst_Nematode_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highlySusceptible_99-segregating" "soybean" "C" "T071" "抗孢囊线虫_C" 1 "T071-7-"
+13 "抗孢囊线虫" "kangbaonangxianchong" "9-高感" 14 "field" "Cyst_Nematode_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highlySusceptible_99-segregating" "soybean" "C" "T071" "抗孢囊线虫_C" 1 "T071-9-"
+13 "抗孢囊线虫" "kangbaonangxianchong" "99-分离" 14 "field" "Cyst_Nematode_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highlySusceptible_99-segregating" "soybean" "C" "T071" "抗孢囊线虫_C" 1 "T071-99-"
+14 "倒伏性" "daofuxing" "1-不倒" 15 "field" "Lodging_Resistance" "1-noLodging_3-lightLodging_5-fairLodging_7-severeLodging_9-verySevereLodging" "soybean" "C" "T072" "倒伏性_C" 114 "T072-1-"
+14 "倒伏性" "daofuxing" "3-轻倒" 15 "field" "Lodging_Resistance" "1-noLodging_3-lightLodging_5-fairLodging_7-severeLodging_9-verySevereLodging" "soybean" "C" "T072" "倒伏性_C" 114 "T072-3-"
+14 "倒伏性" "daofuxing" "5-中倒" 15 "field" "Lodging_Resistance" "1-noLodging_3-lightLodging_5-fairLodging_7-severeLodging_9-verySevereLodging" "soybean" "C" "T072" "倒伏性_C" 114 "T072-5-"
+14 "倒伏性" "daofuxing" "7-重倒" 15 "field" "Lodging_Resistance" "1-noLodging_3-lightLodging_5-fairLodging_7-severeLodging_9-verySevereLodging" "soybean" "C" "T072" "倒伏性_C" 114 "T072-7-"
+14 "倒伏性" "daofuxing" "9-严重倒" 15 "field" "Lodging_Resistance" "1-noLodging_3-lightLodging_5-fairLodging_7-severeLodging_9-verySevereLodging" "soybean" "C" "T072" "倒伏性_C" 114 "T072-9-"
+15 "鼓粒期" "guliqi" NA 16 "field" "Pod_Filling_Stage" NA "soybean" "D" "T073" "鼓粒期_C" 1 "T073-NA"
+16 "鼓粒期评价" "guliqipingjia" "2-优" 17 "field" "Pod_Filling_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T074" "鼓粒期评价_C" 1 "T074-2-"
+16 "鼓粒期评价" "guliqipingjia" "1-良" 17 "field" "Pod_Filling_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T074" "鼓粒期评价_C" 1 "T074-1-"
+16 "鼓粒期评价" "guliqipingjia" "0-中" 17 "field" "Pod_Filling_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T074" "鼓粒期评价_C" 1 "T074-0-"
+16 "鼓粒期评价" "guliqipingjia" "-1-差" 17 "field" "Pod_Filling_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T074" "鼓粒期评价_C" 1 "T074--1-"
+17 "落叶性" "luoyexing" "1-不落" 18 "field" "Leaf_Drop" "1-noDropping_2-harfDropping_3-dropping_99-segregating" "soybean" "C" "T075" "落叶性_C" 113 "T075-1-"
+17 "落叶性" "luoyexing" "2-半落" 18 "field" "Leaf_Drop" "1-noDropping_2-harfDropping_3-dropping_99-segregating" "soybean" "C" "T075" "落叶性_C" 113 "T075-2-"
+17 "落叶性" "luoyexing" "3-落" 18 "field" "Leaf_Drop" "1-noDropping_2-harfDropping_3-dropping_99-segregating" "soybean" "C" "T075" "落叶性_C" 113 "T075-3-"
+17 "落叶性" "luoyexing" "99-分离" 18 "field" "Leaf_Drop" "1-noDropping_2-harfDropping_3-dropping_99-segregating" "soybean" "C" "T075" "落叶性_C" 113 "T075-99-"
+18 "裂荚性" "liejiaxing" "3-不裂" 19 "field" "Pod_Shattering" "3-noCracking_5-lightCracking0-9_7-fairCrackgin9-25_9-easyCracking>25_99-segregating" "soybean" "C" "T076" "裂荚性_C" 112 "T076-3-"
+18 "裂荚性" "liejiaxing" "5-轻裂0-9" 19 "field" "Pod_Shattering" "3-noCracking_5-lightCracking0-9_7-fairCrackgin9-25_9-easyCracking>25_99-segregating" "soybean" "C" "T076" "裂荚性_C" 112 "T076-5-0-9"
+18 "裂荚性" "liejiaxing" "7-中裂9-25" 19 "field" "Pod_Shattering" "3-noCracking_5-lightCracking0-9_7-fairCrackgin9-25_9-easyCracking>25_99-segregating" "soybean" "C" "T076" "裂荚性_C" 112 "T076-7-9-25"
+18 "裂荚性" "liejiaxing" "9-易裂>25" 19 "field" "Pod_Shattering" "3-noCracking_5-lightCracking0-9_7-fairCrackgin9-25_9-easyCracking>25_99-segregating" "soybean" "C" "T076" "裂荚性_C" 112 "T076-9-25"
+18 "裂荚性" "liejiaxing" "99-分离" 19 "field" "Pod_Shattering" "3-noCracking_5-lightCracking0-9_7-fairCrackgin9-25_9-easyCracking>25_99-segregating" "soybean" "C" "T076" "裂荚性_C" 112 "T076-99-"
+19 "成熟期" "chengshuqi" NA 20 "field" "Maturity_Stage" NA "soybean" "D" "T077" "成熟期_C" 104 "T077-NA"
+20 "成熟期评价" "chengshuqipingjia" "2-优" 21 "field" "Maturity_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T078" "成熟期评价_C" 1 "T078-2-"
+20 "成熟期评价" "chengshuqipingjia" "1-良" 21 "field" "Maturity_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T078" "成熟期评价_C" 1 "T078-1-"
+20 "成熟期评价" "chengshuqipingjia" "0-中" 21 "field" "Maturity_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T078" "成熟期评价_C" 1 "T078-0-"
+20 "成熟期评价" "chengshuqipingjia" "-1-差" 21 "field" "Maturity_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T078" "成熟期评价_C" 1 "T078--1-"
+21 "收获期" "shouhuoqi" NA 22 "field" "Harvesting_Period" NA "soybean" "D" "T079" "收获期_C" 105 "T079-NA"
+22 "田间备注" "tianjianbeizhu" NA 23 "field" "Field_Notes" NA "soybean" "any" "T080" "田间备注_C" 118 "T080-NA"
+23 "考种株数" "kaozhongzhushu" "0" 24 "plant" "Number_of_Tested_Plants" "0_1000" "soybean" "N" "T081" "考种株数_C" 200 "T081-0"
+23 "考种株数" "kaozhongzhushu" "1000" 24 "plant" "Number_of_Tested_Plants" "0_1000" "soybean" "N" "T081" "考种株数_C" 200 "T081-1000"
+24 "植株评价" "zhizhupingjia" "2-优" 25 "plant" "Plant_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T082" "植株评价_C" 2 "T082-2-"
+24 "植株评价" "zhizhupingjia" "1-良" 25 "plant" "Plant_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T082" "植株评价_C" 2 "T082-1-"
+24 "植株评价" "zhizhupingjia" "0-中" 25 "plant" "Plant_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T082" "植株评价_C" 2 "T082-0-"
+24 "植株评价" "zhizhupingjia" "-1-差" 25 "plant" "Plant_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T082" "植株评价_C" 2 "T082--1-"
+25 "结荚习性" "jiejiaxixing" "3-无限" 26 "plant" "Pod_Setting_Habit" "3-indeterminate_5-semiDeterminate_7-determinate_99-segregating" "soybean" "C" "T083" "结荚习性_C" 110 "T083-3-"
+25 "结荚习性" "jiejiaxixing" "5-亚有限" 26 "plant" "Pod_Setting_Habit" "3-indeterminate_5-semiDeterminate_7-determinate_99-segregating" "soybean" "C" "T083" "结荚习性_C" 110 "T083-5-"
+25 "结荚习性" "jiejiaxixing" "7-有限" 26 "plant" "Pod_Setting_Habit" "3-indeterminate_5-semiDeterminate_7-determinate_99-segregating" "soybean" "C" "T083" "结荚习性_C" 110 "T083-7-"
+25 "结荚习性" "jiejiaxixing" "99-分离" 26 "plant" "Pod_Setting_Habit" "3-indeterminate_5-semiDeterminate_7-determinate_99-segregating" "soybean" "C" "T083" "结荚习性_C" 110 "T083-99-"
+26 "茸毛色" "rongmaose" "1-灰" 27 "plant" "Hair_Color" "1-gray_2-brown_99-segregating" "soybean" "C" "T084" "茸毛色_C" 109 "T084-1-"
+26 "茸毛色" "rongmaose" "2-棕" 27 "plant" "Hair_Color" "1-gray_2-brown_99-segregating" "soybean" "C" "T084" "茸毛色_C" 109 "T084-2-"
+26 "茸毛色" "rongmaose" "99-分离" 27 "plant" "Hair_Color" "1-gray_2-brown_99-segregating" "soybean" "C" "T084" "茸毛色_C" 109 "T084-99-"
+27 "荚熟色" "jiashuse" "1-灰褐" 28 "plant" "Pod_Ripening_Color" "1-grayBrown_2-yellowBrown_3-brown_4-darkBrown_5-black_99-segregating" "soybean" "C" "T085" "荚熟色_C" 2 "T085-1-"
+27 "荚熟色" "jiashuse" "2-黄褐" 28 "plant" "Pod_Ripening_Color" "1-grayBrown_2-yellowBrown_3-brown_4-darkBrown_5-black_99-segregating" "soybean" "C" "T085" "荚熟色_C" 2 "T085-2-"
+27 "荚熟色" "jiashuse" "3-褐" 28 "plant" "Pod_Ripening_Color" "1-grayBrown_2-yellowBrown_3-brown_4-darkBrown_5-black_99-segregating" "soybean" "C" "T085" "荚熟色_C" 2 "T085-3-"
+27 "荚熟色" "jiashuse" "4-深褐" 28 "plant" "Pod_Ripening_Color" "1-grayBrown_2-yellowBrown_3-brown_4-darkBrown_5-black_99-segregating" "soybean" "C" "T085" "荚熟色_C" 2 "T085-4-"
+27 "荚熟色" "jiashuse" "5-黑" 28 "plant" "Pod_Ripening_Color" "1-grayBrown_2-yellowBrown_3-brown_4-darkBrown_5-black_99-segregating" "soybean" "C" "T085" "荚熟色_C" 2 "T085-5-"
+27 "荚熟色" "jiashuse" "99-分离" 28 "plant" "Pod_Ripening_Color" "1-grayBrown_2-yellowBrown_3-brown_4-darkBrown_5-black_99-segregating" "soybean" "C" "T085" "荚熟色_C" 2 "T085-99-"
+28 "株高(cm)" "zhugao" "0" 29 "plant" "Plant_Height_(cm)" "0_3000" "soybean" "N" "T086" "株高(cm)_C" 201 "T086-0"
+28 "株高(cm)" "zhugao" "3000" 29 "plant" "Plant_Height_(cm)" "0_3000" "soybean" "N" "T086" "株高(cm)_C" 201 "T086-3000"
+29 "底荚高(cm)" "dijiagao" "0" 30 "plant" "Pod_Height_from_the_Ground_(cm)" "0_300" "soybean" "N" "T087" "底荚高(cm)_C" 202 "T087-0"
+29 "底荚高(cm)" "dijiagao" "300" 30 "plant" "Pod_Height_from_the_Ground_(cm)" "0_300" "soybean" "N" "T087" "底荚高(cm)_C" 202 "T087-300"
+30 "分枝数" "fenzhishu" "0" 31 "plant" "Number_of_Branches" "0_100" "soybean" "N" "T088" "分枝数_C" 204 "T088-0"
+30 "分枝数" "fenzhishu" "100" 31 "plant" "Number_of_Branches" "0_100" "soybean" "N" "T088" "分枝数_C" 204 "T088-100"
+31 "主茎节数" "zhujingjieshu" "0" 32 "plant" "Number_of_Main_Stem_Nodes" "0_300" "soybean" "N" "T089" "主茎节数_C" 203 "T089-0"
+31 "主茎节数" "zhujingjieshu" "300" 32 "plant" "Number_of_Main_Stem_Nodes" "0_300" "soybean" "N" "T089" "主茎节数_C" 203 "T089-300"
+32 "有效荚" "youxiaojia" "0" 33 "plant" "Effective_Pods" "0_1000" "soybean" "N" "T090" "有效荚_C" 205 "T090-0"
+32 "有效荚" "youxiaojia" "1000" 33 "plant" "Effective_Pods" "0_1000" "soybean" "N" "T090" "有效荚_C" 205 "T090-1000"
+33 "无效荚" "wuxiaojia" "0" 34 "plant" "Ineffective_Pods" "0_1000" "soybean" "N" "T091" "无效荚_C" 206 "T091-0"
+33 "无效荚" "wuxiaojia" "1000" 34 "plant" "Ineffective_Pods" "0_1000" "soybean" "N" "T091" "无效荚_C" 206 "T091-1000"
+34 "考种株粒重(g)" "kaozhongzhulizhong" "0" 35 "plant" "Seed_Weight_per_Tested_Plant_(g)" "0_10000" "soybean" "N" "T092" "考种株粒重(g)_C" 208 "T092-0"
+34 "考种株粒重(g)" "kaozhongzhulizhong" "10000" 35 "plant" "Seed_Weight_per_Tested_Plant_(g)" "0_10000" "soybean" "N" "T092" "考种株粒重(g)_C" 208 "T092-10000"
+35 "植株备注" "zhizhubeizhu" NA 36 "plant" "Plant_Notes" NA "soybean" "any" "T093" "植株备注_C" 2 "T093-NA"
+36 "百粒重(g)" "bailizhong" "1" 37 "seed" "100-Seed_Weight_(g)" "1_50" "soybean" "N" "T094" "百粒重(g)_C" 209 "T094-1"
+36 "百粒重(g)" "bailizhong" "50" 37 "seed" "100-Seed_Weight_(g)" "1_50" "soybean" "N" "T094" "百粒重(g)_C" 209 "T094-50"
+37 "粒型" "lixing" "1-圆" 38 "seed" "Seed_Shape" "1-round_2-flattenedRound_3-oval_4-flattenedOval_5-longOval_6-kidney_99-segregating" "soybean" "C" "T095" "粒型_C" 217 "T095-1-"
+37 "粒型" "lixing" "2-扁圆" 38 "seed" "Seed_Shape" "1-round_2-flattenedRound_3-oval_4-flattenedOval_5-longOval_6-kidney_99-segregating" "soybean" "C" "T095" "粒型_C" 217 "T095-2-"
+37 "粒型" "lixing" "3-椭圆" 38 "seed" "Seed_Shape" "1-round_2-flattenedRound_3-oval_4-flattenedOval_5-longOval_6-kidney_99-segregating" "soybean" "C" "T095" "粒型_C" 217 "T095-3-"
+37 "粒型" "lixing" "4-扁椭圆" 38 "seed" "Seed_Shape" "1-round_2-flattenedRound_3-oval_4-flattenedOval_5-longOval_6-kidney_99-segregating" "soybean" "C" "T095" "粒型_C" 217 "T095-4-"
+37 "粒型" "lixing" "5-长椭圆" 38 "seed" "Seed_Shape" "1-round_2-flattenedRound_3-oval_4-flattenedOval_5-longOval_6-kidney_99-segregating" "soybean" "C" "T095" "粒型_C" 217 "T095-5-"
+37 "粒型" "lixing" "6-肾" 38 "seed" "Seed_Shape" "1-round_2-flattenedRound_3-oval_4-flattenedOval_5-longOval_6-kidney_99-segregating" "soybean" "C" "T095" "粒型_C" 217 "T095-6-"
+37 "粒型" "lixing" "99-分离" 38 "seed" "Seed_Shape" "1-round_2-flattenedRound_3-oval_4-flattenedOval_5-longOval_6-kidney_99-segregating" "soybean" "C" "T095" "粒型_C" 217 "T095-99-"
+38 "种皮色" "zhongpise" "1-黄" 39 "seed" "Seed_Coat_Color" "1-yellow_2-green_3-black_4-brown_5-doubleColor_99-segregating" "soybean" "C" "T096" "种皮色_C" 215 "T096-1-"
+38 "种皮色" "zhongpise" "2-绿" 39 "seed" "Seed_Coat_Color" "1-yellow_2-green_3-black_4-brown_5-doubleColor_99-segregating" "soybean" "C" "T096" "种皮色_C" 215 "T096-2-"
+38 "种皮色" "zhongpise" "3-黑" 39 "seed" "Seed_Coat_Color" "1-yellow_2-green_3-black_4-brown_5-doubleColor_99-segregating" "soybean" "C" "T096" "种皮色_C" 215 "T096-3-"
+38 "种皮色" "zhongpise" "4-褐" 39 "seed" "Seed_Coat_Color" "1-yellow_2-green_3-black_4-brown_5-doubleColor_99-segregating" "soybean" "C" "T096" "种皮色_C" 215 "T096-4-"
+38 "种皮色" "zhongpise" "5-双色" 39 "seed" "Seed_Coat_Color" "1-yellow_2-green_3-black_4-brown_5-doubleColor_99-segregating" "soybean" "C" "T096" "种皮色_C" 215 "T096-5-"
+38 "种皮色" "zhongpise" "99-分离" 39 "seed" "Seed_Coat_Color" "1-yellow_2-green_3-black_4-brown_5-doubleColor_99-segregating" "soybean" "C" "T096" "种皮色_C" 215 "T096-99-"
+39 "子叶色" "ziyese" "1-黄" 40 "seed" "Cotyledon_Color" "1-yellow_2-green_99-segregating" "soybean" "C" "T097" "子叶色_C" 3 "T097-1-"
+39 "子叶色" "ziyese" "2-绿" 40 "seed" "Cotyledon_Color" "1-yellow_2-green_99-segregating" "soybean" "C" "T097" "子叶色_C" 3 "T097-2-"
+39 "子叶色" "ziyese" "99-分离" 40 "seed" "Cotyledon_Color" "1-yellow_2-green_99-segregating" "soybean" "C" "T097" "子叶色_C" 3 "T097-99-"
+40 "脐色" "qise" "1-黄" 41 "seed" "Hilum_Color" "1-yellow_2-lightBrown_3-brown_4-darkbrown_5-blue_6-lightBlack_7-black_99-segregating" "soybean" "C" "T098" "脐色_C" 216 "T098-1-"
+40 "脐色" "qise" "2-淡褐" 41 "seed" "Hilum_Color" "1-yellow_2-lightBrown_3-brown_4-darkbrown_5-blue_6-lightBlack_7-black_99-segregating" "soybean" "C" "T098" "脐色_C" 216 "T098-2-"
+40 "脐色" "qise" "3-褐" 41 "seed" "Hilum_Color" "1-yellow_2-lightBrown_3-brown_4-darkbrown_5-blue_6-lightBlack_7-black_99-segregating" "soybean" "C" "T098" "脐色_C" 216 "T098-3-"
+40 "脐色" "qise" "4-深褐" 41 "seed" "Hilum_Color" "1-yellow_2-lightBrown_3-brown_4-darkbrown_5-blue_6-lightBlack_7-black_99-segregating" "soybean" "C" "T098" "脐色_C" 216 "T098-4-"
+40 "脐色" "qise" "5-蓝" 41 "seed" "Hilum_Color" "1-yellow_2-lightBrown_3-brown_4-darkbrown_5-blue_6-lightBlack_7-black_99-segregating" "soybean" "C" "T098" "脐色_C" 216 "T098-5-"
+40 "脐色" "qise" "6-淡黑" 41 "seed" "Hilum_Color" "1-yellow_2-lightBrown_3-brown_4-darkbrown_5-blue_6-lightBlack_7-black_99-segregating" "soybean" "C" "T098" "脐色_C" 216 "T098-6-"
+40 "脐色" "qise" "7-黑" 41 "seed" "Hilum_Color" "1-yellow_2-lightBrown_3-brown_4-darkbrown_5-blue_6-lightBlack_7-black_99-segregating" "soybean" "C" "T098" "脐色_C" 216 "T098-7-"
+40 "脐色" "qise" "99-分离" 41 "seed" "Hilum_Color" "1-yellow_2-lightBrown_3-brown_4-darkbrown_5-blue_6-lightBlack_7-black_99-segregating" "soybean" "C" "T098" "脐色_C" 216 "T098-99-"
+41 "种皮光泽" "zhongpiguangze" "0-无" 42 "seed" "Seed_Coat_Gloss" "0-no_1-lihgt_2-strong_99-segregating" "soybean" "C" "T099" "种皮光泽_C" 218 "T099-0-"
+41 "种皮光泽" "zhongpiguangze" "1-微" 42 "seed" "Seed_Coat_Gloss" "0-no_1-lihgt_2-strong_99-segregating" "soybean" "C" "T099" "种皮光泽_C" 218 "T099-1-"
+41 "种皮光泽" "zhongpiguangze" "2-强" 42 "seed" "Seed_Coat_Gloss" "0-no_1-lihgt_2-strong_99-segregating" "soybean" "C" "T099" "种皮光泽_C" 218 "T099-2-"
+41 "种皮光泽" "zhongpiguangze" "99-分离" 42 "seed" "Seed_Coat_Gloss" "0-no_1-lihgt_2-strong_99-segregating" "soybean" "C" "T099" "种皮光泽_C" 218 "T099-99-"
+42 "籽粒评价" "zilipingjia" "2-优" 43 "seed" "Seed_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T100" "籽粒评价_C" 3 "T100-2-"
+42 "籽粒评价" "zilipingjia" "1-良" 43 "seed" "Seed_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T100" "籽粒评价_C" 3 "T100-1-"
+42 "籽粒评价" "zilipingjia" "0-中" 43 "seed" "Seed_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T100" "籽粒评价_C" 3 "T100-0-"
+42 "籽粒评价" "zilipingjia" "-1-差" 43 "seed" "Seed_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T100" "籽粒评价_C" 3 "T100--1-"
+43 "籽粒备注" "zilibeizhu" NA 44 "seed" "Seed_Notes" NA "soybean" "any" "T101" "籽粒备注_C" 3 "T101-NA"
+44 "小区面积(m2)" "xiaoqumiaoji" "0" 45 "yield" "Plot_Area_(m²)" "0_100000" "soybean" "N" "T102" "小区面积(m2)_C" 301 "T102-0"
+44 "小区面积(m2)" "xiaoqumiaoji" "100000" 45 "yield" "Plot_Area_(m²)" "0_100000" "soybean" "N" "T102" "小区面积(m2)_C" 301 "T102-100000"
+45 "小区重(kg)" "xiaoquzhong" "0" 46 "yield" "Plot_Weight_(kg)" "0_6000" "soybean" "N" "T103" "小区重(kg)_C" 303 "T103-0"
+45 "小区重(kg)" "xiaoquzhong" "6000" 46 "yield" "Plot_Weight_(kg)" "0_6000" "soybean" "N" "T103" "小区重(kg)_C" 303 "T103-6000"
+46 "蛋白%" "danbai" "20" 47 "quality" "Protein" "20_60" "soybean" "N" "T104" "蛋白_C" 5 "T104-20"
+46 "蛋白%" "danbai" "60" 47 "quality" "Protein" "20_60" "soybean" "N" "T104" "蛋白_C" 5 "T104-60"
+47 "脂肪%" "zhifang" "10" 48 "quality" "Oil" "10_30" "soybean" "N" "T105" "脂肪_C" 5 "T105-10"
+47 "脂肪%" "zhifang" "30" 48 "quality" "Oil" "10_30" "soybean" "N" "T105" "脂肪_C" 5 "T105-30"
+48 "含基因" "hanjiyin" NA 49 "combination" "Gene_Content" NA "soybean" "any" "T106" "含基因_C" 6 "T106-NA"
+49 "回交备注" "huijiaobeizhu" NA 50 "combination" "Backcross_Notes" NA "soybean" "any" "T107" "回交备注_C" 6 "T107-NA"
+50 "父本备注" "fubenbeizhu" NA 51 "combination" "Parent_Line_Notes" NA "soybean" "any" "T108" "父本备注_C" 6 "T108-NA"
+51 "做花数" "zuohuashu" "0" 52 "combination" "Number_of_Flowers_Produced" "0_1000" "soybean" "N" "T109" "做花数_C" 6 "T109-0"
+51 "做花数" "zuohuashu" "1000" 52 "combination" "Number_of_Flowers_Produced" "0_1000" "soybean" "N" "T109" "做花数_C" 6 "T109-1000"
+52 "成活荚数" "chenghuojiashu" "0" 53 "combination" "Number_of_Pods_Set" "0_1000" "soybean" "N" "T110" "成活荚数_C" 6 "T110-0"
+52 "成活荚数" "chenghuojiashu" "1000" 53 "combination" "Number_of_Pods_Set" "0_1000" "soybean" "N" "T110" "成活荚数_C" 6 "T110-1000"
+53 "收获粒数" "shouhuolishu" "0" 54 "combination" "Number_of_Seeds_Harvested" "0_1000" "soybean" "N" "T111" "收获粒数_C" 6 "T111-0"
+53 "收获粒数" "shouhuolishu" "1000" 54 "combination" "Number_of_Seeds_Harvested" "0_1000" "soybean" "N" "T111" "收获粒数_C" 6 "T111-1000"
+54 "抗拟茎点种腐" "kangnijingdianzhongfu" "0-免疫" 13 "field" "Phomopsisseed_decay_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T112" "抗拟茎点种腐_C" 1 "T112-0-"
+54 "抗拟茎点种腐" "kangnijingdianzhongfu" "1-高抗" 13 "field" "Phomopsisseed_decay_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T112" "抗拟茎点种腐_C" 1 "T112-1-"
+54 "抗拟茎点种腐" "kangnijingdianzhongfu" "3-抗" 13 "field" "Phomopsisseed_decay_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T112" "抗拟茎点种腐_C" 1 "T112-3-"
+54 "抗拟茎点种腐" "kangnijingdianzhongfu" "7-感" 13 "field" "Phomopsisseed_decay_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T112" "抗拟茎点种腐_C" 1 "T112-7-"
+54 "抗拟茎点种腐" "kangnijingdianzhongfu" "9-高感" 13 "field" "Phomopsisseed_decay_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T112" "抗拟茎点种腐_C" 1 "T112-9-"
+54 "抗拟茎点种腐" "kangnijingdianzhongfu" "99-分离" 13 "field" "Phomopsisseed_decay_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T112" "抗拟茎点种腐_C" 1 "T112-99-"
+55 "核心亲本" "hexinqinben" "0-否" 55 "field" "Core_parent" "0-no_1-yes" "soybean" "C" "T113" "核心亲本_C" 1 "T113-0-"
+55 "核心亲本" "hexinqinben" "1-是" 55 "field" "Core_parent" "0-no_1-yes" "soybean" "C" "T113" "核心亲本_C" 1 "T113-1-"
+56 "抗病" "kangbing" "0-免疫" 56 "field" "Disease-Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T114" "抗病_C" 1 "T114-0-"
+56 "抗病" "kangbing" "1-高抗" 56 "field" "Disease-Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T114" "抗病_C" 1 "T114-1-"
+56 "抗病" "kangbing" "3-抗" 56 "field" "Disease-Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T114" "抗病_C" 1 "T114-3-"
+56 "抗病" "kangbing" "7-感" 56 "field" "Disease-Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T114" "抗病_C" 1 "T114-7-"
+56 "抗病" "kangbing" "9-高感" 56 "field" "Disease-Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T114" "抗病_C" 1 "T114-9-"
+56 "抗病" "kangbing" "99-分离" 56 "field" "Disease-Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T114" "抗病_C" 1 "T114-99-"
+57 "抗虫" "kangchong" "0-免疫" 57 "field" "Pest_Resistancce" "0-immune_1-highly-resistant_3-resistant_5-Moderately-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T115" "抗虫_C" 1 "T115-0-"
+57 "抗虫" "kangchong" "1-高抗" 57 "field" "Pest_Resistancce" "0-immune_1-highly-resistant_3-resistant_5-Moderately-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T115" "抗虫_C" 1 "T115-1-"
+57 "抗虫" "kangchong" "3-抗" 57 "field" "Pest_Resistancce" "0-immune_1-highly-resistant_3-resistant_5-Moderately-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T115" "抗虫_C" 1 "T115-3-"
+57 "抗虫" "kangchong" "5-中抗" 57 "field" "Pest_Resistancce" "0-immune_1-highly-resistant_3-resistant_5-Moderately-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T115" "抗虫_C" 1 "T115-5-"
+57 "抗虫" "kangchong" "7-感" 57 "field" "Pest_Resistancce" "0-immune_1-highly-resistant_3-resistant_5-Moderately-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T115" "抗虫_C" 1 "T115-7-"
+57 "抗虫" "kangchong" "9-高感" 57 "field" "Pest_Resistancce" "0-immune_1-highly-resistant_3-resistant_5-Moderately-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T115" "抗虫_C" 1 "T115-9-"
+57 "抗虫" "kangchong" "99-分离" 57 "field" "Pest_Resistancce" "0-immune_1-highly-resistant_3-resistant_5-Moderately-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T115" "抗虫_C" 1 "T115-99-"
+58 "活秆成熟" "huoganchengshu" "0-否" 58 "field" "Mature_with_green_stalks" "0-no_1-yes_99-segregating" "soybean" "C" "T116" "活秆成熟_C" 1 "T116-0-"
+58 "活秆成熟" "huoganchengshu" "1-是" 58 "field" "Mature_with_green_stalks" "0-no_1-yes_99-segregating" "soybean" "C" "T116" "活秆成熟_C" 1 "T116-1-"
+58 "活秆成熟" "huoganchengshu" "99-分离" 58 "field" "Mature_with_green_stalks" "0-no_1-yes_99-segregating" "soybean" "C" "T116" "活秆成熟_C" 1 "T116-99-"
+59 "早衰" "zaoshuai" "0-否" 59 "field" "Early_aging" "0-no_1-yes_99-segregating" "soybean" "C" "T117" "早衰_C" 1 "T117-0-"
+59 "早衰" "zaoshuai" "1-是" 59 "field" "Early_aging" "0-no_1-yes_99-segregating" "soybean" "C" "T117" "早衰_C" 1 "T117-1-"
+59 "早衰" "zaoshuai" "99-分离" 59 "field" "Early_aging" "0-no_1-yes_99-segregating" "soybean" "C" "T117" "早衰_C" 1 "T117-99-"
+60 "亩产(kg)" "chanliang" "0" 60 "field" "Yield(kg)" "0_1000" "soybean" "N" "T118" "产量_C" 1 "T118-0"
+60 "亩产(kg)" "chanliang" "1000" 60 "field" "Yield(kg)" "0_1000" "soybean" "N" "T118" "产量_C" 1 "T118-1000"
+61 "测产株数" "cechanzhushu" "0" 61 "field" "Measured_number" "0_1000" "soybean" "N" "T119" "测产株数_C" 302 "T119-0"
+61 "测产株数" "cechanzhushu" "1000" 61 "field" "Measured_number" "0_1000" "soybean" "N" "T119" "测产株数_C" 302 "T119-1000"
+62 "选单株数" "xuandanzhushu" "0" 62 "field" "Selected_number" "0_1000" "soybean" "N" "T0120" "选单株数_C" 1 "T0120-0"
+62 "选单株数" "xuandanzhushu" "1000" 62 "field" "Selected_number" "0_1000" "soybean" "N" "T0120" "选单株数_C" 1 "T0120-1000"
+63 "试纸检测" "shizhijiance" NA 63 "seed" "Test_strip_detection" NA "soybean" "any" "T0121" "试纸检测_C" 3 "T0121-NA"
+64 "完好粒率%" "wanhaolilv" "0" 64 "seed" "Rate_of_intact_grains" "0_100" "soybean" "N" "T0122" "完好粒率_C" 210 "T0122-0"
+64 "完好粒率%" "wanhaolilv" "100" 64 "seed" "Rate_of_intact_grains" "0_100" "soybean" "N" "T0122" "完好粒率_C" 210 "T0122-100"
+65 "紫斑粒率%" "zibanlilv" "0" 65 "seed" "Rate_of_purple_spotted_grains" "0_100" "soybean" "N" "T0123" "紫斑粒率_C" 211 "T0123-0"
+65 "紫斑粒率%" "zibanlilv" "100" 65 "seed" "Rate_of_purple_spotted_grains" "0_100" "soybean" "N" "T0123" "紫斑粒率_C" 211 "T0123-100"
+66 "褐斑粒率%" "hebanlilv" "0" 66 "seed" "Rate_of_brown_spotted_grains" "0_100" "soybean" "N" "T0124" "褐斑粒率_C" 212 "T0124-0"
+66 "褐斑粒率%" "hebanlilv" "100" 66 "seed" "Rate_of_brown_spotted_grains" "0_100" "soybean" "N" "T0124" "褐斑粒率_C" 212 "T0124-100"
+67 "虫蚀粒率%" "chongshililv" "0" 67 "seed" "Rate_of_insect_damaged_grains" "0_100" "soybean" "N" "T0125" "虫蚀粒率_C" 213 "T0125-0"
+67 "虫蚀粒率%" "chongshililv" "100" 67 "seed" "Rate_of_insect_damaged_grains" "0_100" "soybean" "N" "T0125" "虫蚀粒率_C" 213 "T0125-100"

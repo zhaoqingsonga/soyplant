@@ -29,7 +29,6 @@ savewb <-
       addWorksheet(wb, "combi_matrix", visible = TRUE,tabColour = "blue")
       writeData(wb, "combi_matrix", combi_matrix, startRow = 1)
     }
-
     #设置格式
     hs1 <-
       createStyle(
