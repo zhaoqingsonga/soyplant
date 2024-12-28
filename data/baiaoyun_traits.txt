@@ -101,7 +101,7 @@
 "T099" "种皮光泽_C" "zhongpiguangze" 3 NA NA NA "0" "41" "0-无,1-微,2-强,99-分离" "ChinaSeed" "seed" NA
 "T100" "籽粒评价_C" "zilipingjia" 3 NA NA NA "0" "42" "2-优,1-良,0-中,-1-差" "ChinaSeed" "seed" NA
 "T101" "籽粒备注_C" "zilibeizhu" 4 NA NA NA "0" "43" NA "ChinaSeed" "seed" NA
-"T102" "小区面积(m2)_C" "xiaoqumiaoji" 1 "m2" "0" "10000" "2" "44" NA "ChinaSeed" "yield" NA
+"T102" "小区面积(m2)_C" "xiaoqumianji" 1 "m2" "0" "10000" "2" "44" NA "ChinaSeed" "yield" NA
 "T103" "小区重(kg)_C" "xiaoquzhong" 1 "kg" "0" "6000" "4" "45" NA "ChinaSeed" "yield" NA
 "T104" "蛋白(%)_C" "danbai" 1 "%" "20" "60" "2" "46" NA "ChinaSeed" "quality" NA
 "T105" "脂肪(%)_C" "zhifang" 1 "%" "10" "30" "2" "47" NA "ChinaSeed" "quality" NA
@@ -117,7 +117,7 @@
 "T115" "抗虫_C" "kangchong" 3 NA NA NA "0" "56" "0-免疫,1-高抗,3-抗,5-中抗,7-感,9-高感" "ChinaSeed" "field" NA
 "T116" "活秆成熟_C" "huoganchengshu" 3 NA NA NA "0" "56" "0-否,1-是" "ChinaSeed" "field" NA
 "T117" "早衰_C" "zaoshuai" 3 NA NA NA "0" "57" "0-否,1-是" "ChinaSeed" "field" NA
-"T118" "亩产(kg)_C" "chanliang" 1 "kg" "0" "10000" "2" "59" NA "ChinaSeed" "plant" NA
+"T118" "亩产(kg)_C" "muchan" 1 "kg" "0" "10000" "2" "59" NA "ChinaSeed" "plant" NA
 "T119" "测产株数_C" "cechanzhushu" 1 NA "0" "500" "2" "59" NA "ChinaSeed" "plant" NA
 "T0120" "选单株数_C" "xuandanzhushu" 1 NA "0" "10000" "0" "120" NA "ChinaSeed" "field" NA
 "T0121" "试纸检测_C" "shizhijiance" 4 NA NA NA "0" "121" NA "ChinaSeed" "seed" NA

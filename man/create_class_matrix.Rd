@@ -7,10 +7,12 @@
 create_class_matrix(df)
 }
 \arguments{
-\item{df}{一个数据框，必须包含以下列：fieldid, xingzhuang 和 class。}
+\item{df}{输入的数据框，该数据框需要包含 `fieldid`、`name_code` 和 `level_C` 这几个列，用于后续的数据处理和格式转换操作。}
 }
 \value{
 返回一个宽格式的数据框，以 fieldid 和 xingzhuang 为行列，显示 class 值。
+
+返回一个宽格式的数据框，行索引为 `fieldid`，列名为 `name_code`，对应的值为 `level_C` 的值，若某 `(fieldid, name_code)` 组合不存在对应的值，则用 `NA` 填充。
 }
 \description{
 这个函数接受一个数据框，并生成一个以 fieldid 和 xingzhuang 为行列的宽格式数据框，
@@ -28,4 +30,13 @@ df <- data.frame(
   number = c(19, 51, 52, 88, 89, 91)
 )
 create_class_matrix(df)
+# 创建一个示例数据框（实际应用中替换为真实数据框）
+df_example <- data.frame(
+  fieldid = c(1, 1, 2, 2),
+  name_code = c("T001", "T002", "T001", "T003"),
+  level_C = c("A", "B", "C", "D")
+)
+result <- create_class_matrix(df_example)
+print(result)
+
 }

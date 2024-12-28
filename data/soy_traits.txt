@@ -8,7 +8,7 @@
 7 "开花期" "kaihuaqi" NA 7 "field" "Flowering_Period" NA "soybean" "D" "T065" "开花期_C" 103
 8 "花色" "huase" "1-白_2-紫_99-分离" 8 "field" "Flower_Color" "1-white_2-purple_99-segregating" "soybean" "C" "T066" "花色_C" 108
 9 "叶形" "yexing" "1-披针_2-卵圆_3-椭圆_99-分离" 9 "field" "Leaf_Shape" "1-lanceolate_2-ovate_3-oval_99-segregating" "soybean" "C" "T067" "叶形_C" 107
-10 "叶色" " yese" "1-淡绿_2-绿_3-深绿_99-分离" 10 "field" "Leaf_Color" "1-lightGreen_2-green_3-darkGreen_99-segregating" "soybean" "C" "T068" "叶色_C" 1
+10 "叶色" "yese" "1-淡绿_2-绿_3-深绿_99-分离" 10 "field" "Leaf_Color" "1-lightGreen_2-green_3-darkGreen_99-segregating" "soybean" "C" "T068" "叶色_C" 1
 11 "花期评价" "huaqipingjia" "2-优_1-良_0-中_-1-差" 11 "field" "Flowering_Stage_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T069" "花期评价_C" 1
 12 "抗花叶病毒" "kanghuayebingdu" "0-免疫_1-高抗_3-抗_7-感_9-高感_99-分离" 12 "field" "Flower_and_Leaf_Virus_Resistance" "0-immune_1-highlyResistant_3-resistant_7-susceptible_9-highlyusceptible_99-segregating" "soybean" "C" "T070" "抗花叶病毒_C" 116
 13 "抗孢囊线虫" "kangbaonangxianchong" "0-免疫_1-高抗_3-抗_7-感_9-高感_99-分离" 14 "field" "Cyst_Nematode_Resistance" "0-immune_1-highly-resistant_3-resistant_7-susceptible_9-highlySusceptible_99-segregating" "soybean" "C" "T071" "抗孢囊线虫_C" 1
@@ -42,7 +42,7 @@
 41 "种皮光泽" "zhongpiguangze" "0-无_1-微_2-强_99-分离" 42 "seed" "Seed_Coat_Gloss" "0-no_1-lihgt_2-strong_99-segregating" "soybean" "C" "T099" "种皮光泽_C" 218
 42 "籽粒评价" "zilipingjia" "2-优_1-良_0-中_-1-差" 43 "seed" "Seed_Evaluation" "2-excellent_1-good_0-fair_-1-poor" "soybean" "C" "T100" "籽粒评价_C" 3
 43 "籽粒备注" "zilibeizhu" NA 44 "seed" "Seed_Notes" NA "soybean" "any" "T101" "籽粒备注_C" 3
-44 "小区面积(m2)" "xiaoqumiaoji" "0_100000" 45 "yield" "Plot_Area_(m²)" "0_100000" "soybean" "N" "T102" "小区面积(m2)_C" 301
+44 "小区面积(m2)" "xiaoqumianji" "0_100000" 45 "yield" "Plot_Area_(m²)" "0_100000" "soybean" "N" "T102" "小区面积(m2)_C" 301
 45 "小区重(kg)" "xiaoquzhong" "0_6000" 46 "yield" "Plot_Weight_(kg)" "0_6000" "soybean" "N" "T103" "小区重(kg)_C" 303
 46 "蛋白%" "danbai" "20_60" 47 "quality" "Protein" "20_60" "soybean" "N" "T104" "蛋白_C" 5
 47 "脂肪%" "zhifang" "10_30" 48 "quality" "Oil" "10_30" "soybean" "N" "T105" "脂肪_C" 5
@@ -58,7 +58,7 @@
 57 "抗虫" "kangchong" "0-免疫_1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 57 "field" "Pest_Resistancce" "0-immune_1-highly-resistant_3-resistant_5-Moderately-resistant_7-susceptible_9-highly-susceptible_99-segregating" "soybean" "C" "T115" "抗虫_C" 1
 58 "活秆成熟" "huoganchengshu" "0-否_1-是_99-分离" 58 "field" "Mature_with_green_stalks" "0-no_1-yes_99-segregating" "soybean" "C" "T116" "活秆成熟_C" 1
 59 "早衰" "zaoshuai" "0-否_1-是_99-分离" 59 "field" "Early_aging" "0-no_1-yes_99-segregating" "soybean" "C" "T117" "早衰_C" 1
-60 "亩产(kg)" "chanliang" "0_1000" 60 "field" "Yield(kg)" "0_1000" "soybean" "N" "T118" "产量_C" 1
+60 "亩产(kg)" "muchan" "0_1000" 60 "field" "Yield(kg)" "0_1000" "soybean" "N" "T118" "亩产_C" 304
 61 "测产株数" "cechanzhushu" "0_1000" 61 "field" "Measured_number" "0_1000" "soybean" "N" "T119" "测产株数_C" 302
 62 "选单株数" "xuandanzhushu" "0_1000" 62 "field" "Selected_number" "0_1000" "soybean" "N" "T0120" "选单株数_C" 1
 63 "试纸检测" "shizhijiance" NA 63 "seed" "Test_strip_detection" NA "soybean" "any" "T0121" "试纸检测_C" 3
@@ -66,3 +66,4 @@
 65 "紫斑粒率%" "zibanlilv" "0_100" 65 "seed" "Rate_of_purple_spotted_grains" "0_100" "soybean" "N" "T0123" "紫斑粒率_C" 211
 66 "褐斑粒率%" "hebanlilv" "0_100" 66 "seed" "Rate_of_brown_spotted_grains" "0_100" "soybean" "N" "T0124" "褐斑粒率_C" 212
 67 "虫蚀粒率%" "chongshililv" "0_100" 67 "seed" "Rate_of_insect_damaged_grains" "0_100" "soybean" "N" "T0125" "虫蚀粒率_C" 213
+68 "生育期(d)" "shengyuqi" "30_200" 68 "field" "Yield(kg)" "30_200" "soybean" "N" "T010" "生育期" 106
