@@ -226,6 +226,37 @@ addfieldid <- function(my_primary) {
   return(re_v)
 }
 
+##
+##考虑了不同地点是否重新编写FID
+addplace_addfieldid_addrows<-function(my_primary, place = c("石家庄", "德州"),restartfid=FALSE,rows=6){
+  if(restartfid){
+    #不同地点重新编号
+    mat <- my_primary
+    df <- data.frame()
+    for (iname in place) {
+      mat$place <- iname
+      mat$fieldid<- generate_id(start_num = 1,end_num  = nrow(mat),char = "f")
+      #不同地点分别加行号
+      mat$rows<-rows
+      mat$line_number<-rows_to_linenumber(mat$rows)
+      df <- rbind(df, mat)
+      #停留1.1秒
+      Sys.sleep(1.1)
+    }
+
+  }else{
+    #不同地点不重新编号
+    df<-addplace(my_primary, place)
+    df<-addfieldid(df)
+    #统一加
+    df$rows<-rows
+    df$line_number<-rows_to_linenumber(df$rows)
+  }
+
+  return(df)
+}
+
+
 #' 确保数据框包含指定字段并调整字段顺序
 #'
 #' 该函数确保数据框中包含指定的必需字段。如果数据框中缺少某个必需字段，则自动添加并填充为 `NA`。函数还将必需字段调整至数据框的前面，其余字段保持在后面。
@@ -297,7 +328,8 @@ planting <- function(my_primary,
                      place = c("石家庄", "德州"),
                      ckfixed = TRUE,
                      digits = 3,
-                     rows=6
+                     rows=6,
+                     restartfid=FALSE
                      ) {
   library(dplyr)
   field<-subset(field,grepl("planting", table, ignore.case = TRUE))
@@ -306,17 +338,19 @@ planting <- function(my_primary,
     re_v<-my_primary %>%
       addrpckfixed(ck, interval, s_prefix, rp, digits) %>%
       addtreatment(treatment) %>%
-      addplace(place) %>%
-      addfieldid()
+      addplace_addfieldid_addrows(place,restartfid,rows)
+      # addplace(place) %>%
+      # addfieldid()
   } else{
     re_v<-my_primary %>%
       addrpck(ck, interval, s_prefix, rp, digits) %>%
       addtreatment(treatment) %>%
-      addplace(place) %>%
-      addfieldid()
+      addplace_addfieldid_addrows(place,restartfid,rows)
+      # addplace(place) %>%
+      # addfieldid()
   }
-  re_v$rows<-rows
-  re_v$line_number<-rows_to_linenumber(re_v$rows)
+  # re_v$rows<-rows
+  # re_v$line_number<-rows_to_linenumber(re_v$rows)
   #确保必须的列都存在
   re_v<-ensure_and_reorder_columns(re_v,as.character(field$name))
   return(re_v)

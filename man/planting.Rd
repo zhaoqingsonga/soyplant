@@ -14,7 +14,8 @@ planting(
   place = c("石家庄", "德州"),
   ckfixed = TRUE,
   digits = 3,
-  rows = 6
+  rows = 6,
+  restartfid = FALSE
 )
 }
 \arguments{
