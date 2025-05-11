@@ -148,76 +148,98 @@ combination_matrix <- function(my_combi) {
   return(mapamatri)
 }
 
-#filename="E:\\FangCloudSync\\★大豆试验设计及总结\\2024年试验设计及总结\\2024杂交圃准备2024-03-29.xlsx"
-#my_combi<-get_combination(filename,prefix = "ZJ24")
 
 
-#write.table(my_combi,"E:\\FangCloudSync\\R_WD360\\Project\\soyplant\\data\\my_combi.txt")
-
-#' 转换二维表为母本与父本配对的数据框
+#' 将数据框转换为配对数据
 #'
-#' 此函数将输入的二维表（数据框）转换为一个数据框，其中包括母本（第一列）和父本（其余列）之间的配对关系。结果数据框包含三列：母本 (`ma`)、父本 (`pa`) 和备注 (`memo`)，其中备注列的值为 `NA`。
+#' 该函数的作用是把特定格式的数据框转换为配对数据，配对数据包含母本、父本及其特征信息。
 #'
-#' @param data_frame_input 一个数据框，第一列为母本，其余列为父本，内容为0或1，表示母本与父本的配对关系。
-#' @return 返回一个数据框，包括三列：
-#' \item{ma}{母本的名称}
-#' \item{pa}{父本的名称}
-#' \item{memo}{备注列，所有值为NA}
+#' @param data_frame_input 输入的数据框，必须是方阵且包含 "mapa" 单元格。
+#' @param feature_cols 可选的数值向量，用于指定要提取的特征列索引。若为 NULL，则提取所有可用特征。
+#'
+#' @return 一个数据框，包含三列："ma"（母本名称）、"pa"（父本名称）和 "memo"（母本和父本特征信息）。
+#'         若未找到符合条件的配对，返回一个空的数据框。
+#'
 #' @examples
-#' # 创建一个示例数据框
-#' example_df <- data.frame(
-#'   Mother = c("Mother1", "Mother2", "Mother3"),
-#'   Father1 = c(1, 0, 1),
-#'   Father2 = c(0, 1, 0),
-#'   Father3 = c(1, 0, 0),
-#'   Father4 = c(0, 1, 0),
-#'   stringsAsFactors = FALSE
-#' )
+#' # 假设 df 是符合要求的数据框
+#' # result <- convert_to_pairs(df)
 #'
-#' # 使用函数转换示例数据框
-#' result <- convert_to_pairs(example_df)
-#' print(result)
-convert_to_pairs <- function(data_frame_input) {
-  # 检查输入是否为数据框
-  if (!is.data.frame(data_frame_input)) {
+#' @export
+#'
+#' @importFrom stats na.omit
+convert_to_pairs <- function(data_frame_input, feature_cols = NULL,mylag="1") {
+  # 基本校验
+  if (!is.data.frame(data_frame_input))
     stop("输入必须是一个数据框")
+  if (nrow(data_frame_input) != ncol(data_frame_input))
+    stop("输入数据框必须为方阵")
+
+  # 定位mapa单元格
+  mapa_pos <- which(data_frame_input == "mapa", arr.ind = TRUE)
+  if (nrow(mapa_pos) == 0) stop("未找到mapa单元格")
+  if (nrow(mapa_pos) > 1) stop("找到多个mapa单元格")
+  row_mapa <- mapa_pos[1, "row"]
+  col_mapa <- mapa_pos[1, "col"]
+
+  # 校验对称性
+  if (row_mapa != col_mapa)
+    stop("mapa必须位于对角线位置")
+
+  # 处理feature_cols参数
+  if (is.null(feature_cols)) {
+    mother_feature_indices <- 1:(col_mapa - 1)
+    father_feature_indices <- 1:(row_mapa - 1)
+  } else {
+    if (!is.numeric(feature_cols))
+      stop("feature_cols必须是数值向量")
+    feature_cols <- as.integer(feature_cols)
+    if (any(feature_cols < 1 | feature_cols > (col_mapa - 1)))
+      stop("feature_cols中的索引超出母本特征列范围（1到", col_mapa - 1, ")")
+    if (any(feature_cols < 1 | feature_cols > (row_mapa - 1)))
+      stop("feature_cols中的索引超出父本特征行范围（1到", row_mapa - 1, ")")
+    mother_feature_indices <- feature_cols
+    father_feature_indices <- feature_cols
   }
 
-  # 确保数据框的列数大于1
-  if (ncol(data_frame_input) < 2) {
-    stop("数据框必须至少包含两列")
+  # 获取母本和父本名称
+  mother_names <- data_frame_input[(row_mapa+1):nrow(data_frame_input), col_mapa]
+  father_names <- unlist(data_frame_input[row_mapa, (col_mapa+1):ncol(data_frame_input)])
+
+  # 校验名称一致性
+  if (!identical(as.vector(mother_names), as.vector(father_names)))
+    stop("母本与父本名称不一致")
+
+  # 特征填充（对称处理）
+  for (j in (col_mapa+1):ncol(data_frame_input)) {
+    mother_row <- row_mapa + (j - col_mapa)
+    features <- data_frame_input[mother_row, 1:(col_mapa-1)]
+    data_frame_input[1:(row_mapa-1), j] <- t(features)
   }
 
-  # 获取母本和父本的名称
-  mother_names <- data_frame_input[[1]]
-  father_names <- colnames(data_frame_input)[-1]  # 排除第一列的母本名称
+  # 构建结果
+  result <- list()
+  n_mother <- length(mother_names)
 
-  # 创建一个空的数据框来存储结果
-  result_list <- list()
-
-  # 遍历每一行数据
-  for (i in 1:nrow(data_frame_input)) {
-    # 获取当前母本名称
+  for (i in 1:n_mother) {
+    curr_row <- row_mapa + i
     mother <- mother_names[i]
+    m_features <- paste(data_frame_input[curr_row, mother_feature_indices], collapse = ";")
 
-    # 找到当前母本对应的所有父本
-    father_indices <- which(data_frame_input[i, -1] == 1)
-
-    # 获取对应的父本名称
-    fathers <- father_names[father_indices]
-
-    # 将母本和父本配对添加到结果列表中，并且设置"memo"列为 NA
-    result_list <- append(result_list, lapply(fathers, function(father) data.frame(ma = mother, pa = father, memo = NA, stringsAsFactors = FALSE)))
+    for (j in 1:n_mother) {
+      curr_col <- col_mapa + j
+      if (!is.na(data_frame_input[curr_row, curr_col]) && data_frame_input[curr_row, curr_col] == mylag) {
+        father <- father_names[j]
+        p_features <- paste(data_frame_input[father_feature_indices, curr_col], collapse = ";")
+        memo <- paste(m_features, p_features, sep = "+")
+        result[[length(result)+1]] <- data.frame(ma=mother, pa=father, memo=memo)
+      }
+    }
   }
 
-  # 合并结果列表为一个数据框
-  result_df <- do.call(rbind, result_list)
-
-  return(result_df)
+  if (length(result) == 0) return(data.frame(ma=character(), pa=character(), memo=character()))
+  re_data <- do.call(rbind, result)
+  rownames(re_data) <- NULL
+  return(re_data)
 }
-
-
-
-
 
 
