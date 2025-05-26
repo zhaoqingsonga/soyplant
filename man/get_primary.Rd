@@ -2,7 +2,8 @@
 % Please edit documentation in R/primary_productivity.R
 \name{get_primary}
 \alias{get_primary}
-\title{处理株行进入初级产比的数据}
+\title{处理株行进入初级产比的数据
+从杂交组合中或群体中升级群体,数据框中必有字段：name,next_stage,f}
 \usage{
 get_primary(my_line, start_num = 1)
 }
@@ -16,4 +17,5 @@ get_primary(my_line, start_num = 1)
 }
 \description{
 处理株行进入初级产比的数据
+从杂交组合中或群体中升级群体,数据框中必有字段：name,next_stage,f
 }

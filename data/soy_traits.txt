@@ -1,89 +1,89 @@
-"ID" "name_C" "name_lib" "level_C" "order" "name_E" "level_E" "species" "field_type" "name_code" "name_baiaoyun" "class_standard"
-1 "小区实收面积(m2)" "XiaoQuShiShouMianJi" NA 0 NA NA "soybean" "N" "T000" "小区实收面积(m2)" 0
-2 "小区产量(kg)" "XiaoQuChanLiang" NA 1 NA NA "soybean" "N" "T001" "小区产量(kg)" 0
-3 "含水量(%)" "HanShuiLiang" NA 2 NA NA "soybean" "N" "T002" "含水量(%)" 0
-4 "亩产(kg)" "MuChan" NA 3 NA NA "soybean" "N" "T003" "亩产(kg)" 0
-5 "播种期" "BoZhongQi" NA 4 NA NA "soybean" "D" "T004" "播种期" 0
-6 "出苗期" "ChuMiaoQi" NA 5 NA NA "soybean" "D" "T005" "出苗期" 0
-7 "出苗良否" "ChuMiaoLiangFou" "1-良_0-否" 6 NA "1-Liang_0-Fou" "soybean" "C" "T006" "出苗良否" 0
-8 "苗期田间评价" "MiaoQiTianJianPingJia" "2-优_0-中_-1-差" 7 NA "2-You_0-Zhong_-1-Cha" "soybean" "C" "T007" "苗期田间评价" 0
-9 "开花期" "KaiHuaQi" NA 8 NA NA "soybean" "D" "T008" "开花期" 0
-10 "花色" "HuaSe" "1-白_2-紫_99-分离" 9 NA "1-Bai_2-Zi_99-FenLi" "soybean" "C" "T009" "花色" 0
-11 "花期田间评价" "HuaQiTianJianPingJia" "2-优_0-中_-1-差" 10 NA "2-You_0-Zhong_-1-Cha" "soybean" "C" "T010" "花期田间评价" 0
-12 "叶形" "YeXing" "1-披针_2-卵圆_3-椭圆_99-分离" 11 NA "1-PiZhen_2-LuanYuan_3-TuoYuan_99-FenLi" "soybean" "C" "T011" "叶形" 0
-13 "茸毛色" "RongMaoSe" "1-灰_2-棕_99-分离" 12 NA "1-Hui_2-Zong_99-FenLi" "soybean" "C" "T012" "茸毛色" 0
-14 "生长习性" "ShengZhangXiXing" "1-直立_3-半直立_5-半蔓生_7-蔓生_99-分离" 13 NA "1-ZhiLi_3-BanZhiLi_5-BanManSheng_7-ManSheng_99-FenLi" "soybean" "C" "T013" "生长习性" 0
-15 "结荚习性" "JieJiaXiXing" "3-无限_5-亚有限_7-有限_99-分离" 14 NA "3-WuXian_5-YaYouXian_7-YouXian_99-FenLi" "soybean" "C" "T014" "结荚习性" 0
-16 "倒伏性" "DaoFuXing" "1-不倒_3-轻倒_5-中倒_7-重倒_9-严重倒_99-分离" 15 NA "1-BuDao_3-QingDao_5-ZhongDao_7-ZhongDao_9-YanZhongDao_99-FenLi" "soybean" "C" "T015" "倒伏性" 0
-17 "早衰性" "ZaoShuaiXing" "0-否_1-是_99-分离" 16 NA "0-Fou_1-Shi_99-FenLi" "soybean" "C" "T016" "早衰性" 0
-18 "株型" "ZhuXing" "3-收敛型_5-半开张_7-开张_99-分离" 17 NA "3-ShouLianXing_5-BanKaiZhang_7-KaiZhang_99-FenLi" "soybean" "C" "T017" "株型" 0
-19 "落叶性" "LuoYeXing" "1-不落_2-半落_3-落_99-分离" 18 NA "1-BuLuo_2-BanLuo_3-Luo_99-FenLi" "soybean" "C" "T018" "落叶性" 0
-20 "裂荚性" "LieJiaXing" "3-不裂_5-轻裂0-9_7-中9-25_9-易裂>25_99-分离" 19 NA "3-BuLie_5-QingLie0-9_7-Zhong9-25_9-YiLie>25_99-FenLi" "soybean" "C" "T019" "裂荚性" 0
-21 "成熟期" "ChengShuQi" NA 20 NA NA "soybean" "D" "T020" "成熟期" 0
-22 "活秆成熟" "HuoGanChengShu" "0-否_1-是_99-分离" 21 NA "0-Fou_1-Shi_99-FenLi" "soybean" "C" "T021" "活秆成熟" 0
-23 "成熟期田间评价" "ChengShuQiTianJianPingJia" "2-优_0-中_-1-差" 22 NA "2-You_0-Zhong_-1-Cha" "soybean" "C" "T022" "成熟期田间评价" 0
-24 "收获期" "ShouHuoQi" NA 23 NA NA "soybean" "D" "T023" "收获期" 0
-25 "小区收获株数" "XiaoQuShouHuoZhuShu" "0_1000" 24 NA "0_1000" "soybean" "N" "T024" "小区收获株数" 0
-26 "生育期(天)" "ShengYuQi" "30_150" 25 NA "30_150" "soybean" "N" "T025" "生育期(天)" 0
-27 "田间备注" "TianJianBeiZhu" NA 26 NA NA "soybean" "any" "T026" "田间备注" 0
-28 "花叶病毒病" "HuaYeBingDuBing" "0-免疫_1-高抗_3-抗_7-感_9-高感_99-分离" 27 NA "0-MianYi_1-GaoKang_3-Kang_7-Gan_9-GaoGan_99-FenLi" "soybean" "C" "T027" "花叶病毒病" 0
-29 "拟茎点种腐病" "NiJingDianZhongFuBing" "0-免疫_1-高抗_3-抗_7-感_9-高感_99-分离" 28 NA "0-MianYi_1-GaoKang_3-Kang_7-Gan_9-GaoGan_99-FenLi" "soybean" "C" "T028" "拟茎点种腐病" 0
-30 "霜霉病" "ShuangMeiBing" "0-免疫_1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 29 NA "0-MianYi_1-GaoKang_3-Kang_5-ZhongKang_7-Gan_9-GaoGan_99-FenLi" "soybean" "C" "T029" "霜霉病" 0
-31 "灰斑病" "HuiBanBing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 30 NA "1-GaoKang_3-Kang_5-ZhongKang_7-Gan_9-GaoGan_99-FenLi" "soybean" "C" "T030" "灰斑病" 0
-32 "细菌性斑点病" "XiJunXingBanDianBing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 31 NA "1-GaoKang_3-Kang_5-ZhongKang_7-Gan_9-GaoGan_99-FenLi" "soybean" "C" "T031" "细菌性斑点病" 0
-33 "锈病" "XiuBing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 32 NA "1-GaoKang_3-Kang_5-ZhongKang_7-Gan_9-GaoGan_99-FenLi" "soybean" "C" "T032" "锈病" 0
-34 "根腐病" "GenFuBing" "3-抗_5-中抗_7-感_99-分离" 33 NA "3-Kang_5-ZhongKang_7-Gan_99-FenLi" "soybean" "C" "T033" "根腐病" 0
-35 "孢囊线虫病" "BaoNangXianChongBing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 34 NA "1-GaoKang_3-Kang_5-ZhongKang_7-Gan_9-GaoGan_99-FenLi" "soybean" "C" "T034" "孢囊线虫病" 0
-36 "其他病害" "QiTaBingHai" NA 35 NA NA "soybean" "any" "T035" "其他病害" 0
-37 "豆秆黑潜蝇" "DouGanHeiQianYing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 36 NA "1-GaoKang_3-Kang_5-ZhongKang_7-Gan_9-GaoGan_99-FenLi" "soybean" "C" "T036" "豆秆黑潜蝇" 0
-38 "豆荚螟" "DouJiaMing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 37 NA "1-GaoKang_3-Kang_5-ZhongKang_7-Gan_9-GaoGan_99-FenLi" "soybean" "C" "T037" "豆荚螟" 0
-39 "蚜虫" "YaChong" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 38 NA "1-GaoKang_3-Kang_5-ZhongKang_7-Gan_9-GaoGan_99-FenLi" "soybean" "C" "T038" "蚜虫" 0
-40 "食叶性害虫" "ShiYeXingHaiChong" "0-食叶0-5_1-食叶6-25_2-食叶26-50_3-食叶51-75_4-食叶>76_99-分离" 39 NA "0-ShiYe0-5_1-ShiYe6-25_2-ShiYe26-50_3-ShiYe51-75_4-ShiYe>76_99-FenLi" "soybean" "C" "T039" "食叶性害虫" 0
-41 "考种株数" "KaoZhongZhuShu" "0_1000" 40 NA "0_1000" "soybean" "N" "T040" "考种株数" 0
-42 "株高(cm)" "ZhuGao" "0_300" 41 NA "0_300" "soybean" "N" "T041" "株高(cm)" 0
-43 "底荚高(cm)" "DiJiaGao" "0_100" 42 NA "0_100" "soybean" "N" "T042" "底荚高(cm)" 0
-44 "分枝数" "FenZhiShu" "0_30" 43 NA "0_30" "soybean" "N" "T043" "分枝数" 0
-45 "主茎节数" "ZhuJingJieShu" "0_50" 44 NA "0_50" "soybean" "N" "T044" "主茎节数" 0
-46 "荚形" "JiaXing" "1-直形_2-弯镰形_3-弓形_99-分离" 45 NA "1-ZhiXing_2-WanLianXing_3-GongXing_99-FenLi" "soybean" "C" "T045" "荚形" 0
-47 "荚熟色" "JiaShuSe" "1-灰褐_2-黄褐_3-褐_4-深褐_5-黑_99-分离" 46 NA "1-HuiHe_2-HuangHe_3-He_4-ShenHe_5-Hei_99-FenLi" "soybean" "C" "T046" "荚熟色" 0
-48 "有效荚" "YouXiaoJia" "0_500" 47 NA "0_500" "soybean" "N" "T047" "有效荚" 0
-49 "无效荚" "WuXiaoJia" "0_500" 48 NA "0_500" "soybean" "N" "T048" "无效荚" 0
-50 "单株荚数" "DanZhuJiaShu" "0_100" 49 NA "0_100" "soybean" "N" "T049" "单株荚数" 0
-51 "单株粒数" "DanZhuLiShu" "0_1000" 50 NA "0_1000" "soybean" "N" "T050" "单株粒数" 0
-52 "单株粒重(g)" "DanZhuLiZhong" "0_200" 51 NA "0_200" "soybean" "N" "T051" "单株粒重(g)" 0
-53 "每荚粒数" "MeiJiaLiShu" "0_5" 52 NA "0_5" "soybean" "N" "T052" "每荚粒数" 0
-54 "粒型" "LiXing" "1-圆_2-扁圆_3-椭圆_4-扁椭圆_5-长椭圆_6-肾_99-分离" 53 NA "1-Yuan_2-BianYuan_3-TuoYuan_4-BianTuoYuan_5-ZhangTuoYuan_6-Shen_99-FenLi" "soybean" "C" "T053" "粒型" 0
-55 "种皮色" "ZhongPiSe" "1-黄色_2-绿色_3-黑色_4-褐色_5-双色_99-分离" 54 NA "1-HuangSe_2-LvSe_3-HeiSe_4-HeSe_5-ShuangSe_99-FenLi" "soybean" "C" "T054" "种皮色" 0
-56 "脐色" "QiSe" "1-黄_2-淡褐_3-褐_4-深褐_5-蓝_6-淡黑_7-黑_99-分离" 55 NA "1-Huang_2-DanHe_3-He_4-ShenHe_5-Lan_6-DanHei_7-Hei_99-FenLi" "soybean" "C" "T055" "脐色" 0
-57 "子叶色" "ZiYeSe" "1-黄_2-绿_99-分离" 56 NA "1-Huang_2-Lv_99-FenLi" "soybean" "C" "T056" "子叶色" 0
-58 "种皮光泽" "ZhongPiGuangZe" "0-无_1-微_2-强_99-分离" 57 NA "0-Wu_1-Wei_2-Qiang_99-FenLi" "soybean" "C" "T057" "种皮光泽" 0
-59 "百粒重(g)" "BaiLiZhong" "1_50" 58 NA "1_50" "soybean" "N" "T058" "百粒重(g)" 0
-60 "完好粒率(%)" "WanHaoLiLv" "0_100" 59 NA "0_100" "soybean" "N" "T059" "完好粒率(%)" 0
-61 "破碎粒率(%)" "PoSuiLiLv" "0_100" 60 NA "0_100" "soybean" "N" "T060" "破碎粒率(%)" 0
-62 "病粒率(%)" "BingLiLv" "0_100" 61 NA "0_100" "soybean" "N" "T061" "病粒率(%)" 0
-63 "紫斑粒率(%)" "ZiBanLiLv" "0_100" 62 NA "0_100" "soybean" "N" "T062" "紫斑粒率(%)" 0
-64 "褐斑粒率(%)" "HeBanLiLv" "0_100" 63 NA "0_100" "soybean" "N" "T063" "褐斑粒率(%)" 0
-65 "霜霉粒率(%)" "ShuangMeiLiLv" "0_100" 64 NA "0_100" "soybean" "N" "T064" "霜霉粒率(%)" 0
-66 "灰斑粒率(%)" "HuiBanLiLv" "0_100" 65 NA "0_100" "soybean" "N" "T065" "灰斑粒率(%)" 0
-67 "虫蚀粒率(%)" "ChongShiLiLv" "0_100" 66 NA "0_100" "soybean" "N" "T066" "虫蚀粒率(%)" 0
-68 "籽粒评价" "ZiLiPingJia" "2-优_0-中_-1-差" 67 NA "2-You_0-Zhong_-1-Cha" "soybean" "C" "T067" "籽粒评价" 0
-69 "蛋白(%)" "DanBai" "20_60" 68 NA "20_60" "soybean" "N" "T068" "蛋白(%)" 0
-70 "脂肪(%)" "ZhiFang" "5_30" 69 NA "5_30" "soybean" "N" "T069" "脂肪(%)" 0
-71 "蛋脂和(%)" "DanZhiHe" "25_90" 70 NA "25_90" "soybean" "N" "T070" "蛋脂和(%)" 0
-72 "草甘膦抗性" "CaoGanLinKangXing" "1-高抗_3-抗_5-中抗_7-不抗_99-分离" 71 NA "1-GaoKang_3-Kang_5-ZhongKang_7-BuKang_99-FenLi" "soybean" "C" "T071" "草甘膦抗性" 0
-73 "试纸检测" "ShiZhiJianCe" NA 72 NA NA "soybean" "any" "T072" "试纸检测" 0
-74 "含基因" "HanJiYin" NA 73 NA NA "soybean" "any" "T073" "含基因" 0
-75 "播种盆数" "BoZhongPenShu" "0_5000" 74 NA "0_5000" "soybean" "N" "T074" "播种盆数" 0
-76 "播种粒数" "BoZhongLiShu" "0_10000" 75 NA "0_10000" "soybean" "N" "T075" "播种粒数" 0
-77 "出苗数" "ChuMiaoShu" "0_10000" 76 NA "0_10000" "soybean" "N" "T076" "出苗数" 0
-78 "出苗率" "ChuMiaoLiShu" "0_100" 77 NA "0_100" "soybean" "N" "T077" "出苗率" 0
-79 "耐盐性" "NaiYanXing" "1-耐旱_2-中耐_3-不耐_4-较敏感_5-敏感_99-分离" 78 NA "1-NaiHan_2-ZhongNai_3-BuNai_4-JiaoMinGan_5-MinGan_99-FenLi" "soybean" "C" "T078" "耐盐性" 0
-80 "耐旱性" "NaiHanXing" "1-耐旱_2-中耐_3-不耐_99-分离" 79 NA "1-NaiHan_2-ZhongNai_3-BuNai_99-FenLi" "soybean" "C" "T079" "耐旱性" 0
-81 "始花期" "ShiHuaQi" NA 80 NA NA "soybean" "D" "T080" "始花期" 0
-82 "杂交花数" "ZaJiaoHuaShu" "0_5000" 81 NA "0_5000" "soybean" "N" "T081" "杂交花数" 0
-83 "成活荚数" "ChengHuoJiaShu" "0_200" 82 NA "0_200" "soybean" "N" "T082" "成活荚数" 0
-84 "杂交粒数" "ZhaJiaoliShu" "0_5000" 83 NA "0_5000" "soybean" "N" "T083" "杂交粒数" 0
-85 "初熟期" "ChuShuQi" NA 84 NA NA "soybean" "D" "T084" "初熟期" 0
-86 "完熟期" "WanShuQi" NA 85 NA NA "soybean" "D" "T085" "完熟期" 0
-87 "回复率" "HuiFuLv" "0_100" 86 NA "0_100" "soybean" "N" "T086" "回复率" 0
-88 "SSR不合格位点" "SSRBuHeGeWeiDian" NA 87 NA NA "soybean" "any" "T087" "SSR不合格位点" 0
+"ID" "name_C" "name_lib" "level_C" "order" "name_E" "species" "field_type" "name_code" "name_baiaoyun" "class_standard"
+1 "小区实收面积(m2)" "XiaoQuShiShouMianJi" NA 0 NA "soybean" "N" "T000" "小区实收面积(m2)" 0
+2 "小区产量(kg)" "XiaoQuChanLiang" NA 1 NA "soybean" "N" "T001" "小区产量(kg)" 0
+3 "含水量(%)" "HanShuiLiang" NA 2 NA "soybean" "N" "T002" "含水量(%)" 0
+4 "亩产(kg)" "MuChan" NA 3 NA "soybean" "N" "T003" "亩产(kg)" 0
+5 "播种期" "BoZhongQi" NA 4 NA "soybean" "D" "T004" "播种期" 0
+6 "出苗期" "ChuMiaoQi" NA 5 NA "soybean" "D" "T005" "出苗期" 0
+7 "出苗良否" "ChuMiaoLiangFou" "1-良_0-否" 6 NA "soybean" "C" "T006" "出苗良否" 0
+8 "苗期田间评价" "MiaoQiTianJianPingJia" "2-优_0-中_-1-差" 7 NA "soybean" "C" "T007" "苗期田间评价" 0
+9 "开花期" "KaiHuaQi" NA 8 NA "soybean" "D" "T008" "开花期" 0
+10 "花色" "HuaSe" "1-白_2-紫_99-分离" 9 NA "soybean" "C" "T009" "花色" 0
+11 "花期田间评价" "HuaQiTianJianPingJia" "2-优_0-中_-1-差" 10 NA "soybean" "C" "T010" "花期田间评价" 0
+12 "叶形" "YeXing" "1-披针_2-卵圆_3-椭圆_99-分离" 11 NA "soybean" "C" "T011" "叶形" 0
+13 "茸毛色" "RongMaoSe" "1-灰_2-棕_99-分离" 12 NA "soybean" "C" "T012" "茸毛色" 0
+14 "生长习性" "ShengZhangXiXing" "1-直立_3-半直立_5-半蔓生_7-蔓生_99-分离" 13 NA "soybean" "C" "T013" "生长习性" 0
+15 "结荚习性" "JieJiaXiXing" "3-无限_5-亚有限_7-有限_99-分离" 14 NA "soybean" "C" "T014" "结荚习性" 0
+16 "倒伏性" "DaoFuXing" "1-不倒_3-轻倒_5-中倒_7-重倒_9-严重倒_99-分离" 15 NA "soybean" "C" "T015" "倒伏性" 0
+17 "早衰性" "ZaoShuaiXing" "0-否_1-是_99-分离" 16 NA "soybean" "C" "T016" "早衰性" 0
+18 "株型" "ZhuXing" "3-收敛型_5-半开张_7-开张_99-分离" 17 NA "soybean" "C" "T017" "株型" 0
+19 "落叶性" "LuoYeXing" "1-不落_2-半落_3-落_99-分离" 18 NA "soybean" "C" "T018" "落叶性" 0
+20 "裂荚性" "LieJiaXing" "3-不裂_5-轻裂0-9_7-中9-25_9-易裂>25_99-分离" 19 NA "soybean" "C" "T019" "裂荚性" 0
+21 "成熟期" "ChengShuQi" NA 20 NA "soybean" "D" "T020" "成熟期" 0
+22 "活秆成熟" "HuoGanChengShu" "0-否_1-是_99-分离" 21 NA "soybean" "C" "T021" "活秆成熟" 0
+23 "成熟期田间评价" "ChengShuQiTianJianPingJia" "2-优_0-中_-1-差" 22 NA "soybean" "C" "T022" "成熟期田间评价" 0
+24 "收获期" "ShouHuoQi" NA 23 NA "soybean" "D" "T023" "收获期" 0
+25 "小区收获株数" "XiaoQuShouHuoZhuShu" "0_1000" 24 NA "soybean" "N" "T024" "小区收获株数" 0
+26 "生育期(天)" "ShengYuQi" "30_150" 25 NA "soybean" "N" "T025" "生育期(天)" 0
+27 "田间备注" "TianJianBeiZhu" NA 26 NA "soybean" "any" "T026" "田间备注" 0
+28 "花叶病毒病" "HuaYeBingDuBing" "0-免疫_1-高抗_3-抗_7-感_9-高感_99-分离" 27 NA "soybean" "C" "T027" "花叶病毒病" 0
+29 "拟茎点种腐病" "NiJingDianZhongFuBing" "0-免疫_1-高抗_3-抗_7-感_9-高感_99-分离" 28 NA "soybean" "C" "T028" "拟茎点种腐病" 0
+30 "霜霉病" "ShuangMeiBing" "0-免疫_1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 29 NA "soybean" "C" "T029" "霜霉病" 0
+31 "灰斑病" "HuiBanBing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 30 NA "soybean" "C" "T030" "灰斑病" 0
+32 "细菌性斑点病" "XiJunXingBanDianBing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 31 NA "soybean" "C" "T031" "细菌性斑点病" 0
+33 "锈病" "XiuBing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 32 NA "soybean" "C" "T032" "锈病" 0
+34 "根腐病" "GenFuBing" "3-抗_5-中抗_7-感_99-分离" 33 NA "soybean" "C" "T033" "根腐病" 0
+35 "孢囊线虫病" "BaoNangXianChongBing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 34 NA "soybean" "C" "T034" "孢囊线虫病" 0
+36 "其他病害" "QiTaBingHai" NA 35 NA "soybean" "any" "T035" "其他病害" 0
+37 "豆秆黑潜蝇" "DouGanHeiQianYing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 36 NA "soybean" "C" "T036" "豆秆黑潜蝇" 0
+38 "豆荚螟" "DouJiaMing" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 37 NA "soybean" "C" "T037" "豆荚螟" 0
+39 "蚜虫" "YaChong" "1-高抗_3-抗_5-中抗_7-感_9-高感_99-分离" 38 NA "soybean" "C" "T038" "蚜虫" 0
+40 "食叶性害虫" "ShiYeXingHaiChong" "0-食叶0-5_1-食叶6-25_2-食叶26-50_3-食叶51-75_4-食叶>76_99-分离" 39 NA "soybean" "C" "T039" "食叶性害虫" 0
+41 "考种株数" "KaoZhongZhuShu" "0_1000" 40 NA "soybean" "N" "T040" "考种株数" 0
+42 "株高(cm)" "ZhuGao" "0_300" 41 NA "soybean" "N" "T041" "株高(cm)" 0
+43 "底荚高(cm)" "DiJiaGao" "0_100" 42 NA "soybean" "N" "T042" "底荚高(cm)" 0
+44 "分枝数" "FenZhiShu" "0_30" 43 NA "soybean" "N" "T043" "分枝数" 0
+45 "主茎节数" "ZhuJingJieShu" "0_50" 44 NA "soybean" "N" "T044" "主茎节数" 0
+46 "荚形" "JiaXing" "1-直形_2-弯镰形_3-弓形_99-分离" 45 NA "soybean" "C" "T045" "荚形" 0
+47 "荚熟色" "JiaShuSe" "1-灰褐_2-黄褐_3-褐_4-深褐_5-黑_99-分离" 46 NA "soybean" "C" "T046" "荚熟色" 0
+48 "有效荚" "YouXiaoJia" "0_500" 47 NA "soybean" "N" "T047" "有效荚" 0
+49 "无效荚" "WuXiaoJia" "0_500" 48 NA "soybean" "N" "T048" "无效荚" 0
+50 "单株荚数" "DanZhuJiaShu" "0_100" 49 NA "soybean" "N" "T049" "单株荚数" 0
+51 "单株粒数" "DanZhuLiShu" "0_1000" 50 NA "soybean" "N" "T050" "单株粒数" 0
+52 "单株粒重(g)" "DanZhuLiZhong" "0_200" 51 NA "soybean" "N" "T051" "单株粒重(g)" 0
+53 "每荚粒数" "MeiJiaLiShu" "0_5" 52 NA "soybean" "N" "T052" "每荚粒数" 0
+54 "粒型" "LiXing" "1-圆_2-扁圆_3-椭圆_4-扁椭圆_5-长椭圆_6-肾_99-分离" 53 NA "soybean" "C" "T053" "粒型" 0
+55 "种皮色" "ZhongPiSe" "1-黄色_2-绿色_3-黑色_4-褐色_5-双色_99-分离" 54 NA "soybean" "C" "T054" "种皮色" 0
+56 "脐色" "QiSe" "1-黄_2-淡褐_3-褐_4-深褐_5-蓝_6-淡黑_7-黑_99-分离" 55 NA "soybean" "C" "T055" "脐色" 0
+57 "子叶色" "ZiYeSe" "1-黄_2-绿_99-分离" 56 NA "soybean" "C" "T056" "子叶色" 0
+58 "种皮光泽" "ZhongPiGuangZe" "0-无_1-微_2-强_99-分离" 57 NA "soybean" "C" "T057" "种皮光泽" 0
+59 "百粒重(g)" "BaiLiZhong" "1_50" 58 NA "soybean" "N" "T058" "百粒重(g)" 0
+60 "完好粒率(%)" "WanHaoLiLv" "0_100" 59 NA "soybean" "N" "T059" "完好粒率(%)" 0
+61 "破碎粒率(%)" "PoSuiLiLv" "0_100" 60 NA "soybean" "N" "T060" "破碎粒率(%)" 0
+62 "病粒率(%)" "BingLiLv" "0_100" 61 NA "soybean" "N" "T061" "病粒率(%)" 0
+63 "紫斑粒率(%)" "ZiBanLiLv" "0_100" 62 NA "soybean" "N" "T062" "紫斑粒率(%)" 0
+64 "褐斑粒率(%)" "HeBanLiLv" "0_100" 63 NA "soybean" "N" "T063" "褐斑粒率(%)" 0
+65 "霜霉粒率(%)" "ShuangMeiLiLv" "0_100" 64 NA "soybean" "N" "T064" "霜霉粒率(%)" 0
+66 "灰斑粒率(%)" "HuiBanLiLv" "0_100" 65 NA "soybean" "N" "T065" "灰斑粒率(%)" 0
+67 "虫蚀粒率(%)" "ChongShiLiLv" "0_100" 66 NA "soybean" "N" "T066" "虫蚀粒率(%)" 0
+68 "籽粒评价" "ZiLiPingJia" "2-优_0-中_-1-差" 67 NA "soybean" "C" "T067" "籽粒评价" 0
+69 "蛋白(%)" "DanBai" "20_60" 68 NA "soybean" "N" "T068" "蛋白(%)" 0
+70 "脂肪(%)" "ZhiFang" "5_30" 69 NA "soybean" "N" "T069" "脂肪(%)" 0
+71 "蛋脂和(%)" "DanZhiHe" "25_90" 70 NA "soybean" "N" "T070" "蛋脂和(%)" 0
+72 "草甘膦抗性" "CaoGanLinKangXing" "1-高抗_3-抗_5-中抗_7-不抗_99-分离" 71 NA "soybean" "C" "T071" "草甘膦抗性" 0
+73 "试纸检测" "ShiZhiJianCe" NA 72 NA "soybean" "any" "T072" "试纸检测" 0
+74 "含基因" "HanJiYin" NA 73 NA "soybean" "any" "T073" "含基因" 0
+75 "播种盆数" "BoZhongPenShu" "0_5000" 74 NA "soybean" "N" "T074" "播种盆数" 0
+76 "播种粒数" "BoZhongLiShu" "0_10000" 75 NA "soybean" "N" "T075" "播种粒数" 0
+77 "出苗数" "ChuMiaoShu" "0_10000" 76 NA "soybean" "N" "T076" "出苗数" 0
+78 "出苗率" "ChuMiaoLiShu" "0_100" 77 NA "soybean" "N" "T077" "出苗率" 0
+79 "耐盐性" "NaiYanXing" "1-耐旱_2-中耐_3-不耐_4-较敏感_5-敏感_99-分离" 78 NA "soybean" "C" "T078" "耐盐性" 0
+80 "耐旱性" "NaiHanXing" "1-耐旱_2-中耐_3-不耐_99-分离" 79 NA "soybean" "C" "T079" "耐旱性" 0
+81 "始花期" "ShiHuaQi" NA 80 NA "soybean" "D" "T080" "始花期" 0
+82 "杂交花数" "ZaJiaoHuaShu" "0_5000" 81 NA "soybean" "N" "T081" "杂交花数" 0
+83 "成活荚数" "ChengHuoJiaShu" "0_200" 82 NA "soybean" "N" "T082" "成活荚数" 0
+84 "杂交粒数" "ZhaJiaoliShu" "0_5000" 83 NA "soybean" "N" "T083" "杂交粒数" 0
+85 "初熟期" "ChuShuQi" NA 84 NA "soybean" "D" "T084" "初熟期" 0
+86 "完熟期" "WanShuQi" NA 85 NA "soybean" "D" "T085" "完熟期" 0
+87 "回复率" "HuiFuLv" "0_100" 86 NA "soybean" "N" "T086" "回复率" 0
+88 "SSR不合格位点" "SSRBuHeGeWeiDian" NA 87 NA "soybean" "any" "T087" "SSR不合格位点" 0

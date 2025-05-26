@@ -27,7 +27,7 @@
 
 
 #' 处理株行进入初级产比的数据
-#'
+#'从杂交组合中或群体中升级群体,数据框中必有字段：name,next_stage,f
 #'
 #' @param my_line 数据框，包含株行信息
 #' @param start_num 整数，起始编号，默认为1
@@ -44,7 +44,7 @@ get_primary <- function(my_line, start_num = 1) {
   my_primary$source <- my_primary$name
   my_primary$former_fieldid <- my_primary$fieldid
   # 处理名称，小于9代时处理，大于9代时不再追加
-  my_primary$name <- ifelse(my_primary$f < 9,
+  my_primary$name <- ifelse(!is.null(my_primary$f)&my_primary$f < 9,
                             paste(my_primary$name, ":", (my_primary$f + 1), sep = ""),
                             my_primary$name)
 

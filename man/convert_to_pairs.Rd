@@ -2,34 +2,24 @@
 % Please edit documentation in R/combination.R
 \name{convert_to_pairs}
 \alias{convert_to_pairs}
-\title{转换二维表为母本与父本配对的数据框}
+\title{将数据框转换为配对数据}
 \usage{
-convert_to_pairs(data_frame_input)
+convert_to_pairs(data_frame_input, feature_cols = NULL, mylag = "1")
 }
 \arguments{
-\item{data_frame_input}{一个数据框，第一列为母本，其余列为父本，内容为0或1，表示母本与父本的配对关系。}
+\item{data_frame_input}{输入的数据框，必须是方阵且包含 "mapa" 单元格。}
+
+\item{feature_cols}{可选的数值向量，用于指定要提取的特征列索引。若为 NULL，则提取所有可用特征。}
 }
 \value{
-返回一个数据框，包括三列：
-\item{ma}{母本的名称}
-\item{pa}{父本的名称}
-\item{memo}{备注列，所有值为NA}
+一个数据框，包含三列："ma"（母本名称）、"pa"（父本名称）和 "memo"（母本和父本特征信息）。
+        若未找到符合条件的配对，返回一个空的数据框。
 }
 \description{
-此函数将输入的二维表（数据框）转换为一个数据框，其中包括母本（第一列）和父本（其余列）之间的配对关系。结果数据框包含三列：母本 (`ma`)、父本 (`pa`) 和备注 (`memo`)，其中备注列的值为 `NA`。
+该函数的作用是把特定格式的数据框转换为配对数据，配对数据包含母本、父本及其特征信息。
 }
 \examples{
-# 创建一个示例数据框
-example_df <- data.frame(
-  Mother = c("Mother1", "Mother2", "Mother3"),
-  Father1 = c(1, 0, 1),
-  Father2 = c(0, 1, 0),
-  Father3 = c(1, 0, 0),
-  Father4 = c(0, 1, 0),
-  stringsAsFactors = FALSE
-)
+# 假设 df 是符合要求的数据框
+# result <- convert_to_pairs(df)
 
-# 使用函数转换示例数据框
-result <- convert_to_pairs(example_df)
-print(result)
 }

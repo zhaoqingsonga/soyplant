@@ -3,21 +3,25 @@
  #  con1 <- dbConnect(RSQLite::SQLite(), system.file("extdata", "ChinaSeedSoyDatabase.sqlite", package = "soyplant"))
  #  return(con1)
  #   }
+#说明：不能利用python函数，关于reticulate,use_python,pyf,level_E等
+#关于拼音转写的部分注释掉
 library(dplyr)
 library(stringr)
-library(reticulate)
+#library(reticulate)
 library(tidyr)
 library(openxlsx)
-use_python("c:/ProgramData/Anaconda3")
+#use_python("c:/ProgramData/Anaconda3")
+#use_python("C:/Users/zhaoq/anaconda3/python.exe")
+
 #py_config()
-pyf<- py_run_file("inst/python/pyfunction.py")
+#pyf<- py_run_file("inst/python/pyfunction.py")
 bay<-read.xlsx("temp_traits_baiaoyun.xlsx",startRow = 2)
 level_C <- str_replace_all(bay$列表值LIST_VALUES,",","_")
 minmax <- paste(bay$最小值MIN_VALUE,bay$最大值MAX_VALUE,sep="_")
 minmax[minmax=="NA_NA"]<-NA
 level_C <-coalesce(level_C,minmax)
-level_E=pyf$chinese_to_pinyin(level_C)
-level_E[level_E=="Na"]<-NA
+# level_E=pyf$chinese_to_pinyin(level_C)
+# level_E[level_E=="Na"]<-NA
 
 soy_traits<-data.frame(
   ID=1:nrow(bay),
@@ -26,7 +30,7 @@ soy_traits<-data.frame(
   level_C = level_C,
   order = bay$排序ORDER,
   name_E=NA,
-  level_E=level_E,
+  #level_E=level_E,
   species="soybean",
   field_type=recode(bay$性状类型TRAIT_TYPE, "1" = "N","2" = "D","3" = "C","4" = "any"),
   name_code=bay$编码TRAIT_CODE,
