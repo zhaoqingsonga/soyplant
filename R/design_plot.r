@@ -395,6 +395,139 @@ makelist2 <- function(myd = data.frame(num = 1:3, name = c('JD12', 'JD17', '五�
   return(result)
 }
 
+
+#' 根据指定列的值复制数据框行并添加序列号
+#'
+#' 该函数根据数据框中指定列的值复制每一行，并为每组复制添加序列号列。
+#'
+#' @param df 要扩展的数据框（data.frame）
+#' @param replicate_col 字符型，指定包含复制次数的列名，默认为"rows"
+#' @param sequence_col 字符型，指定新序列号列的列名，默认为"seq_id"
+#'
+#' @return 返回一个新的数据框，其中：
+#' \itemize{
+#'   \item 包含原始数据框的所有列
+#'   \item 新增一个序列号列，显示每组复制中的序号
+#' }
+#'
+#' @examples
+#' # 示例数据
+#' sample_data <- data.frame(
+#'   id = c(1, 2, 3),
+#'   name = c("A", "B", "C"),
+#'   times = c(2, 3, 1)
+#' )
+#'
+#' # 使用'times'列扩展行
+#' expanded_data <- expand_rows(sample_data, "times", "copy_num")
+#' print(expanded_data)
+#'
+#' # 输出结果：
+#' #   id name times copy_num
+#' # 1  1    A     2        1
+#' # 2  1    A     2        2
+#' # 3  2    B     3        1
+#' # 4  2    B     3        2
+#' # 5  2    B     3        3
+#' # 6  3    C     1        1
+#'
+#' @export
+expand_rows <- function(df, replicate_col = "rows", sequence_col = "seq_id") {
+  # 检查数据框是否包含指定的复制列
+  if (!replicate_col %in% colnames(df)) {
+    stop(paste0("数据框中必须包含'", replicate_col, "'列"))
+  }
+
+  # 确保复制列是数值型
+  if (!is.numeric(df[[replicate_col]])) {
+    stop(paste0("'", replicate_col, "'列必须是数值型"))
+  }
+
+  # 检查序号列名是否已存在
+  if (sequence_col %in% colnames(df)) {
+    stop(paste0("列名'", sequence_col, "'已存在于数据框中，请指定其他列名"))
+  }
+
+  # 创建一个空列表来存储扩展后的数据
+  expanded_data <- list()
+
+  # 遍历数据框的每一行
+  for (i in 1:nrow(df)) {
+    current_row <- df[i, , drop = FALSE]  # 保持数据框结构
+    n <- current_row[[replicate_col]]
+
+    # 如果复制值 <= 0，跳过该行
+    if (n <= 0) {
+      next
+    }
+
+    # 复制当前行n次
+    replicated_rows <- current_row[rep(1, n), , drop = FALSE]
+
+    # 添加序号列（从1到n）
+    replicated_rows[[sequence_col]] <- 1:n
+
+    # 添加到列表中
+    expanded_data[[i]] <- replicated_rows
+  }
+
+  # 合并所有行
+  result <- do.call(rbind, expanded_data)
+
+  # 重置行名
+  rownames(result) <- NULL
+
+  return(result)
+}
+
+#' 创建重复名称的数据框
+#'
+#' 该函数根据给定的名称和重复次数，生成一个包含重复记录的数据框。
+#'
+#' @param name 字符型，要重复的名称（长度为1）
+#' @param rp 整型，重复次数（必须大于等于1）
+#'
+#' @return 返回一个数据框，包含三列：
+#' \describe{
+#'   \item{stageid}{与输入name相同的内容}
+#'   \item{name}{与输入name相同的内容}
+#'   \item{line_number}{格式为"1-总重复次数"}
+#' }
+#'
+#' @examples
+#' # 基本用法
+#' create_repeated_dataframe("试验材料A", 3)
+#'
+#' # 结果示例
+#' #   stageid     name line_number
+#' # 1 试验材料A 试验材料A        1-3
+#' # 2 试验材料A 试验材料A        1-3
+#' # 3 试验材料A 试验材料A        1-3
+#'
+#' @export
+create_repeated_dataframe <- function(name, rp) {
+  # 检查参数有效性
+  if (!is.character(name) || length(name) != 1) {
+    stop("name参数必须是一个长度为1的字符向量")
+  }
+  if (!is.numeric(rp) || length(rp) != 1 || rp < 1) {
+    stop("rp参数必须是一个大于等于1的数值")
+  }
+
+  # 创建数据框
+  result <- data.frame(
+    stageid = rep(name, rp),
+    name = rep(name, rp),
+    line_number = rep(paste0("1-", rp), rp),  # 修改为固定格式"1-总重复次数"
+    stringsAsFactors = FALSE
+  )
+
+  return(result)
+}
+
+
+
+
 # 加载必要的包
 library(dplyr)
 

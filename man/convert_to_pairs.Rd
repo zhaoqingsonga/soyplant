@@ -2,24 +2,35 @@
 % Please edit documentation in R/combination.R
 \name{convert_to_pairs}
 \alias{convert_to_pairs}
-\title{将数据框转换为配对数据}
+\title{将矩阵格式转换为配对数据框}
 \usage{
 convert_to_pairs(data_frame_input, feature_cols = NULL, mylag = "1")
 }
 \arguments{
-\item{data_frame_input}{输入的数据框，必须是方阵且包含 "mapa" 单元格。}
+\item{data_frame_input}{必需，输入的方阵数据框，必须包含"mapa"单元格}
 
-\item{feature_cols}{可选的数值向量，用于指定要提取的特征列索引。若为 NULL，则提取所有可用特征。}
+\item{feature_cols}{可选，数值向量，指定要提取的特征列索引。默认为NULL，表示提取所有可用特征}
+
+\item{mylag}{可选，字符值，用于识别有效配对的标记值，默认为"1"}
 }
 \value{
-一个数据框，包含三列："ma"（母本名称）、"pa"（父本名称）和 "memo"（母本和父本特征信息）。
-        若未找到符合条件的配对，返回一个空的数据框。
+返回一个数据框，包含三列：ma（母本名称）、pa（父本名称）和memo（母本和父本特征组合）
 }
 \description{
-该函数的作用是把特定格式的数据框转换为配对数据，配对数据包含母本、父本及其特征信息。
+该函数处理包含遗传育种信息的方阵数据，提取亲本特征并生成配对组合。
+适用于处理包含"mapa"标记的遗传分析矩阵，将其转换为便于分析的配对数据框。
+}
+\details{
+函数执行以下主要步骤：
+1. 验证输入是否为方阵数据框
+2. 定位"mapa"单元格并验证其位置
+3. 提取并验证母本和父本名称
+4. 填充特征值（确保矩阵对称性）
+5. 基于指定的标记值(mylag)生成配对组合
 }
 \examples{
-# 假设 df 是符合要求的数据框
-# result <- convert_to_pairs(df)
+# 假设data是符合要求的方阵数据框
+# pairs_data <- convert_to_pairs(data)
+# pairs_data <- convert_to_pairs(data, feature_cols = c(1, 3, 5))
 
 }

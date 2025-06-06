@@ -302,6 +302,69 @@ ensure_and_reorder_columns <- function(df, required_columns) {
 
 
 
+#' 计划种植试验
+#'
+#' @param my_primary 数据框，数据框中需包含 id, stageid, name 三列（若无 stageid 列将自动补全）。
+#' @param ck 向量，对照名称。
+#' @param interval 插入对照的材料间隔数。
+#' @param s_prefix 材料前缀。
+#' @param rp 种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同。
+#' @param place 向量，试验地点。
+#' @param treatment 向量，处理因素。
+#' @param ckfixed 逻辑值，是否固定插入对照。
+#' @param digits 整数，材料编号的位数。
+#' @param rows 每块的行数。
+#' @param restartfid 逻辑值，是否重新启动字段编号。
+#'
+#' @return 数据框，包含编号、对照插入、处理、地点等信息。
+planting <- function(
+    my_primary,
+    ck = c("冀豆12", "冀豆17"),
+    interval = 3,
+    s_prefix = "GC",
+    rp = 2,
+    treatment = c(""),
+    place = c("石家庄", "德州"),
+    ckfixed = TRUE,
+    digits = 3,
+    rows = 6,
+    restartfid = FALSE
+) {
+  library(dplyr)
+
+  # 如果没有 stageid 列，添加默认值为 NA
+  if (!"stageid" %in% names(my_primary)) {
+    my_primary <- my_primary |>
+      mutate(stageid = NA)
+  }
+
+  # 提取字段名匹配 planting 表格（假定 field 为外部已有数据）
+  field <- subset(field, grepl("planting", table, ignore.case = TRUE))
+
+  # 插入对照并添加处理和地点
+  result <- if (ckfixed) {
+    my_primary |>
+      addrpckfixed(ck, interval, s_prefix, rp, digits) |>
+      addtreatment(treatment) |>
+      addplace_addfieldid_addrows(place, restartfid, rows)
+  } else {
+    my_primary |>
+      addrpck(ck, interval, s_prefix, rp, digits) |>
+      addtreatment(treatment) |>
+      addplace_addfieldid_addrows(place, restartfid, rows)
+  }
+
+  # 确保最终列顺序和字段一致
+  result <- ensure_and_reorder_columns(result, as.character(field$name))
+
+  return(result)
+}
+
+
+
+
+
+
 
 
 
@@ -318,44 +381,46 @@ ensure_and_reorder_columns <- function(df, required_columns) {
 #' @param ckfixed 逻辑值，对照是否固定，是固定则按等材料数插入
 #' @return 返回插入对照和重复的数据框，给材料进行了编号，对照随机
 
-#set.seed(100)#随机固定
-planting <- function(my_primary,
-                     ck = c("冀豆12", "冀豆17"),
-                     interval = 3,
-                     s_prefix = "GC",
-                     rp = 2,
-                     treatment= c(""),
-                     place = c("石家庄", "德州"),
-                     ckfixed = TRUE,
-                     digits = 3,
-                     rows=6,
-                     restartfid=FALSE
-                     ) {
-  library(dplyr)
-  field<-subset(field,grepl("planting", table, ignore.case = TRUE))
-  #ck固定
-  if (ckfixed) {
-    re_v<-my_primary %>%
-      addrpckfixed(ck, interval, s_prefix, rp, digits) %>%
-      addtreatment(treatment) %>%
-      addplace_addfieldid_addrows(place,restartfid,rows)
-      # addplace(place) %>%
-      # addfieldid()
-  } else{
-    re_v<-my_primary %>%
-      addrpck(ck, interval, s_prefix, rp, digits) %>%
-      addtreatment(treatment) %>%
-      addplace_addfieldid_addrows(place,restartfid,rows)
-      # addplace(place) %>%
-      # addfieldid()
-  }
-  # re_v$rows<-rows
-  # re_v$line_number<-rows_to_linenumber(re_v$rows)
-  #确保必须的列都存在
-  re_v<-ensure_and_reorder_columns(re_v,as.character(field$name))
-  return(re_v)
-}
-
+# #set.seed(100)#随机固定
+# planting <- function(my_primary,
+#                      ck = c("冀豆12", "冀豆17"),
+#                      interval = 3,
+#                      s_prefix = "GC",
+#                      rp = 2,
+#                      treatment= c(""),
+#                      place = c("石家庄", "德州"),
+#                      ckfixed = TRUE,
+#                      digits = 3,
+#                      rows=6,
+#                      restartfid=FALSE
+#                      ) {
+#   library(dplyr)
+#   field<-subset(field,grepl("planting", table, ignore.case = TRUE))
+#
+#
+#   #ck固定
+#   if (ckfixed) {
+#     re_v<-my_primary %>%
+#       addrpckfixed(ck, interval, s_prefix, rp, digits) %>%
+#       addtreatment(treatment) %>%
+#       addplace_addfieldid_addrows(place,restartfid,rows)
+#       # addplace(place) %>%
+#       # addfieldid()
+#   } else{
+#     re_v<-my_primary %>%
+#       addrpck(ck, interval, s_prefix, rp, digits) %>%
+#       addtreatment(treatment) %>%
+#       addplace_addfieldid_addrows(place,restartfid,rows)
+#       # addplace(place) %>%
+#       # addfieldid()
+#   }
+#   # re_v$rows<-rows
+#   # re_v$line_number<-rows_to_linenumber(re_v$rows)
+#   #确保必须的列都存在
+#   re_v<-ensure_and_reorder_columns(re_v,as.character(field$name))
+#   return(re_v)
+# }
+#
 
 # # 材料在石家庄种3个重复，在德州种2个重复
 # library(dplyr)
