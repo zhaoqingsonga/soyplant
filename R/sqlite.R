@@ -160,58 +160,6 @@ update_table_from_df <- function(db_path, table_name, data_df) {
 #' @import DBI
 #' @import RSQLite
 #' @export
-# add_fields_to_table <- function(db_path, table_name, new_field_names) {
-#   # 连接到SQLite数据库
-#   conn <- dbConnect(RSQLite::SQLite(), dbname = db_path)
-#
-#   on.exit({
-#     # 确保在函数结束时关闭连接
-#     dbDisconnect(conn)
-#   }, add = TRUE)
-#
-#   # 检查输入字段名是否为字符型向量
-#   if (!is.character(new_field_names)) {
-#     stop("新字段名称必须是一个字符型向量")
-#   }
-#
-#   # 获取表的现有字段
-#   existing_fields <- dbListFields(conn, table_name)
-#
-#   # 记录成功添加的字段和失败的字段
-#   success <- character()
-#   failed <- character()
-#
-#   for (field_name in new_field_names) {
-#     # 检查字段是否已经存在
-#     if (field_name %in% existing_fields) {
-#       failed <- c(failed, paste("字段", field_name, "已经存在"))
-#       next
-#     }
-#
-#     # 构造ALTER TABLE语句
-#     sql <- paste0("ALTER TABLE ", table_name, " ADD COLUMN ", field_name, " TEXT")
-#
-#     # 执行ALTER TABLE操作
-#     tryCatch({
-#       dbExecute(conn, sql)
-#       success <- c(success, paste("字段", field_name, "成功添加到表", table_name))
-#     }, error = function(e) {
-#       failed <- c(failed, paste("添加字段", field_name, "失败:", e$message))
-#     })
-#   }
-#
-#   # 输出结果
-#   if (length(success) > 0) {
-#     message(paste(success, collapse = "\n"))
-#   }
-#   if (length(failed) > 0) {
-#     warning(paste(failed, collapse = "\n"))
-#   }
-#
-#   # 返回成功和失败的字段
-#   return(list(success = success, failed = failed))
-# }
-#
 add_fields_to_table <- function(db_path, table_name, new_field_names) {
   # 连接到SQLite数据库
   conn <- dbConnect(RSQLite::SQLite(), dbname = db_path)
@@ -264,6 +212,58 @@ add_fields_to_table <- function(db_path, table_name, new_field_names) {
   return(list(success = success, failed = failed))
 }
 
+# add_fields_to_table <- function(db_path, table_name, new_field_names) {
+#   # 连接到SQLite数据库
+#   conn <- dbConnect(RSQLite::SQLite(), dbname = db_path)
+#
+#   on.exit({
+#     # 确保在函数结束时关闭连接
+#     dbDisconnect(conn)
+#   }, add = TRUE)
+#
+#   # 检查输入字段名是否为字符型向量
+#   if (!is.character(new_field_names)) {
+#     stop("新字段名称必须是一个字符型向量")
+#   }
+#
+#   # 获取表的现有字段
+#   existing_fields <- dbListFields(conn, table_name)
+#
+#   # 记录成功添加的字段和失败的字段
+#   success <- character()
+#   failed <- character()
+#
+#   for (field_name in new_field_names) {
+#     # 检查字段是否已经存在
+#     if (field_name %in% existing_fields) {
+#       failed <- c(failed, paste("字段", field_name, "已经存在"))
+#       next
+#     }
+#
+#     # 构造ALTER TABLE语句
+#     sql <- paste0("ALTER TABLE ", table_name, " ADD COLUMN ", field_name, " TEXT")
+#
+#     # 执行ALTER TABLE操作
+#     tryCatch({
+#       dbExecute(conn, sql)
+#       success <- c(success, paste("字段", field_name, "成功添加到表", table_name))
+#     }, error = function(e) {
+#       failed <- c(failed, paste("添加字段", field_name, "失败:", e$message))
+#     })
+#   }
+#
+#   # 输出结果
+#   if (length(success) > 0) {
+#     message(paste(success, collapse = "\n"))
+#   }
+#   if (length(failed) > 0) {
+#     warning(paste(failed, collapse = "\n"))
+#   }
+#
+#   # 返回成功和失败的字段
+#   return(list(success = success, failed = failed))
+# }
+#
 
 
 

@@ -19,24 +19,30 @@ planting(
 )
 }
 \arguments{
-\item{my_primary}{数据框，数据框中要包含id,stageid,name三列}
+\item{my_primary}{数据框，数据框中需包含 id, stageid, name 三列（若无 stageid 列将自动补全）。}
 
-\item{ck}{向量，对照名称}
+\item{ck}{向量，对照名称。}
 
-\item{interval}{插入对照的材料间隔数}
+\item{interval}{插入对照的材料间隔数。}
 
-\item{s_prefix}{材料前缀}
+\item{s_prefix}{材料前缀。}
 
-\item{rp}{种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同}
+\item{rp}{种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同。}
 
-\item{treatment}{向量，处理，可以多个水平}
+\item{treatment}{向量，处理因素。}
 
-\item{place}{向量，试验地点，可多个试验地点}
+\item{place}{向量，试验地点。}
 
-\item{ckfixed}{逻辑值，对照是否固定，是固定则按等材料数插入}
+\item{ckfixed}{逻辑值，是否固定插入对照。}
+
+\item{digits}{整数，材料编号的位数。}
+
+\item{rows}{每块的行数。}
+
+\item{restartfid}{逻辑值，是否重新启动字段编号。}
 }
 \value{
-返回插入对照和重复的数据框，给材料进行了编号，对照随机
+数据框，包含编号、对照插入、处理、地点等信息。
 }
 \description{
 计划种植试验

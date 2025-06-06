@@ -2,19 +2,36 @@
 % Please edit documentation in R/combination.R
 \name{add_matrix_content}
 \alias{add_matrix_content}
-\title{将整个矩阵内容写入组合数据框（并调整 content 字段位置）}
+\title{向组合数据框中添加矩阵内容}
 \usage{
-add_matrix_content(combined_df, mat)
+add_matrix_content(combined_df, mat, add_symmetric = TRUE)
 }
 \arguments{
-\item{combined_df}{使用 combine_records() 生成的组合数据框。}
+\item{combined_df}{数据框，必须包含 `ma_row` 和 `pa_row` 两个字段，用于与矩阵行列对应。}
 
-\item{mat}{一个 n × n 的矩阵，行列对应原始记录编号。}
+\item{mat}{正方形矩阵，元素为字符串，代表内容。}
+
+\item{add_symmetric}{逻辑值，是否添加“反交”对称内容，默认为 `TRUE`。}
 }
 \value{
-添加了一列 `content` 的数据框，位于 `pa_row` 之后。
+返回一个数据框，在原有 `combined_df` 基础上新增 `content` 字段，并调整字段顺序。
 }
 \description{
-将正方形矩阵中每个元素填入组合数据框中对应的 `(ma_row, pa_row)` 行，
-在新列 `content` 中标注矩阵值，并将其放置在 `pa_row` 字段之后。
+根据给定的正方形矩阵 `mat`，将非空内容添加到组合数据框 `combined_df` 中。
+对于矩阵中的每个非空元素 `(i, j)`，在结果中添加对应的行，并可选地添加其“反交”对称元素 `(j, i)`。
+}
+\details{
+- 函数会遍历矩阵所有元素，对非空且非NA的元素生成对应的内容行。
+- 如果 `add_symmetric = TRUE`，则还会添加对称位置的“反交”内容，字段内容为原内容加上字符串“反交”。
+- 最终合并生成的新数据框中，字段顺序会自动调整，方便后续使用。
+}
+\examples{
+combined_df <- data.frame(
+  pair_id = 1:4,
+  ma_row = c(1,1,2,2),
+  pa_row = c(2,3,1,3)
+)
+mat <- matrix(c("A", NA, "B", NA, "C", "D", NA, NA, "E"), nrow=3)
+add_matrix_content(combined_df, mat)
+
 }
