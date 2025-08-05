@@ -61,37 +61,49 @@ write.table(new_data,"data/qr_trait.txt",row.names=FALSE)
 
 
 
+#' 下载模型数据并导出为 Excel 文件
+#'
+#' 此函数依次从 mapa 中提取组合、群体、单株、系、初选、高代和种植数据，
+#' 并将这些数据写入 Excel 文件。支持自定义文件名与保存目录。
+#'
+#' @param file_name 字符串，导出的 Excel 文件名。默认为 `"soyplant_model.xlsx"`。
+#' @param dir_path 字符串，保存文件的目标目录。默认为当前工作目录。
+#'
+#' @return 无返回值。函数执行后将在指定目录生成 Excel 文件。
+#' @importFrom openxlsx createWorkbook addWorksheet writeDataTable saveWorkbook
+#' @export
+download_model <- function(file_name = "soyplant_model.xlsx",
+                           dir_path = getwd()) {
+  # 提取数据各阶段信息
+  combi <- get_combination(mapa)
+  pop <- get_population(combi)
+  plant <- get_plant(pop)
+  line <- get_line(plant)
+  pri <- get_primary(line)
+  adv <- get_advanced(pri)
+  planting <- planting(adv, ck = "冀豆12")
 
-download_model<-function(){
-  COMBI<-get_combination(mapa)
-  POP<-get_population(COMBI)
-  PLANT<-get_plant(POP)
-  LINE<-get_line(PLANT)
-  PRI<-get_primary(LINE)
-  ADV<-get_advanced(PRI)
-  PLANTING<-planting(ADV,ck="冀豆12")
-  #
-  library(openxlsx)
-  wb<-createWorkbook()
-  addWorksheet(wb,"mapa")
-  addWorksheet(wb,"combination")
-  addWorksheet(wb,"population")
-  addWorksheet(wb,"plant")
-  addWorksheet(wb,"line")
-  addWorksheet(wb,"primary")
-  addWorksheet(wb,"advanced")
-  addWorksheet(wb,"planting")
+  # 创建 Excel 工作簿并添加工作表
+  wb <- openxlsx::createWorkbook()
+  sheets <- c(
+    "mapa", "combination", "population", "plant",
+    "line", "primary", "advanced", "planting"
+  )
+  lapply(sheets, openxlsx::addWorksheet, wb = wb)
 
-  writeDataTable(wb,"mapa",mapa)
-  writeDataTable(wb,"combination",COMBI)
-  writeDataTable(wb,"population",POP)
-  writeDataTable(wb,"plant",PLANT)
-  writeDataTable(wb,"line",LINE)
-  writeDataTable(wb,"primary",PRI)
-  writeDataTable(wb,"advanced",ADV)
-  writeDataTable(wb,"planting",PLANTING)
-  mydir<-paste(getwd(),"/","soyplant_model.xlsx",sep="")
-  saveWorkbook(wb,mydir,overwrite = TRUE)
+  # 写入数据表
+  openxlsx::writeDataTable(wb, "mapa", mapa)
+  openxlsx::writeDataTable(wb, "combination", combi)
+  openxlsx::writeDataTable(wb, "population", pop)
+  openxlsx::writeDataTable(wb, "plant", plant)
+  openxlsx::writeDataTable(wb, "line", line)
+  openxlsx::writeDataTable(wb, "primary", pri)
+  openxlsx::writeDataTable(wb, "advanced", adv)
+  openxlsx::writeDataTable(wb, "planting", planting)
+
+  # 构造完整路径并保存
+  output_path <- file.path(dir_path, file_name)
+  openxlsx::saveWorkbook(wb, output_path, overwrite = TRUE)
 }
 
 #

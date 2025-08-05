@@ -10,7 +10,8 @@ addrpckfixed(
   interval = 3,
   s_prefix = "GC",
   rp = 2,
-  digits = 3
+  digits = 3,
+  startN = 1
 )
 }
 \arguments{

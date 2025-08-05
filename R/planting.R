@@ -26,7 +26,8 @@ addrpckfixed <- function(my_primary,
                          interval = 3,
                          s_prefix = "GC",
                          rp = 2,
-                         digits = 3)
+                         digits = 3,
+                         startN=1)
 
 {
   mym <- my_primary#[c("id", "stageid", "name")]
@@ -64,8 +65,8 @@ addrpckfixed <- function(my_primary,
   df_list$code <- 1:nrow(df_list)#编号
   df_list$stageid <-
     generate_stageid(
-      start_num = 1,
-      end_num = nrow(df_list),
+      start_num = startN,
+      end_num = nrow(df_list)+startN-1,
       char= s_prefix,
       digit_length = digits
     )
@@ -114,7 +115,8 @@ addrpck <- function(my_primary,
                     interval = 3,
                     s_prefix = "GC",
                     rp = 3,
-                    digits = 3
+                    digits = 3,
+                    startN
                     )
 
 {
@@ -154,8 +156,8 @@ addrpck <- function(my_primary,
   df_list$code <- 1:nrow(df_list)#编号
   df_list$stageid <-
     generate_stageid(
-      start_num  = 1,
-      end_num  = nrow(df_list),
+      start_num  = startN,
+      end_num  = nrow(df_list)+startN-1,
       char = s_prefix,
       digit_length = digits
     )
@@ -328,7 +330,8 @@ planting <- function(
     ckfixed = TRUE,
     digits = 3,
     rows = 6,
-    restartfid = FALSE
+    restartfid = FALSE,
+    startN=1
 ) {
   library(dplyr)
 
@@ -344,12 +347,12 @@ planting <- function(
   # 插入对照并添加处理和地点
   result <- if (ckfixed) {
     my_primary |>
-      addrpckfixed(ck, interval, s_prefix, rp, digits) |>
+      addrpckfixed(ck, interval, s_prefix, rp, digits,startN) |>
       addtreatment(treatment) |>
       addplace_addfieldid_addrows(place, restartfid, rows)
   } else {
     my_primary |>
-      addrpck(ck, interval, s_prefix, rp, digits) |>
+      addrpck(ck, interval, s_prefix, rp, digits,startN) |>
       addtreatment(treatment) |>
       addplace_addfieldid_addrows(place, restartfid, rows)
   }

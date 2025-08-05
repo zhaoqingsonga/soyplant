@@ -15,7 +15,8 @@ planting(
   ckfixed = TRUE,
   digits = 3,
   rows = 6,
-  restartfid = FALSE
+  restartfid = FALSE,
+  startN = 1
 )
 }
 \arguments{
