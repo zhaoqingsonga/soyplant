@@ -40,7 +40,7 @@ soy_traits<-data.frame(
 
 #write.table(read.xlsx("temp_traits_qr.xlsx"),"data/qr_trait.txt",row.names=FALSE)
 #write.table(read.xlsx("temp_traits.xlsx"),"data/soy_traits.txt",row.names=FALSE)
-write.table(soy_traits,"data/soy_traits.txt",row.names=FALSE)
+#write.table(soy_traits,"data/soy_traits.txt",row.names=FALSE)
 write.table(bay,"data/baiaoyun_traits.txt",row.names=FALSE)
 write.table(read.xlsx("inst/extdata/temp_field.xlsx"),"data/field.txt",row.names=FALSE)
 write.table(read.xlsx("inst/extdata/temp_soy_mapa.xlsx"),"data/mapa.txt",row.names=FALSE)

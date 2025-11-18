@@ -3,18 +3,18 @@
 #' 该函数从数据框中提取`is_ck`为1的对照组数据，使用IQR（四分位距）方法判断异常值，并将异常值设为NA。
 #' 异常值的判定是基于对照组数据的第一四分位数（Q1）和第三四分位数（Q3），异常值定义为低于Q1 - 1.5 * IQR 或 高于Q3 + 1.5 * IQR的值。
 #'
-#' @param df 数据框，包含两列：`muchan`（产量数据）和`is_ck`（是否为对照组，0为非对照，1为对照）。
+#' @param df 数据框，包含两列：`MuChan`（产量数据）和`is_ck`（是否为对照组，0为非对照，1为对照）。
 #' @return 返回处理后的数据框，其中对照组的异常值被替换为NA。
 #' @examples
 #' df <- data.frame(
-#'   muchan = c(10, 12, 15, 8, 25, 30, 35, 100, 20, 18),
+#'   MuChan = c(10, 12, 15, 8, 25, 30, 35, 100, 20, 18),
 #'   is_ck = c(0, 1, 1, 0, 1, 1, 0, 1, 0, 1)
 #' )
 #' df_cleaned <- remove_ck_outliers(df)
 #' print(df_cleaned)
 remove_ck_outliers <- function(df) {
   # 提取is_ck为1的对照组数据
-  control_data <- df[df$is_ck == 1, "muchan"]
+  control_data <- df[df$is_ck == 1, "MuChan"]
 
   # 计算四分位数和IQR
   Q1 <- quantile(control_data, 0.25,na.rm = TRUE)
@@ -26,7 +26,7 @@ remove_ck_outliers <- function(df) {
   upper_bound <- Q3 + 1.5 * IQR_value
 
   # 将异常值设为NA
-  df$muchan[df$is_ck == 1 & (df$muchan < lower_bound | df$muchan > upper_bound)] <- NA
+  df$MuChan[df$is_ck == 1 & (df$MuChan < lower_bound | df$MuChan > upper_bound)] <- NA
 
   return(df)
 }
@@ -37,7 +37,7 @@ remove_ck_outliers <- function(df) {
 #'
 #' @param df 数据框，必须包含以下列：
 #'   \itemize{
-#'     \item muchan: 产量数据
+#'     \item MuChan: 产量数据
 #'     \item is_ck: 是否为对照组，值为1表示对照组，其他值表示实验组
 #'   }
 #'
@@ -51,20 +51,20 @@ remove_ck_outliers <- function(df) {
 #'
 #' @examples
 #' df <- data.frame(
-#'   muchan = c(10, 20, 15, 25, 30, 10),
+#'   MuChan = c(10, 20, 15, 25, 30, 10),
 #'   is_ck = c(1, 0, 1, 0, 0, 1)
 #' )
-#' result <- calculate_muchan_increase_with_multiple_methods(df)
+#' result <- calculate_MuChan_increase_with_multiple_methods(df)
 #' print(result)
 #'
 #' @export
-calculate_muchan_increase_with_multiple_methods <- function(df) {
+calculate_MuChan_increase_with_multiple_methods <- function(df) {
   # 检查是否有至少一个非空的对照组数据
-  if (sum(df$is_ck == 1 & !is.na(df$muchan)) == 0) {
-    df$jiaolinjinduizhaozengchan<-NA
-    df$jiaopingjunduizhaozengchan<-NA
-    df$jiaolinjinduizhaoweici<-NA
-    df$jiaopingjunduizhaoweici<-NA
+  if (sum(df$is_ck == 1 & !is.na(df$MuChan)) == 0) {
+    df$JiaoLinJinDuiZhaoZengChan<-NA
+    df$JiaoPingJunDuiZhaoZengChan<-NA
+    df$JiaoLinJinDuiZhaoWeiCi<-NA
+    df$JiaoPingJunDuiZhaoWeiCi<-NA
     return(df)
   }
 
@@ -72,10 +72,10 @@ calculate_muchan_increase_with_multiple_methods <- function(df) {
   df <- remove_ck_outliers(df)
 
   # 获取所有非空对照的索引
-  control_indices <- which(df$is_ck == 1 & !is.na(df$muchan))
+  control_indices <- which(df$is_ck == 1 & !is.na(df$MuChan))
 
   # 计算所有非空对照的平均产量
-  control_avg <- mean(df$muchan[control_indices])
+  control_avg <- mean(df$MuChan[control_indices])
 
   # 创建两个向量存储增产百分比：一种是与最近两个对照点比较，另一种是与所有非空对照的平均值比较
   increase_percent_near_controls <- numeric(nrow(df))
@@ -89,27 +89,27 @@ calculate_muchan_increase_with_multiple_methods <- function(df) {
       increase_percent_all_controls[i] <- NA
     } else {
       # 获取当前产量
-      muchan <- df$muchan[i]
+      MuChan <- df$MuChan[i]
 
       # 计算与最近两个对照点的增产百分比
       distances <- abs(control_indices - i)
       sorted_indices <- order(distances)
       closest_controls <- control_indices[sorted_indices[1:2]]
-      control_avg_near_controls <- mean(df$muchan[closest_controls])
-      increase_percent_near_controls[i] <- (muchan - control_avg_near_controls) / control_avg_near_controls * 100
+      control_avg_near_controls <- mean(df$MuChan[closest_controls])
+      increase_percent_near_controls[i] <- (MuChan - control_avg_near_controls) / control_avg_near_controls * 100
 
       # 计算与所有非空对照的增产百分比
-      increase_percent_all_controls[i] <- (muchan - control_avg) / control_avg * 100
+      increase_percent_all_controls[i] <- (MuChan - control_avg) / control_avg * 100
     }
   }
 
   # 将增产百分比加入数据框
-  df$jiaolinjinduizhaozengchan <- as.numeric(increase_percent_near_controls)
-  df$jiaopingjunduizhaozengchan <- as.numeric(increase_percent_all_controls)
+  df$JiaoLinJinDuiZhaoZengChan <- as.numeric(increase_percent_near_controls)
+  df$JiaoPingJunDuiZhaoZengChan <- as.numeric(increase_percent_all_controls)
 
   # 根据增产百分比排序，并生成位次列（分别计算两种方式的位次）
-  df$jiaolinjinduizhaoweici <- rank(-df$jiaolinjinduizhaozengchan, na.last = "keep", ties.method = "min")
-  df$jiaopingjunduizhaoweici <- rank(-df$jiaopingjunduizhaozengchan, na.last = "keep", ties.method = "min")
+  df$JiaoLinJinDuiZhaoWeiCi <- rank(-df$JiaoLinJinDuiZhaoZengChan, na.last = "keep", ties.method = "min")
+  df$JiaoPingJunDuiZhaoWeiCi <- rank(-df$JiaoPingJunDuiZhaoZengChan, na.last = "keep", ties.method = "min")
 
   return(df)
 }
@@ -121,7 +121,7 @@ calculate_muchan_increase_with_multiple_methods <- function(df) {
 #'
 #' 该函数通过四分位数间距法（IQR）或标准差法（SD）来判断数据中的异常值。支持两种方法：IQR法和标准差法。
 #'
-#' @param muchan 向量，包含需要检测异常值的产量数据，可以包含NA值。
+#' @param MuChan 向量，包含需要检测异常值的产量数据，可以包含NA值。
 #' @param method 字符串，指定使用的方法。默认为 "IQR"，可以选择 "SD" 来使用标准差法。IQR方法基于四分位数间距，SD方法基于均值和标准差。
 #'
 #' @return 返回一个逻辑向量，指示哪些数据点是异常值（TRUE表示异常值，FALSE表示正常值）。对于NA值，默认会被判定为异常值。
@@ -132,18 +132,18 @@ calculate_muchan_increase_with_multiple_methods <- function(df) {
 #'
 #' @examples
 #' # 示例：使用IQR方法检测异常值
-#' muchan_data <- c(10, 20, 15, 25, 30, 100, 5)
-#' outliers_iqr <- find_outliers(muchan_data, method = "IQR")
+#' MuChan_data <- c(10, 20, 15, 25, 30, 100, 5)
+#' outliers_iqr <- find_outliers(MuChan_data, method = "IQR")
 #' print(outliers_iqr)
 #'
 #' # 示例：使用标准差方法检测异常值
-#' outliers_sd <- find_outliers(muchan_data, method = "SD")
+#' outliers_sd <- find_outliers(MuChan_data, method = "SD")
 #' print(outliers_sd)
 #'
 #' @export
-find_outliers <- function(muchan, method = "IQR") {
+find_outliers <- function(MuChan, method = "IQR") {
   # 去除NA值，计算有效数据
-  valid_data <- muchan[!is.na(muchan)]
+  valid_data <- MuChan[!is.na(MuChan)]
 
   # 使用四分位数间距法（IQR）
   if (method == "IQR") {
@@ -157,7 +157,7 @@ find_outliers <- function(muchan, method = "IQR") {
     upper_bound <- q3 + 1.5 * iqr
 
     # 判断哪些是异常值
-    outliers <- muchan < lower_bound | muchan > upper_bound | is.na(muchan)
+    outliers <- MuChan < lower_bound | MuChan > upper_bound | is.na(MuChan)
 
     # 使用标准差法（SD）
   } else if (method == "SD") {
@@ -170,7 +170,7 @@ find_outliers <- function(muchan, method = "IQR") {
     upper_bound <- mean_value + 3 * sd_value
 
     # 判断哪些是异常值
-    outliers <- muchan < lower_bound | muchan > upper_bound | is.na(muchan)
+    outliers <- MuChan < lower_bound | MuChan > upper_bound | is.na(MuChan)
 
   } else {
     stop("无效的方法参数，只能是 'IQR' 或者 'SD'")
