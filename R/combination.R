@@ -147,6 +147,7 @@ get_combination <- function(mydata,
   re_v$sele<-0
   re_v$source<-NA
   re_v$former_fieldid<-NA
+  re_v$former_stageid<-NA
   field<-subset(field,grepl("combination", table, ignore.case = TRUE))
   #如果生成表中没有field中所包含的字段则补全
   # 补齐缺失的字段

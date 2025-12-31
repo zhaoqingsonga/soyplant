@@ -36,13 +36,28 @@ get_advanced <- function(my_primary, start_num = 1) {
   # 生成唯一ID
   my_advanced$id <- generate_id(start_num, end_num = nrow(my_advanced) + start_num - 1)
 
-  # 记录来源名称和前fieldid
+  # 记录来源名称和前fieldid,前stageid
   my_advanced$source <- my_advanced$name
   my_advanced$former_fieldid <- my_advanced$fieldid
+  my_advanced$former_stageid <- my_advanced$stageid
   # 处理名称，小于9代时处理，大于9代时不再追加
-  my_advanced$name <- ifelse(my_advanced$f < 9,
-                             paste(my_advanced$name, ":", (my_advanced$f + 1), sep = ""),
-                             my_advanced$name)
+  #
+  my_advanced$name <- ifelse(
+    !is.na(my_advanced$f) & my_advanced$f < 9,
+    # 用mapply逐元素处理替换逻辑
+    mapply(
+      function(name_str, f_val) {
+        if (grepl("(:\\d+)$", name_str, perl = TRUE)) {
+          sub("(:\\d+)$", paste0(":", f_val + 1), name_str, perl = TRUE)
+        } else {
+          paste(name_str, ":", f_val + 1, sep = "")
+        }
+      },
+      name_str = my_advanced$name,  # 逐个传入name
+      f_val = my_advanced$f         # 逐个传入对应的f值
+    ),
+    my_advanced$name  # 不满足条件时保持原样
+  )
 
   # 更新字段
   my_advanced$stage <- "高级产比"

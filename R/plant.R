@@ -57,12 +57,14 @@ get_plant <- function(my_pop, start_num = 1) {
     path_name <- my_pop$path[i]
     source_name <- my_pop$name[i]
     former_fieldid<-my_pop$fieldid[i]
+    former_stageid<-my_pop$stageid[i]
     do.call(rbind, lapply(1:my_pop$sele[i], function(j) {
       temp <- my_pop[i, ]
       temp$name <- paste(pop_name, j, sep = "-")
       temp$path <- paste(path_name, j, sep = "-")
       temp$source <- source_name
       temp$former_fieldid<-former_fieldid
+      temp$former_stageid<-former_stageid
       temp
     }))
   }))

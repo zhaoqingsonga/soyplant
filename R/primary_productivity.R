@@ -40,13 +40,27 @@ get_primary <- function(my_line, start_num = 1) {
   # 生成唯一ID
   my_primary$id <- generate_id(start_num, end_num = nrow(my_primary) + start_num - 1)
 
-  # 记录来源名称,和前fieldid
+  # 记录来源名称,和前fieldid和前stageid
   my_primary$source <- my_primary$name
   my_primary$former_fieldid <- my_primary$fieldid
-  # 处理名称，小于9代时处理，大于9代时不再追加
-  my_primary$name <- ifelse(!is.null(my_primary$f)&my_primary$f < 9,
-                            paste(my_primary$name, ":", (my_primary$f + 1), sep = ""),
-                            my_primary$name)
+  my_primary$former_stageid <- my_primary$stageid
+  # 处理名称,追加世代，小于9代时处理，大于9代时不再追加
+  my_primary$name <- ifelse(
+    !is.na(my_primary$f) & my_primary$f < 9,
+    # 用mapply逐元素处理替换逻辑
+    mapply(
+      function(name_str, f_val) {
+        if (grepl("(:\\d+)$", name_str, perl = TRUE)) {
+          sub("(:\\d+)$", paste0(":", f_val + 1), name_str, perl = TRUE)
+        } else {
+          paste(name_str, ":", f_val + 1, sep = "")
+        }
+      },
+      name_str = my_primary$name,  # 逐个传入name
+      f_val = my_primary$f         # 逐个传入对应的f值
+    ),
+    my_primary$name  # 不满足条件时保持原样
+  )
 
   # 更新字段
   my_primary$stage <- "初级产比"

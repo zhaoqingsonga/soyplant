@@ -9,17 +9,25 @@
 
 get_population <- function(my_combi,start_num=1) {
   my_pop <- subset(my_combi, my_combi$next_stage == "群体")
-  #如果name中是任意字符+F或者T+数字则其后数字加1，如果不是则后面直接加 Fn,单株不能进入群体，path字段有bug
+  #如果name中是任意字符+(F或者T)+数字则其后数字加1，如果不是则后面直接加 Fn,单株不能进入群体，path字段有bug
   # 使用正则表达式检测名字是否符合“任意字符+F+数字”的模式
   pattern <- ".*[FT][0-9]+$"
+  pattern2<-".*[:][0-9]+$"
   if (all(grepl(pattern, my_pop$name))) {
     name <-
       paste(sapply(my_pop$name, function(x)
         substr(x, 1, nchar(x) - 1)),
         (my_pop$f + 1),
         sep = "")
-  } else{
-    name <- paste(my_pop$name,"F",(my_pop$f + 1),  sep = "")
+  } else if(all(grepl(pattern2, my_pop$name))){
+    name <-
+      paste(sapply(my_pop$name, function(x)
+        substr(x, 1, nchar(x) - 1)),
+        (my_pop$f + 1),
+        sep = "")
+  }
+  else{
+    name <- paste(my_pop$name,":",(my_pop$f + 1),  sep = "")
   }
   if(length(name)==0) return("No selected population!")
   user <- get_computer_nodename()
@@ -44,6 +52,7 @@ get_population <- function(my_combi,start_num=1) {
   re_v$source <- my_pop$name
   re_v$memo<-my_pop$memo
   re_v$former_fieldid<-my_pop$fieldid
+  re_v$former_stageid<-my_pop$stageid
   field<-subset(field,grepl("combination", table, ignore.case = TRUE))
   #如果生成表中没有field中所包含的字段则补全
   # 补齐缺失的字段

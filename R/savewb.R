@@ -9,94 +9,78 @@
 
 savewb <-
   function(origin = NULL,
+           material = NULL,
            planting = NULL,
            myview = NULL,
-           combi_matrix=NULL,
+           combi_matrix = NULL,
            filename,
            overwrite = FALSE) {
+
     wb <- traitstable(trait_col = ncol(myview), validation_number = nrow(myview))
-    addWorksheet(wb, "planting", visible = TRUE,tabColour = "darkred")
-    addWorksheet(wb, "origin", visible = TRUE,tabColour = "red")
-    #wb中有
-    #addWorksheet(wb, "traits", visible = TRUE)
+    # 定义sheet参数列表，名称、tab颜色、写入起始行、内容
+    sheet_info <- list(
+      planting = list(tabColour = "darkred", data = planting, startRow = 2),
+      material = list(tabColour = "red", data = material, startRow = 1),
+      origin   = list(tabColour = "darkgreen", data = origin, startRow = 1),
+      traits   = list(tabColour = NULL, data = myview, startRow = 2)
+    )
 
-    writeData(wb, "planting", planting, startRow = 2)
-    writeData(wb, "origin", origin, startRow = 1)
-    writeData(wb, "traits", myview, startRow = 2)
+    # 获取已存在的工作表名（兼容大小写问题，openxlsx工作表名大小写不敏感）
+    existing_sheets <- tolower(names(wb))
 
-    #增加组合矩阵表
-    if(!is.null(combi_matrix)){
-      addWorksheet(wb, "combi_matrix", visible = TRUE,tabColour = "blue")
+    # 循环添加sheet及写入数据，避免已存在时重复添加
+    for (s in names(sheet_info)) {
+      if (!(tolower(s) %in% existing_sheets)) {
+        addWorksheet(wb, s, visible = TRUE, tabColour = sheet_info[[s]]$tabColour)
+      }
+      writeData(wb, s, sheet_info[[s]]$data, startRow = sheet_info[[s]]$startRow)
+    }
+    # 组合矩阵表（如有），同样保证唯一名
+    if (!is.null(combi_matrix)) {
+      if (!("combi_matrix" %in% tolower(names(wb)))) {
+        addWorksheet(wb, "combi_matrix", visible = TRUE, tabColour = "blue")
+      }
       writeData(wb, "combi_matrix", combi_matrix, startRow = 1)
     }
-    #设置格式
-    hs1 <-
-      createStyle(
-        fgFill = "lightblue",
-        halign = "CENTER",
-        textDecoration = "bold",
-        border = "Bottom"
-      )
+
+    # 样式定义
+    hs1 <- createStyle(
+      fgFill = "lightblue",
+      halign = "CENTER",
+      textDecoration = "bold",
+      border = "Bottom"
+    )
     bodyStyle <- createStyle(border = "TopBottom", borderColour = "red")
 
-
-    ##add style for "planting"
-    headerStyle <- hs1
-    addStyle(
-      wb,
-      sheet = "planting",
-      headerStyle,
-      rows = 1:2,
-      cols = 1:(9 + ncol(planting)),
-      gridExpand = TRUE
-    )
-    ## style for body
-    ##设置内容主题的模板
-    addStyle(
-      wb,
-      sheet = "planting",
-      bodyStyle,
-      rows = 3:(nrow(planting) + 2),
-      cols = 1:(9 + ncol(planting)),
-      gridExpand = TRUE
-    )
-    ####
-    setColWidths(wb, "planting", cols = 1, widths = 10)
-    setRowHeights(wb,
-                  "planting",
-                  rows = 1:(nrow(planting) + 2),
-                  heights = 17.5)
-    ###
-
-    ##add style for "origin"
-    headerStyle <- hs1
-    addStyle(
-      wb,
-      sheet = "origin",
-      headerStyle,
-      rows = 1:1,
-      cols = 1:(9 + ncol(planting)),
-      gridExpand = TRUE
-    )
-    ## style for body
-    ##设置内容主题的模板
-    addStyle(
-      wb,
-      sheet = "origin",
-      bodyStyle,
-      rows = 2:(nrow(planting) + 2),
-      cols = 1:(9 + ncol(planting)),
-      gridExpand = TRUE
-    )
-    ####
-    setColWidths(wb, "origin", cols = 1, widths = 10)
-    setRowHeights(wb,
-                  "origin",
-                  rows = 1:(nrow(planting) + 2),
-                  heights = 17.5)
-    ###
-
-
+    # 要批量添加样式的sheet
+    format_sheets <- c("planting", "origin", "material")
+    for (sheet in format_sheets) {
+      # 列数统一用最大值，优化以防各表列数不同
+      ncols <- if (!is.null(ncol(planting))) (9 + ncol(planting)) else 9
+      nrows <- if (!is.null(nrow(planting))) (nrow(planting) + 2) else 2
+      # 第一行做表头（planting行头2行，其余1行，实际根据现有代码也可合并简写如下）
+      header_rows <- if (sheet == "planting") 1:2 else 1
+      addStyle(
+        wb,
+        sheet = sheet,
+        hs1,
+        rows = header_rows,
+        cols = 1:ncols,
+        gridExpand = TRUE
+      )
+      # 内容区样式（planting从第3行，其余第2行）
+      body_start <- if (sheet == "planting") 3 else 2
+      addStyle(
+        wb,
+        sheet = sheet,
+        bodyStyle,
+        rows = body_start:nrows,
+        cols = 1:ncols,
+        gridExpand = TRUE
+      )
+      setColWidths(wb, sheet, cols = 1, widths = 10)
+      setRowHeights(wb, sheet, rows = 1:nrows, heights = 17.5)
+    }
 
     saveWorkbook(wb, overwrite = overwrite, filename)
     return("Ok!")
