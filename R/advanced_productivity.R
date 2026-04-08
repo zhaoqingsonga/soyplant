@@ -1,26 +1,3 @@
-# get_advanced <- function(my_primary,start_num=1) {
-#   my_advanced <- subset(my_primary, my_primary$next_stage == "高级产比")
-#   #处理各列
-#   my_advanced$id <- generate_id(start_num,  end_num = nrow(my_advanced)+start_num-1)
-#   my_advanced$source <- my_advanced$name
-#   #处理名称小于9代时处理，大于9代时不再追加
-#   my_advanced$name <-
-#     ifelse(my_advanced$f<9,paste(my_advanced$name, ":", (my_advanced$f + 1),  sep = ""),my_advanced$name)
-#
-#
-#   my_advanced$stage <- "高级产比"
-#   my_advanced$next_stage <- "多点鉴定"
-#   my_advanced$f <- my_advanced$f + 1
-#   my_advanced$sele <- 5
-#   my_advanced$process <-
-#     paste(my_advanced$process, my_advanced$id, sep = "/")
-#   my_advanced$path <- paste(my_advanced$path, 0, sep = "-")
-#   #
-#   rownames(my_advanced) <- NULL
-#   return(my_advanced)
-# }
-
-
 #' 处理初级产比进入高级产比的数据
 #'
 #' 只有初级产比进入高级产比时，世代不增加
@@ -40,24 +17,9 @@ get_advanced <- function(my_primary, start_num = 1) {
   my_advanced$source <- my_advanced$name
   my_advanced$former_fieldid <- my_advanced$fieldid
   my_advanced$former_stageid <- my_advanced$stageid
-  # 处理名称，小于9代时处理，大于9代时不再追加
-  #
-  my_advanced$name <- ifelse(
-    !is.na(my_advanced$f) & my_advanced$f < 9,
-    # 用mapply逐元素处理替换逻辑
-    mapply(
-      function(name_str, f_val) {
-        if (grepl("(:\\d+)$", name_str, perl = TRUE)) {
-          sub("(:\\d+)$", paste0(":", f_val + 1), name_str, perl = TRUE)
-        } else {
-          paste(name_str, ":", f_val + 1, sep = "")
-        }
-      },
-      name_str = my_advanced$name,  # 逐个传入name
-      f_val = my_advanced$f         # 逐个传入对应的f值
-    ),
-    my_advanced$name  # 不满足条件时保持原样
-  )
+
+  # 处理名称，小于9代时追加世代号
+  my_advanced$name <- increment_generation_name(my_advanced$name, my_advanced$f)
 
   # 更新字段
   my_advanced$stage <- "高级产比"
@@ -69,13 +31,7 @@ get_advanced <- function(my_primary, start_num = 1) {
 
   # 移除行名
   rownames(my_advanced) <- NULL
-  field<-subset(field,grepl("combination", table, ignore.case = TRUE))
-  #如果生成表中没有field中所包含的字段则补全
-  # 补齐缺失的字段
-  for (col in as.character(field$name)) {
-    if (!col %in% names(my_advanced)) {
-      my_advanced[[col]] <- NA
-    }
-  }
-  return(my_advanced[as.character(field$name)])
+
+  # 对齐到field模式
+  align_to_field_schema(my_advanced, table_pattern = "combination")
 }

@@ -116,20 +116,17 @@ update_table_from_df <- function(db_path, table_name, data_df) {
   # 开始一个事务
   dbBegin(conn)
 
-  # 执行更新操作
+  # 执行更新操作：使用预编译语句批量绑定参数
   tryCatch({
-    for (i in 1:nrow(data_df)) {
-      # 提取字段ID和更新值
-      row <- data_df[i, ]
-      fieldid <- row[1]
-      values <- row[-1]
+    rs <- dbSendStatement(conn, sql)
+    on.exit(dbClearResult(rs), add = TRUE)
 
-      # 确保参数顺序与SQL占位符顺序一致
-      params <- as.vector(unlist(c(values, fieldid)))
-
-      # 执行SQL更新
-      dbExecute(conn, sql, params = params)
+    for (i in seq_len(nrow(data_df))) {
+      params <- c(as.list(data_df[i, -1]), list(data_df[i, 1]))
+      dbBind(rs, params = params)
     }
+    dbClearResult(rs)
+
     # 提交事务
     dbCommit(conn)
     return(NULL)

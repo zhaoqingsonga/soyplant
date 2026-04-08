@@ -28,34 +28,15 @@
 #' print(result)
 #'
 replace_headers <- function(original_df, alias_df) {
-  # 创建一个空的字符向量用于存储新的表头名称
-  new_headers <- character(length = ncol(original_df))
-  # 构建一个从原表头名称到别名的映射列表，在此处判断并处理因子类型，确保为字符型映射
-  header_mapping <- setNames(lapply(alias_df[, 2], function(x) {
-    if (is.factor(x)) {
-      as.character(x)
-    } else {
-      x
-    }
-  }), lapply(alias_df[, 1], function(x) {
-    if (is.factor(x)) {
-      as.character(x)
-    } else {
-      x
-    }
-  }))
-  # 遍历原数据框的表头
-  for (i in seq_along(names(original_df))) {
-    header <- names(original_df)[i]
-    # 根据精确的原表头名称查找对应的别名，如果找到则使用别名，否则使用原表头转换为合法的字符型变量名形式
-    if (header %in% names(header_mapping)) {
-      new_headers[i] <- header_mapping[header]
-    } else {
-      new_headers[i] <- make.names(header, unique = TRUE)
-    }
-  }
-  # 使用新的表头名称重新命名原数据框的列
-  names(original_df) <- new_headers
+  # 构建映射：使用命名向量处理因子类型
+  header_mapping <- setNames(as.character(alias_df[[2]]), as.character(alias_df[[1]]))
+
+  # 向量化替换：直接在命名向量中查找
+  orig_names <- names(original_df)
+  new_names <- ifelse(orig_names %in% names(header_mapping),
+                      header_mapping[orig_names],
+                      make.names(orig_names, unique = TRUE))
+  names(original_df) <- new_names
   return(original_df)
 }
 
@@ -105,26 +86,20 @@ update_dataframe_by_fieldid <- function(reference_df, target_df) {
   # 找出在update_cols_reference_df中同时也在target_cols里且字段名完全一致的列名
   cols_to_update <- intersect(update_cols_reference_df, target_cols)
 
-  # 获取target_df和reference_df的行数
-  n_reference <- nrow(reference_df)
-  n_target <- nrow(target_df)
+  # 向量化查找：建立 ID -> reference_df行索引 的映射
+  ref_id_map <- setNames(seq_len(nrow(reference_df)), as.character(reference_df[["唯一编号"]]))
+  target_ids <- as.character(target_df[["fieldid"]])
+  row_match <- ref_id_map[target_ids]
 
-  # 循环遍历target_df的每一行
-  for (i in 1:n_target) {
-    # 获取target_df当前行的fieldid值
-    current_id <- target_df[i, "fieldid"]
-    # 在reference_df中查找匹配的'唯一编号'行
-    matching_rows <- which(reference_df[, "唯一编号"] == current_id)
-    if (length(matching_rows) > 0) {
-      # 如果找到匹配行，遍历要更新的列，判断参考数据框对应列的数据类型，若是数字则以数字类型更新
-      for (col_name in cols_to_update) {
-        if (col_name %in% names(reference_df) && col_name %in% names(target_df)) {
-          if (is.numeric(reference_df[[col_name]])) {
-            target_df[i, col_name] <- as.numeric(reference_df[matching_rows[1], col_name])
-          } else {
-            target_df[i, col_name] <- reference_df[matching_rows[1], col_name]
-          }
-        }
+  # 批量更新每个列
+  for (col_name in cols_to_update) {
+    if (col_name %in% names(reference_df) && col_name %in% names(target_df)) {
+      valid_match <- !is.na(row_match)
+      ref_vals <- reference_df[[col_name]][row_match[valid_match]]
+      if (is.numeric(reference_df[[col_name]])) {
+        target_df[valid_match, col_name] <- as.numeric(ref_vals)
+      } else {
+        target_df[valid_match, col_name] <- ref_vals
       }
     }
   }
@@ -155,24 +130,20 @@ update_dataframe_by_fieldid <- function(reference_df, target_df) {
 #' print(result_df)
 #'
 convert_string_numbers_to_numeric <- function(input_df) {
-  # 获取输入数据框的列数
-  num_cols <- ncol(input_df)
-  # 遍历每一列
-  for (col_index in 1:num_cols) {
-    # 获取当前列名
-    col_name = names(input_df)[col_index]
-    # 判断当前列的数据类型是否为字符型
+  # 向量化版本：遍历每一列
+  for (col_name in names(input_df)) {
+    # 只处理字符型列
     if (is.character(input_df[[col_name]])) {
-      # 提取当前列非空值的元素
-      non_na_elements <- input_df[[col_name]][!is.na(input_df[[col_name]])]
-      # 去除非空值元素中的空字符串（如果有）
-      non_empty_elements <- non_na_elements[non_na_elements!= ""]
-      # 判断去除空值和空字符串后剩余的元素是否都能转换为数字
-      if (all(sapply(non_empty_elements, function(x) {
-        suppressWarnings(!is.na(as.numeric(x)))
-      }))) {
-        # 如果都能转换为数字，则将原列转换为数字类型
-        input_df[[col_name]] <- as.numeric(input_df[[col_name]])
+      # 提取非空非NA的元素
+      vals <- input_df[[col_name]]
+      non_na_mask <- !is.na(vals) & vals != ""
+      # 判断是否所有非空元素都能转换为数字
+      if (any(non_na_mask)) {
+        non_empty <- vals[non_na_mask]
+        can_convert <- !is.na(suppressWarnings(as.numeric(non_empty)))
+        if (all(can_convert)) {
+          input_df[[col_name]] <- as.numeric(vals)
+        }
       }
     }
   }
@@ -269,65 +240,71 @@ update_baiaoyun_old <- function(df, updf,overwrite=TRUE) {
 
 
 
-update_baiaoyun <- function(df, updf,overwrite=TRUE) {
-  #确保更新的字段在df中全有
-  updfnames<-names(updf)[-1]
-  if(!all(updfnames%in%df[2,8:ncol(df)])){
-    needadd<- updfnames[!updfnames%in%df[2,8:ncol(df)]]
-    return(paste("error,在下载的文件中添加",needadd,sep=""))
+update_baiaoyun <- function(df, updf, overwrite = TRUE) {
+  # 确保更新的字段在df中全有
+  updfnames <- names(updf)[-1]
+  if (!all(updfnames %in% df[2, 8:ncol(df)])) {
+    needadd <- updfnames[!updfnames %in% df[2, 8:ncol(df)]]
+    return(paste("error,在下载的文件中添加", needadd, sep = ""))
   }
-  #只保留有更新的字段
-  df<-cbind(df[1:7],df[df[2,]%in%updfnames])
+  # 只保留有更新的字段
+  df <- cbind(df[1:7], df[df[2, ] %in% updfnames])
 
   # 找到主数据集中唯一编号的列
-  col.ID<-which(df=="唯一编号",arr.ind = TRUE)[2]
+  col.ID <- which(df == "唯一编号", arr.ind = TRUE)[2]
 
   if (length(col.ID) == 0) {
     stop("主数据集 df 必须包含 '唯一编号' 列")
   }
+
+  # 创建fieldid到行索引的映射（避免循环内O(n)查找）
+  id_to_row_idx <- setNames(seq_len(nrow(df)), df[, col.ID])
 
   # 获取更新数据集中需要更新的性状列
   update_traits <- setdiff(colnames(updf), "fieldid")
 
   # 遍历每个需要更新的性状
   for (trait in update_traits) {
-    #要更新的性状中不含NA值
-    updf_i<-subset(updf,!is.na(updf[,trait]))
+    # 要更新的性状中不含NA值
+    updf_i <- subset(updf, !is.na(updf[, trait]))
     # 获取更新数据集中的性状列索引
     col.trait_updf_i <- which(colnames(updf_i) == trait)
     # 找到主数据集中对应的性状列索引
-    col.trait_df<-which(df==trait,arr.ind = TRUE)[2]
+    col.trait_df <- which(df == trait, arr.ind = TRUE)[2]
     # 找不到则下一个循环（不能更新df中没有的字段）
-    if(is.na(col.trait_df))  next
-    # 根据唯一编号更新主数据集
-    update_value<-NA
-    for (i in seq_len(nrow(updf_i))) {
-      field_id <- updf_i$fieldid[i]
-      update_value <- updf_i[i, col.trait_updf_i]
-      row_idx <- which(df[, col.ID] == field_id)
-      if (length(row_idx) > 0) {
-        #处理备注信息,备注信息为添加不覆盖
-        if(trait%in%c("T080","T093","T101")){
-          #判断如果为NA则不进行合并粘贴
-          if(is.na(df[row_idx, col.trait_df])){
-            df[row_idx, col.trait_df] <- paste(update_value,",",Sys.Date(),".",sep="")
+    if (is.na(col.trait_df)) next
+
+    # 备注性状（添加不覆盖）
+    is_memo_trait <- trait %in% c("T080", "T093", "T101")
+
+    # 批量处理：获取所有需要更新的fieldid
+    field_ids <- updf_i$fieldid
+    # 查找对应的行索引（向量化的lookup）
+    row_indices <- id_to_row_idx[as.character(field_ids)]
+    valid_idx <- !is.na(row_indices)
+
+    if (any(valid_idx)) {
+      if (is_memo_trait) {
+        # 备注信息：追加不覆盖
+        for (j in which(valid_idx)) {
+          row_idx <- row_indices[j]
+          update_value <- updf_i[j, col.trait_updf_i]
+          if (is.na(df[row_idx, col.trait_df])) {
+            df[row_idx, col.trait_df] <- paste(update_value, ",", Sys.Date(), ".", sep = "")
+          } else {
+            df[row_idx, col.trait_df] <- paste(df[row_idx, col.trait_df], update_value, ",", Sys.Date(), ".", sep = "")
           }
-          else{
-            df[row_idx, col.trait_df] <- paste(df[row_idx, col.trait_df],update_value,",",Sys.Date(),".",sep="")
-          }
-
-          next
         }
-
-        #是否覆盖
-        if(overwrite){
-          #覆盖
-          df[row_idx, col.trait_df] <- update_value
-        }else{
-          #不覆盖
-          if(is.na(df[row_idx, col.trait_df]))  df[row_idx, col.trait_df] <- update_value
+      } else {
+        if (overwrite) {
+          # 覆盖模式：向量化赋值
+          df[row_indices[valid_idx], col.trait_df] <- updf_i[valid_idx, col.trait_updf_i]
+        } else {
+          # 不覆盖模式：只更新NA值，向量化
+          target_rows <- row_indices[valid_idx]
+          na_mask <- is.na(df[target_rows, col.trait_df])
+          df[target_rows[na_mask], col.trait_df] <- updf_i[valid_idx, col.trait_updf_i][na_mask]
         }
-
       }
     }
   }

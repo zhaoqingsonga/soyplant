@@ -53,15 +53,9 @@ get_population <- function(my_combi,start_num=1) {
   re_v$memo<-my_pop$memo
   re_v$former_fieldid<-my_pop$fieldid
   re_v$former_stageid<-my_pop$stageid
-  field<-subset(field,grepl("combination", table, ignore.case = TRUE))
-  #如果生成表中没有field中所包含的字段则补全
-  # 补齐缺失的字段
-  for (col in as.character(field$name)) {
-    if (!col %in% names(re_v)) {
-      re_v[[col]] <- NA
-    }
-  }
-  return(re_v[as.character(field$name)])
+
+  # 对齐到field模式
+  align_to_field_schema(re_v, table_pattern = "combination")
 }
 
 # my_pop <- get_population(my_combi)

@@ -71,7 +71,7 @@ to_base62 <- function(num) {
 #' }
 #'
 #' @export
-generate_id <- function(start_num = 1, end_num=10, char = "g", digit_length = 5, include_datetime = TRUE) {
+generate_id <- function(start_num = 1, end_num = 10, char = "g", digit_length = 5, include_datetime = TRUE) {
   # 如果需要，生成日期时间字符串
   current_time <- ""
   if (include_datetime) {
@@ -84,28 +84,19 @@ generate_id <- function(start_num = 1, end_num=10, char = "g", digit_length = 5,
                            to_base62(as.numeric(format(Sys.time(), "%S"))))
   }
 
-  # 生成ID序列
-  ids <- vector(mode = "character", length = (end_num - start_num + 1))
-  for (i in seq_len(end_num - start_num + 1)) {
-    num_part <- sprintf(paste0("%0", digit_length, "d"), start_num + (i - 1))
-    ids[i] <- paste0(char, current_time, num_part)
-  }
+  # 生成ID序列：完全向量化
+  nums <- seq.int(start_num, end_num)
+  fmt <- paste0("%0", digit_length, "d")
+  ids <- paste0(char, current_time, sprintf(fmt, nums))
 
   return(ids)
 }
 
-generate_stageid <- function(start_num=1, end_num, char="24GC", digit_length=4) {
-  # Generate a series of IDs, each consisting of specified parameters
-  ids <- c()  # Store the generated IDs
-  # Iterate through the range of numbers to generate IDs
-  for (num in start_num:end_num) {
-    # Convert the number to a string with the specified number of digits
-    num_str <- sprintf(paste0("%0", digit_length, "d"), num)
-    # Construct the ID and add it to the vector
-    ids <- c(ids, paste0(char, num_str))
-  }
-
-  return(ids)
+generate_stageid <- function(start_num = 1, end_num, char = "24GC", digit_length = 4) {
+  # 向量化版本：直接生成所有ID
+  nums <- start_num:end_num
+  fmt <- paste0("%0", digit_length, "d")
+  paste0(char, sprintf(fmt, nums))
 }
 
 

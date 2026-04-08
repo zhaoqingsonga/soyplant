@@ -38,12 +38,16 @@ soy_traits<-data.frame(
   class_standard=0
 )
 
-#write.table(read.xlsx("temp_traits_qr.xlsx"),"data/qr_trait.txt",row.names=FALSE)
-#write.table(read.xlsx("temp_traits.xlsx"),"data/soy_traits.txt",row.names=FALSE)
-#write.table(soy_traits,"data/soy_traits.txt",row.names=FALSE)
-write.table(bay,"data/baiaoyun_traits.txt",row.names=FALSE)
-write.table(read.xlsx("inst/extdata/temp_field.xlsx"),"data/field.txt",row.names=FALSE)
-write.table(read.xlsx("inst/extdata/temp_soy_mapa.xlsx"),"data/mapa.txt",row.names=FALSE)
+# Only write data files if they don't exist (use lazy-loaded data in production)
+if (!file.exists("data/baiaoyun_traits.txt")) {
+  write.table(bay, "data/baiaoyun_traits.txt", row.names = FALSE)
+}
+if (!file.exists("data/field.txt")) {
+  write.table(read.xlsx("inst/extdata/temp_field.xlsx"), "data/field.txt", row.names = FALSE)
+}
+if (!file.exists("data/mapa.txt")) {
+  write.table(read.xlsx("inst/extdata/temp_soy_mapa.xlsx"), "data/mapa.txt", row.names = FALSE)
+}
 
 
 
@@ -57,7 +61,9 @@ new_data <- data %>%
 # 使用mutate函数将name_code和level_code字段用-连接，并更新level_code字段的值
 new_data <- new_data %>%
   mutate(level_code = paste(name_code, level_code, sep = "-"))
-write.table(new_data,"data/qr_trait.txt",row.names=FALSE)
+if (!file.exists("data/qr_trait.txt")) {
+  write.table(new_data, "data/qr_trait.txt", row.names = FALSE)
+}
 
 
 

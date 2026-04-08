@@ -38,23 +38,7 @@ addrpckfixed <- function(my_primary,
                   each = interval,
                   length.out = nrow(mym))
     df_list <- split(mym, patten)
-
-    # 定义追加函数
-    add_row <-
-      function(df, myck = ck) {
-        for (iname in myck) {
-          mdf <- df
-          mdf <- mdf[1, ]
-          mdf[1, ] <- NA
-          mdf$id = NA
-          mdf$stageid = NA
-          mdf$name = iname#
-          df <- rbind(df, mdf)
-        }
-        return(df)
-      }
-
-    df_list <- lapply(df_list, add_row)
+    df_list <- insert_ck_rows(df_list, ck)
     df_list <- do.call(rbind, df_list)
 
   } else{
@@ -116,7 +100,7 @@ addrpck <- function(my_primary,
                     s_prefix = "GC",
                     rp = 3,
                     digits = 3,
-                    startN
+                    startN = 1
                     )
 
 {
@@ -128,24 +112,7 @@ addrpck <- function(my_primary,
                   each = interval,
                   length.out = nrow(mym))
     df_list <- split(mym, patten)
-
-    # 定义追加函数
-    add_row <-
-      function(df, myck = ck) {
-        for (iname in myck) {
-          mdf <- df
-          mdf <- mdf[1, ]
-          mdf[1, ] <- NA
-
-          mdf$id = NA
-          mdf$stageid = NA
-          mdf$name = iname
-          df <- rbind(df, mdf)
-        }
-        return(df)
-      }
-
-    df_list <- lapply(df_list, add_row)
+    df_list <- insert_ck_rows(df_list, ck)
     df_list <- do.call(rbind, df_list)
 
   } else{
@@ -200,22 +167,22 @@ addrpck <- function(my_primary,
 
 
 addplace <- function(my_primary, place = c("石家庄", "德州")) {
-  mat <- my_primary
-  myd <- data.frame()
-  for (iname in place) {
-    mat$place = iname
-    myd <- rbind(myd, mat)
-  }
+  # 向量化版本：使用lapply + do.call(rbind)
+  myd <- do.call(rbind, lapply(place, function(iname) {
+    mat <- my_primary
+    mat$place <- iname
+    mat
+  }))
   return(myd)
 }
 
 addtreatment <- function(my_primary, treatment = c("高密", "低密")) {
-  mat <- my_primary
-  myd <- data.frame()
-  for (iname in treatment) {
-    mat$treatment = iname
-    myd <- rbind(myd, mat)
-  }
+  # 向量化版本：使用lapply + do.call(rbind)
+  myd <- do.call(rbind, lapply(treatment, function(iname) {
+    mat <- my_primary
+    mat$treatment <- iname
+    mat
+  }))
   return(myd)
 }
 
@@ -230,29 +197,24 @@ addfieldid <- function(my_primary) {
 
 ##
 ##考虑了不同地点是否重新编写FID
-addplace_addfieldid_addrows<-function(my_primary, place = c("石家庄", "德州"),restartfid=FALSE,rows=6){
-  if(restartfid){
-    #不同地点重新编号
-    mat <- my_primary
-    df <- data.frame()
-    for (iname in place) {
+addplace_addfieldid_addrows <- function(my_primary, place = c("石家庄", "德州"), restartfid = FALSE, rows = 6) {
+  if (restartfid) {
+    # 不同地点重新编号：使用lapply收集，最后合并
+    df <- do.call(rbind, lapply(place, function(iname) {
+      mat <- my_primary
       mat$place <- iname
-      mat$fieldid<- generate_id(start_num = 1,end_num  = nrow(mat),char = "f")
-      #不同地点分别加行号
-      mat$rows<-rows
-      mat$line_number<-rows_to_linenumber(mat$rows)
-      df <- rbind(df, mat)
-      #停留1.1秒
+      mat$fieldid <- generate_id(start_num = 1, end_num = nrow(mat), char = "f")
+      mat$rows <- rows
+      mat$line_number <- rows_to_linenumber(mat$rows)
       Sys.sleep(1.1)
-    }
-
-  }else{
-    #不同地点不重新编号
-    df<-addplace(my_primary, place)
-    df<-addfieldid(df)
-    #统一加
-    df$rows<-rows
-    df$line_number<-rows_to_linenumber(df$rows)
+      mat
+    }))
+  } else {
+    # 不同地点不重新编号
+    df <- addplace(my_primary, place)
+    df <- addfieldid(df)
+    df$rows <- rows
+    df$line_number <- rows_to_linenumber(df$rows)
   }
 
   return(df)
@@ -341,9 +303,6 @@ planting <- function(
       mutate(stageid = NA)
   }
 
-  # 提取字段名匹配 planting 表格（假定 field 为外部已有数据）
-  field <- subset(field, grepl("planting", table, ignore.case = TRUE))
-
   # 插入对照并添加处理和地点
   result <- if (ckfixed) {
     my_primary |>
@@ -357,10 +316,8 @@ planting <- function(
       addplace_addfieldid_addrows(place, restartfid, rows)
   }
 
-  # 确保最终列顺序和字段一致
-  result <- ensure_and_reorder_columns(result, as.character(field$name))
-
-  return(result)
+  # 对齐到field模式
+  align_to_field_schema(result, table_pattern = "planting")
 }
 
 
@@ -384,50 +341,3 @@ planting <- function(
 #' @param ckfixed 逻辑值，对照是否固定，是固定则按等材料数插入
 #' @return 返回插入对照和重复的数据框，给材料进行了编号，对照随机
 
-# #set.seed(100)#随机固定
-# planting <- function(my_primary,
-#                      ck = c("冀豆12", "冀豆17"),
-#                      interval = 3,
-#                      s_prefix = "GC",
-#                      rp = 2,
-#                      treatment= c(""),
-#                      place = c("石家庄", "德州"),
-#                      ckfixed = TRUE,
-#                      digits = 3,
-#                      rows=6,
-#                      restartfid=FALSE
-#                      ) {
-#   library(dplyr)
-#   field<-subset(field,grepl("planting", table, ignore.case = TRUE))
-#
-#
-#   #ck固定
-#   if (ckfixed) {
-#     re_v<-my_primary %>%
-#       addrpckfixed(ck, interval, s_prefix, rp, digits) %>%
-#       addtreatment(treatment) %>%
-#       addplace_addfieldid_addrows(place,restartfid,rows)
-#       # addplace(place) %>%
-#       # addfieldid()
-#   } else{
-#     re_v<-my_primary %>%
-#       addrpck(ck, interval, s_prefix, rp, digits) %>%
-#       addtreatment(treatment) %>%
-#       addplace_addfieldid_addrows(place,restartfid,rows)
-#       # addplace(place) %>%
-#       # addfieldid()
-#   }
-#   # re_v$rows<-rows
-#   # re_v$line_number<-rows_to_linenumber(re_v$rows)
-#   #确保必须的列都存在
-#   re_v<-ensure_and_reorder_columns(re_v,as.character(field$name))
-#   return(re_v)
-# }
-#
-
-# # 材料在石家庄种3个重复，在德州种2个重复
-# library(dplyr)
-# set.seed(100)#随机固定
-# my_primary%>%planting(ck="JD12",interval=3,rp=3,place=c("石家庄","新乡"),ckfixed = TRUE)
-# my_primary%>%planting(ck="JD12",interval=2,rp=2,place="德州",ckfixed=FALSE)
-#

@@ -24,23 +24,9 @@ advance_breeding_stage <- function(candidates, start_num = 1,
   candidates$source <- candidates$name
   candidates$former_fieldid <- candidates$fieldid
   candidates$former_stageid <- candidates$stageid
-  # 处理名称，小于9代时处理，大于9代时不再追加
-  candidates$name <- ifelse(
-    !is.na(candidates$f) & candidates$f < 9,
-    # 用mapply逐元素处理替换逻辑
-    mapply(
-      function(name_str, f_val) {
-        if (grepl("(:\\d+)$", name_str, perl = TRUE)) {
-          sub("(:\\d+)$", paste0(":", f_val + 1), name_str, perl = TRUE)
-        } else {
-          paste(name_str, ":", f_val + 1, sep = "")
-        }
-      },
-      name_str = candidates$name,  # 逐个传入name
-      f_val = candidates$f         # 逐个传入对应的f值
-    ),
-    candidates$name  # 不满足条件时保持原样
-  )
+
+  # 处理名称，小于9代时追加世代号
+  candidates$name <- increment_generation_name(candidates$name, candidates$f)
 
   # 更新字段
   candidates$stage <- selection_key
@@ -52,15 +38,9 @@ advance_breeding_stage <- function(candidates, start_num = 1,
 
   # 移除行名
   rownames(candidates) <- NULL
-  field<-subset(field,grepl("combination", table, ignore.case = TRUE))
-  #如果生成表中没有field中所包含的字段则补全
-  # 补齐缺失的字段
-  for (col in as.character(field$name)) {
-    if (!col %in% names(candidates)) {
-      candidates[[col]] <- NA
-    }
-  }
-  return(candidates[as.character(field$name)])
+
+  # 对齐到field模式
+  align_to_field_schema(candidates, table_pattern = "combination")
 }
 
 

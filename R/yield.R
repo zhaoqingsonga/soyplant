@@ -81,27 +81,43 @@ calculate_MuChan_increase_with_multiple_methods <- function(df) {
   increase_percent_near_controls <- numeric(nrow(df))
   increase_percent_all_controls <- numeric(nrow(df))
 
-  # 遍历数据框
-  for (i in 1:nrow(df)) {
-    if (df$is_ck[i] == 1) {
-      # 如果当前是对照组，跳过计算增产
-      increase_percent_near_controls[i] <- NA
-      increase_percent_all_controls[i] <- NA
+  # 向量化版本：计算所有行到所有对照的距离
+  n <- nrow(df)
+  is_ck <- df$is_ck == 1
+  is_not_ck <- !is_ck
+
+  if (any(is_not_ck) && length(control_indices) > 0) {
+    # 计算所有非对照行到所有对照的距离矩阵
+    non_ck_idx <- which(is_not_ck)
+    dist_mat <- outer(non_ck_idx, control_indices, function(x, y) abs(x - y))
+
+    # 找到每个非对照行最近的2个对照（处理只有1个对照的情况）
+    n_controls <- length(control_indices)
+    closest_2_idx <- apply(dist_mat, 1, function(d) order(d)[1:min(2, n_controls)])
+    if (n_controls == 1) {
+      # 只有一个对照时，复制同一对照
+      closest_controls <- rep(control_indices, length(non_ck_idx))
     } else {
-      # 获取当前产量
-      MuChan <- df$MuChan[i]
-
-      # 计算与最近两个对照点的增产百分比
-      distances <- abs(control_indices - i)
-      sorted_indices <- order(distances)
-      closest_controls <- control_indices[sorted_indices[1:2]]
-      control_avg_near_controls <- mean(df$MuChan[closest_controls])
-      increase_percent_near_controls[i] <- (MuChan - control_avg_near_controls) / control_avg_near_controls * 100
-
-      # 计算与所有非空对照的增产百分比
-      increase_percent_all_controls[i] <- (MuChan - control_avg) / control_avg * 100
+      closest_controls <- control_indices[closest_2_idx]
     }
+
+    # 计算最近两个对照的平均产量
+    muchan_vals <- df$MuChan[non_ck_idx]
+    control_mu <- df$MuChan[closest_controls]
+    if (n_controls == 1) {
+      control_avg_near <- control_mu
+    } else {
+      control_avg_near <- rowMeans(matrix(control_mu, nrow = length(non_ck_idx)))
+    }
+
+    # 计算增产百分比
+    increase_percent_near_controls[non_ck_idx] <- (muchan_vals - control_avg_near) / control_avg_near * 100
+    increase_percent_all_controls[non_ck_idx] <- (muchan_vals - control_avg) / control_avg * 100
   }
+
+  # 对照组设为NA
+  increase_percent_near_controls[is_ck] <- NA
+  increase_percent_all_controls[is_ck] <- NA
 
   # 将增产百分比加入数据框
   df$JiaoLinJinDuiZhaoZengChan <- as.numeric(increase_percent_near_controls)

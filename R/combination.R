@@ -148,17 +148,9 @@ get_combination <- function(mydata,
   re_v$source<-NA
   re_v$former_fieldid<-NA
   re_v$former_stageid<-NA
-  field<-subset(field,grepl("combination", table, ignore.case = TRUE))
-  #如果生成表中没有field中所包含的字段则补全
-  # 补齐缺失的字段
-  for (col in as.character(field$name)) {
-    if (!col %in% names(re_v)) {
-      re_v[[col]] <- NA
-    }
-  }
 
-  re_v<-re_v[as.character(field$name)]
-  return(re_v)
+  # 对齐到field模式
+  align_to_field_schema(re_v, table_pattern = "combination")
 }
 ##
 
