@@ -150,7 +150,7 @@ get_combination <- function(mydata,
   re_v$former_stageid<-NA
 
   # 对齐到field模式
-  align_to_field_schema(re_v, table_pattern = "combination")
+  re_v <- align_to_field_schema(re_v, table_pattern = "combination")
 }
 ##
 
@@ -167,6 +167,14 @@ get_combination <- function(mydata,
 
 #组合矩阵
 combination_matrix <- function(my_combi) {
+  # 过滤掉 ma 或 pa 为 NA/空白的无效行
+  valid <- !is.na(my_combi$ma) & !is.na(my_combi$pa) &
+    nchar(as.character(my_combi$ma)) > 0 & nchar(as.character(my_combi$pa)) > 0
+  if (sum(valid) == 0) {
+    return(NULL)
+  }
+  my_combi <- my_combi[valid, , drop = FALSE]
+
   ma <- my_combi$ma[!duplicated(my_combi$ma)]
   pa <- my_combi$pa[!duplicated(my_combi$pa)]
   mapamatri <-
@@ -178,12 +186,17 @@ combination_matrix <- function(my_combi) {
   colnames(mapamatri) <- pa
 
   for (i in 1:nrow(my_combi)) {
-    if (is.na(mapamatri[my_combi$ma[i], my_combi$pa[i]])) {
-      mapamatri[my_combi$ma[i], my_combi$pa[i]] <- my_combi$name[i]
-    } else{
-      mapamatri[my_combi$ma[i], my_combi$pa[i]] <-
-        paste(mapamatri[my_combi$ma[i], my_combi$pa[i]], my_combi$name[i], sep =
-                "/")
+    row_name <- my_combi$ma[i]
+    col_name <- my_combi$pa[i]
+    # 容错：确保行列名都存在于矩阵中
+    if (!is.na(row_name) && !is.na(col_name) &&
+        row_name %in% rownames(mapamatri) && col_name %in% colnames(mapamatri)) {
+      if (is.na(mapamatri[row_name, col_name])) {
+        mapamatri[row_name, col_name] <- my_combi$name[i]
+      } else{
+        mapamatri[row_name, col_name] <-
+          paste(mapamatri[row_name, col_name], my_combi$name[i], sep = "/")
+      }
     }
   }
   mapamatri <- as.data.frame(mapamatri)

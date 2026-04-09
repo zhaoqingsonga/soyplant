@@ -51,7 +51,7 @@ get_plant <- function(my_pop, start_num = 1) {
   new_df$stageid <- NA
 
   # 对齐到field模式
-  align_to_field_schema(new_df, table_pattern = "combination")
+  new_df <- align_to_field_schema(new_df, table_pattern = "combination")
 }
 
 # 示例用法：

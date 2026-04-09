@@ -51,7 +51,9 @@ align_to_field_schema <- function(df, field_df = field, table_pattern) {
       df[[col]] <- NA
     }
   }
-  df[as.character(field_subset$name)]
+  # 保留 field schema 列 + 额外列
+  extra_cols <- setdiff(names(df), field_subset$name)
+  df[c(as.character(field_subset$name), extra_cols)]
 }
 
 
@@ -64,20 +66,46 @@ align_to_field_schema <- function(df, field_df = field, table_pattern) {
 #'
 #' @return 在每个分组末尾追加对照行的数据框
 insert_ck_rows <- function(df, ck) {
-  lapply(df, function(sub_df) {
-    n_insert <- length(ck)
-    if (n_insert == 0) return(sub_df)
+  # df 必须是 list（由 split() 产生），传入单个 data.frame 时自动包装
+  if (is.data.frame(df)) df <- list(df)
+  if (!is.list(df)) return(df)
 
-    # 预先构建所有要插入的行，最后一次性合并
-    insert_rows <- lapply(ck, function(iname) {
-      mdf <- sub_df[1, , drop = FALSE]
-      mdf[] <- NA
-      if ("id" %in% names(mdf)) mdf$id <- NA
-      if ("stageid" %in% names(mdf)) mdf$stageid <- NA
-      if ("name" %in% names(mdf)) mdf$name <- iname
-      mdf
-    })
+  n_insert <- length(ck)
+  # 零对照或全空字符串对照：直接返回
+  if (n_insert == 0 || all(nchar(ck) == 0)) return(df)
 
-    do.call(rbind, c(list(sub_df), insert_rows))
+  lapply(seq_along(df), function(i) {
+    sub_df <- df[[i]]
+    ng <- nrow(sub_df)
+    if (ng == 0) return(sub_df)
+
+    # 按组轮换选择对应的 ck（循环）
+    this_ck <- ck[(i %% n_insert) + 1]
+    nres <- ng + 1
+
+    # 预分配：先复制 sub_df 行，再将最后1行覆盖为 NA
+    res <- sub_df[seq_len(nres), , drop = FALSE]
+    res[seq_len(ng), ] <- sub_df
+    res[nres, ] <- NA
+
+    # is_ck：对照行设为1
+    is_ck_vec <- integer(nres)
+    is_ck_vec[seq_len(ng)] <- 0L
+    is_ck_vec[nres] <- 1L
+    res$is_ck <- is_ck_vec
+
+    # name 列：该组的 ck 品种名
+    if ("name" %in% names(res)) {
+      name_vec <- character(nres)
+      name_vec[seq_len(ng)] <- as.character(sub_df$name)
+      name_vec[nres] <- this_ck
+      res$name <- name_vec
+    }
+
+    rownames(res) <- NULL
+
+    # 统一列顺序，is_ck 放最后
+    all_cols <- c(setdiff(names(res), "is_ck"), "is_ck")
+    res[, all_cols, drop = FALSE]
   })
 }

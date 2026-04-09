@@ -55,7 +55,7 @@ get_population <- function(my_combi,start_num=1) {
   re_v$former_stageid<-my_pop$stageid
 
   # 对齐到field模式
-  align_to_field_schema(re_v, table_pattern = "combination")
+  re_v <- align_to_field_schema(re_v, table_pattern = "combination")
 }
 
 # my_pop <- get_population(my_combi)

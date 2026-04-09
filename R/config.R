@@ -67,49 +67,69 @@ if (!file.exists("data/qr_trait.txt")) {
 
 
 
-#' 下载模型数据并导出为 Excel 文件
+#' 生成模型各阶段数据
 #'
 #' 此函数依次从 mapa 中提取组合、群体、单株、系、初选、高代和种植数据，
-#' 并将这些数据写入 Excel 文件。支持自定义文件名与保存目录。
+#' 返回包含所有阶段数据的列表。
 #'
-#' @param file_name 字符串，导出的 Excel 文件名。默认为 `"soyplant_model.xlsx"`。
-#' @param dir_path 字符串，保存文件的目标目录。默认为当前工作目录。
-#'
-#' @return 无返回值。函数执行后将在指定目录生成 Excel 文件。
-#' @importFrom openxlsx createWorkbook addWorksheet writeDataTable saveWorkbook
+#' @return 列表，包含 mapa, combination, population, plant, line, primary, advanced, planting 八个数据框。
 #' @export
-download_model <- function(file_name = "soyplant_model.xlsx",
-                           dir_path = getwd()) {
-  # 提取数据各阶段信息
+generate_model_data <- function() {
   combi <- get_combination(mapa)
   pop <- get_population(combi)
   plant <- get_plant(pop)
   line <- get_line(plant)
-  pri <- get_primary(line)
-  adv <- get_advanced(pri)
+  pri <- get_primary(line, next_stage = "初级产比", target_stage = "高级产比")
+  adv <- get_primary(pri, next_stage = "高级产比", target_stage = "多点鉴定")
   planting <- planting(adv, ck = "冀豆12")
 
-  # 创建 Excel 工作簿并添加工作表
-  wb <- openxlsx::createWorkbook()
-  sheets <- c(
-    "mapa", "combination", "population", "plant",
-    "line", "primary", "advanced", "planting"
+  list(
+    mapa = mapa,
+    combination = combi,
+    population = pop,
+    plant = plant,
+    line = line,
+    primary = pri,
+    advanced = adv,
+    planting = planting
   )
+}
+
+#' 将模型数据写入 Excel 文件
+#'
+#' @param data 列表，由 `generate_model_data()` 生成的数据列表。
+#' @param file_name 字符串，导出的 Excel 文件名。默认为 `"soyplant_model.xlsx"`。
+#' @param dir_path 字符串，保存文件的目标目录。默认为当前工作目录。
+#'
+#' @return 字符型，文件保存路径。
+#' @importFrom openxlsx createWorkbook addWorksheet writeDataTable saveWorkbook
+#' @export
+write_model_excel <- function(data,
+                               file_name = "soyplant_model.xlsx",
+                               dir_path = getwd()) {
+  wb <- openxlsx::createWorkbook()
+  sheets <- c("mapa", "combination", "population", "plant",
+              "line", "primary", "advanced", "planting")
   lapply(sheets, openxlsx::addWorksheet, wb = wb)
 
-  # 写入数据表
-  openxlsx::writeDataTable(wb, "mapa", mapa)
-  openxlsx::writeDataTable(wb, "combination", combi)
-  openxlsx::writeDataTable(wb, "population", pop)
-  openxlsx::writeDataTable(wb, "plant", plant)
-  openxlsx::writeDataTable(wb, "line", line)
-  openxlsx::writeDataTable(wb, "primary", pri)
-  openxlsx::writeDataTable(wb, "advanced", adv)
-  openxlsx::writeDataTable(wb, "planting", planting)
+  Map(function(sheet, df) openxlsx::writeDataTable(wb, sheet, df),
+      sheets, data[sheets])
 
-  # 构造完整路径并保存
   output_path <- file.path(dir_path, file_name)
   openxlsx::saveWorkbook(wb, output_path, overwrite = TRUE)
+  output_path
+}
+
+#' 下载模型数据并导出为 Excel 文件（兼容旧接口）
+#'
+#' @inheritParams generate_model_data
+#' @inheritParams write_model_excel
+#' @return 无返回值。函数执行后将在指定目录生成 Excel 文件。
+#' @export
+download_model <- function(file_name = "soyplant_model.xlsx",
+                           dir_path = getwd()) {
+  data <- generate_model_data()
+  write_model_excel(data, file_name, dir_path)
 }
 
 #

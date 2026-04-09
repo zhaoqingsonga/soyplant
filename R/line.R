@@ -28,5 +28,5 @@ get_line <- function(my_plant, start_num = 1) {
   rownames(my_line) <- NULL
 
   # 对齐到field模式
-  align_to_field_schema(my_line, table_pattern = "combination")
+  my_line <- align_to_field_schema(my_line, table_pattern = "combination")
 }

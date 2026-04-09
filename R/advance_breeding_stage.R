@@ -40,7 +40,7 @@ advance_breeding_stage <- function(candidates, start_num = 1,
   rownames(candidates) <- NULL
 
   # 对齐到field模式
-  align_to_field_schema(candidates, table_pattern = "combination")
+  candidates <- align_to_field_schema(candidates, table_pattern = "combination")
 }
 
 
