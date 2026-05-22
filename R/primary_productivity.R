@@ -14,7 +14,8 @@ get_primary <- function(my_line,
                         next_stage = "初级产比",
                         target_stage = "高级产比") {
   # 选择 next_stage 为指定值的行
-  my_primary <- subset(my_line, next_stage == next_stage)
+  # 注意：不能用 subset()，因为 next_stage 参数名会与列名冲突
+  my_primary <- my_line[my_line$next_stage == next_stage, ]
 
   if (nrow(my_primary) == 0) {
     stop("get_primary: 没有找到 next_stage='", next_stage, "' 的行，请检查输入数据")

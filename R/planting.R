@@ -45,6 +45,18 @@ addrpckfixed <- function(my_primary,
     df_list <- do.call(rbind, df_list)
     # insert_ck_rows 已正确设置 is_ck：原始行=0，对照行=1，无需再次赋值
 
+    # 首行对照模式：末尾用对照闭合
+    if (first_as_ck && nrow(df_list) > 0) {
+      last_is_ck <- isTRUE(df_list$is_ck[nrow(df_list)] == 1)
+      if (!last_is_ck) {
+        ck_row <- df_list[1, , drop = FALSE]
+        ck_row[] <- NA
+        ck_row$is_ck <- 1L
+        if ("name" %in% names(ck_row)) ck_row$name <- ck[1]
+        df_list <- rbind(df_list, ck_row)
+      }
+    }
+
   } else{
     df_list <- mym
     df_list$is_ck <- 0L
@@ -120,6 +132,18 @@ addrpck <- function(my_primary,
     df_list <- insert_ck_rows(df_list, ck, first_as_ck)
     df_list <- do.call(rbind, df_list)
     # insert_ck_rows 已正确设置 is_ck：原始行=0，对照行=1，无需再次赋值
+
+    # 首行对照模式：末尾用对照闭合
+    if (first_as_ck && nrow(df_list) > 0) {
+      last_is_ck <- isTRUE(df_list$is_ck[nrow(df_list)] == 1)
+      if (!last_is_ck) {
+        ck_row <- df_list[1, , drop = FALSE]
+        ck_row[] <- NA
+        ck_row$is_ck <- 1L
+        if ("name" %in% names(ck_row)) ck_row$name <- ck[1]
+        df_list <- rbind(df_list, ck_row)
+      }
+    }
 
   } else{
     df_list <- mym

@@ -83,12 +83,12 @@ insert_ck_rows <- function(df, ck, first_as_ck = FALSE) {
     this_ck <- ck[(i %% n_insert) + 1]
 
     if (first_as_ck) {
-      # 首记录作为对照：先插入对照行，再放入材料
+      # 首记录作为对照：对照行放首行(NA)，材料行从第2行开始
       nres <- ng + 1
-      # 预分配
+      # 预分配：先复制 sub_df 行，再扩展一行
       res <- sub_df[seq_len(nres), , drop = FALSE]
-      res[seq_len(ng), ] <- sub_df
-      res[nres, ] <- NA
+      res[2:nres, ] <- sub_df
+      res[1, ] <- NA
 
       # is_ck：首行对照=1，其余材料=0
       is_ck_vec <- integer(nres)
