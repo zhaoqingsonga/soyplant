@@ -6,6 +6,7 @@
 \usage{
 savewb(
   origin = NULL,
+  material = NULL,
   planting = NULL,
   myview = NULL,
   combi_matrix = NULL,

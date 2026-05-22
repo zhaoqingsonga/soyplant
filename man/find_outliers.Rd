@@ -4,10 +4,10 @@
 \alias{find_outliers}
 \title{判断数据中的异常值}
 \usage{
-find_outliers(muchan, method = "IQR")
+find_outliers(MuChan, method = "IQR")
 }
 \arguments{
-\item{muchan}{向量，包含需要检测异常值的产量数据，可以包含NA值。}
+\item{MuChan}{向量，包含需要检测异常值的产量数据，可以包含NA值。}
 
 \item{method}{字符串，指定使用的方法。默认为 "IQR"，可以选择 "SD" 来使用标准差法。IQR方法基于四分位数间距，SD方法基于均值和标准差。}
 }
@@ -23,12 +23,12 @@ find_outliers(muchan, method = "IQR")
 }
 \examples{
 # 示例：使用IQR方法检测异常值
-muchan_data <- c(10, 20, 15, 25, 30, 100, 5)
-outliers_iqr <- find_outliers(muchan_data, method = "IQR")
+MuChan_data <- c(10, 20, 15, 25, 30, 100, 5)
+outliers_iqr <- find_outliers(MuChan_data, method = "IQR")
 print(outliers_iqr)
 
 # 示例：使用标准差方法检测异常值
-outliers_sd <- find_outliers(muchan_data, method = "SD")
+outliers_sd <- find_outliers(MuChan_data, method = "SD")
 print(outliers_sd)
 
 }

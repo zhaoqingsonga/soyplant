@@ -62,8 +62,7 @@ addrpckfixed <- function(my_primary,
     df_list$is_ck <- 0L
   }
 
-  #第一重复加stageid,rp,code
-  df_list$code <- 1:nrow(df_list)#编号
+  #第一重复加stageid,rp,code（code直接取stageid的数字部分）
   df_list$stageid <-
     generate_stageid(
       start_num = startN,
@@ -71,6 +70,7 @@ addrpckfixed <- function(my_primary,
       char= s_prefix,
       digit_length = digits
     )
+  df_list$code <- as.numeric(substring(df_list$stageid, nchar(s_prefix) + 1))
   df_list$rp <- 1#重复
   re_v = df_list
   rownames(re_v) <- NULL
@@ -81,14 +81,10 @@ addrpckfixed <- function(my_primary,
     for (rpi in 1:(rp - 1)) {
       df_list2 <- df_list
       rownames(df_list2) <- NULL
-      #非对照code
-      excode <- df_list$code[!df_list$name %in% ck]
-      #对照code
-      ckcode <- df_list$code[df_list$name %in% ck]
-      #删非对照，这个地方想了好长时间
-      df_list2[excode, ] <- NA
-      #随机，这个地方想了好长时间
-      df_list2[excode, ] <- df_list[sample(excode), ]
+      # 非对照行整行替换（含code），保证code===stageid数字部分
+      non_ck_rows <- which(!df_list$name %in% ck)
+      df_list2[non_ck_rows, ] <- NA
+      df_list2[non_ck_rows, ] <- df_list[sample(non_ck_rows), ]
       df_list2$rp <- rpi + 1
       multirp[[rpi]] <- df_list2
     }
@@ -150,8 +146,7 @@ addrpck <- function(my_primary,
     df_list$is_ck <- 0L
   }
 
-  #第一重复加stageid,rp,code
-  df_list$code <- 1:nrow(df_list)#编号
+  #第一重复加stageid,rp,code（code直接取stageid的数字部分）
   df_list$stageid <-
     generate_stageid(
       start_num  = startN,
@@ -159,6 +154,7 @@ addrpck <- function(my_primary,
       char = s_prefix,
       digit_length = digits
     )
+  df_list$code <- as.numeric(substring(df_list$stageid, nchar(s_prefix) + 1))
   df_list$rp <- 1#重复
   re_v = df_list
   rownames(re_v) <- NULL
@@ -170,12 +166,14 @@ addrpck <- function(my_primary,
     for (rpi in 1:(rp - 1)) {
       df_list2 <- df_list
 
-      #随机一次
-      df_list2 <- df_list[sample(df_list$code), ]
-      #直到全不一样，并排两个重复不相同
+      # 随机所有列（含code），保证code===stageid数字部分
+      shuffled_idx <- sample(nrow(df_list))
+      df_list2[] <- df_list[shuffled_idx, ]
+      #直到全不一样，相邻两个重复相同位置不能有相同材料
       outj <- 0
-      while (any(curr$code == df_list2$code)) {
-        df_list2 <- df_list[sample(df_list$code), ]
+      while (any(df_list2$name == curr$name)) {
+        shuffled_idx <- sample(nrow(df_list))
+        df_list2[] <- df_list[shuffled_idx, ]
         outj <- outj + 1
         if (outj >= 20) {
           break

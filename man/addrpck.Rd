@@ -11,7 +11,8 @@ addrpck(
   s_prefix = "GC",
   rp = 3,
   digits = 3,
-  startN
+  startN = 1,
+  first_as_ck = FALSE
 )
 }
 \arguments{

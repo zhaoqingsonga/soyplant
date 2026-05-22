@@ -16,7 +16,8 @@ planting(
   digits = 3,
   rows = 6,
   restartfid = FALSE,
-  startN = 1
+  startN = 1,
+  first_as_ck = FALSE
 )
 }
 \arguments{

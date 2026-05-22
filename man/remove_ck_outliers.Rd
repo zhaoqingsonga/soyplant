@@ -7,7 +7,7 @@
 remove_ck_outliers(df)
 }
 \arguments{
-\item{df}{数据框，包含两列：`muchan`（产量数据）和`is_ck`（是否为对照组，0为非对照，1为对照）。}
+\item{df}{数据框，包含两列：`MuChan`（产量数据）和`is_ck`（是否为对照组，0为非对照，1为对照）。}
 }
 \value{
 返回处理后的数据框，其中对照组的异常值被替换为NA。
@@ -18,7 +18,7 @@ remove_ck_outliers(df)
 }
 \examples{
 df <- data.frame(
-  muchan = c(10, 12, 15, 8, 25, 30, 35, 100, 20, 18),
+  MuChan = c(10, 12, 15, 8, 25, 30, 35, 100, 20, 18),
   is_ck = c(0, 1, 1, 0, 1, 1, 0, 1, 0, 1)
 )
 df_cleaned <- remove_ck_outliers(df)

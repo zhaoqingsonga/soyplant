@@ -2,20 +2,29 @@
 % Please edit documentation in R/primary_productivity.R
 \name{get_primary}
 \alias{get_primary}
-\title{处理株行进入初级产比的数据
+\title{处理株行晋级到下一阶段的数据
 从杂交组合中或群体中升级群体,数据框中必有字段：name,next_stage,f}
 \usage{
-get_primary(my_line, start_num = 1)
+get_primary(
+  my_line,
+  start_num = 1,
+  next_stage = "初级产比",
+  target_stage = "高级产比"
+)
 }
 \arguments{
 \item{my_line}{数据框，包含株行信息}
 
 \item{start_num}{整数，起始编号，默认为1}
+
+\item{next_stage}{字符，下一阶段名称，同时也是输入行的过滤条件，默认为"初级产比"}
+
+\item{target_stage}{字符，晋级后的阶段名称，默认为"高级产比"}
 }
 \value{
-数据框，处理后的初级产比数据
+数据框，处理后的晋级数据
 }
 \description{
-处理株行进入初级产比的数据
+处理株行晋级到下一阶段的数据
 从杂交组合中或群体中升级群体,数据框中必有字段：name,next_stage,f
 }
