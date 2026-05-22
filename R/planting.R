@@ -29,7 +29,8 @@ addrpckfixed <- function(my_primary,
                          s_prefix = "GC",
                          rp = 2,
                          digits = 3,
-                         startN=1)
+                         startN = 1,
+                         first_as_ck = FALSE)
 
 {
   mym <- my_primary#[c("id", "stageid", "name")]
@@ -40,7 +41,7 @@ addrpckfixed <- function(my_primary,
                   each = interval,
                   length.out = nrow(mym))
     df_list <- split(mym, patten)
-    df_list <- insert_ck_rows(df_list, ck)
+    df_list <- insert_ck_rows(df_list, ck, first_as_ck)
     df_list <- do.call(rbind, df_list)
     # insert_ck_rows 已正确设置 is_ck：原始行=0，对照行=1，无需再次赋值
 
@@ -104,8 +105,8 @@ addrpck <- function(my_primary,
                     s_prefix = "GC",
                     rp = 3,
                     digits = 3,
-                    startN = 1
-                    )
+                    startN = 1,
+                    first_as_ck = FALSE)
 
 {
   mym <- my_primary#[c("id", "stageid", "name")]
@@ -116,7 +117,7 @@ addrpck <- function(my_primary,
                   each = interval,
                   length.out = nrow(mym))
     df_list <- split(mym, patten)
-    df_list <- insert_ck_rows(df_list, ck)
+    df_list <- insert_ck_rows(df_list, ck, first_as_ck)
     df_list <- do.call(rbind, df_list)
     # insert_ck_rows 已正确设置 is_ck：原始行=0，对照行=1，无需再次赋值
 
@@ -303,7 +304,8 @@ planting <- function(
     digits = 3,
     rows = 6,
     restartfid = FALSE,
-    startN=1
+    startN = 1,
+    first_as_ck = FALSE
 ) {
   library(dplyr)
 
@@ -319,12 +321,12 @@ planting <- function(
   # 插入对照并添加处理和地点
   result <- if (ckfixed) {
     my_primary |>
-      addrpckfixed(ck, interval, s_prefix, rp, digits,startN) |>
+      addrpckfixed(ck, interval, s_prefix, rp, digits, startN, first_as_ck) |>
       addtreatment(treatment) |>
       addplace_addfieldid_addrows(place, restartfid, rows)
   } else {
     my_primary |>
-      addrpck(ck, interval, s_prefix, rp, digits,startN) |>
+      addrpck(ck, interval, s_prefix, rp, digits, startN, first_as_ck) |>
       addtreatment(treatment) |>
       addplace_addfieldid_addrows(place, restartfid, rows)
   }
