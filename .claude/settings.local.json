@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Rscript -e \"remove.packages\\('soyplant'\\)\")",
+      "Bash(Rscript -e \"devtools::install\\('.', force = TRUE\\)\")"
+    ]
+  }
+}

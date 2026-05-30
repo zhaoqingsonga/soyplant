@@ -60,6 +60,7 @@ align_to_field_schema <- function(df, field_df = field, table_pattern) {
 #' 向数据框中插入对照行
 #'
 #' 在每个分组中插入对照行（NA行），用于田间试验设计。
+#' 当有多个对照品种时，全部对照作为连续块插入，而不是轮流插入。
 #'
 #' @param df 数据框，分组后的数据
 #' @param ck 字符向量，对照名称
@@ -79,49 +80,48 @@ insert_ck_rows <- function(df, ck, first_as_ck = FALSE) {
     ng <- nrow(sub_df)
     if (ng == 0) return(sub_df)
 
-    # 按组轮换选择对应的 ck（循环）
-    this_ck <- ck[(i %% n_insert) + 1]
-
     if (first_as_ck) {
-      # 首记录作为对照：对照行放首行(NA)，材料行从第2行开始
-      nres <- ng + 1
-      # 预分配：先复制 sub_df 行，再扩展一行
+      # 首记录作为对照：全部对照放首行，材料行紧随其后
+      nres <- ng + n_insert
       res <- sub_df[seq_len(nres), , drop = FALSE]
-      res[2:nres, ] <- sub_df
-      res[1, ] <- NA
+      # 对照行占据前 n_insert 行
+      res[seq_len(n_insert), ] <- NA
+      # 材料行从 n_insert + 1 开始
+      res[(n_insert + 1):nres, ] <- sub_df
 
-      # is_ck：首行对照=1，其余材料=0
+      # is_ck：前 n_insert 行对照=1，其余材料=0
       is_ck_vec <- integer(nres)
-      is_ck_vec[1] <- 1L
-      is_ck_vec[2:nres] <- 0L
+      is_ck_vec[seq_len(n_insert)] <- 1L
+      is_ck_vec[(n_insert + 1):nres] <- 0L
       res$is_ck <- is_ck_vec
 
-      # name 列：该组的 ck 品种名在首行
+      # name 列：全部对照品种
       if ("name" %in% names(res)) {
         name_vec <- character(nres)
-        name_vec[1] <- this_ck
-        name_vec[2:nres] <- as.character(sub_df$name)
+        name_vec[seq_len(n_insert)] <- ck
+        name_vec[(n_insert + 1):nres] <- as.character(sub_df$name)
         res$name <- name_vec
       }
     } else {
-      # 末记录作为对照（原有行为）
-      nres <- ng + 1
-      # 预分配：先复制 sub_df 行，再将最后1行覆盖为 NA
+      # 末记录作为对照：全部对照放在材料之后（连续块）
+      nres <- ng + n_insert
       res <- sub_df[seq_len(nres), , drop = FALSE]
+      # 材料行在前
       res[seq_len(ng), ] <- sub_df
-      res[nres, ] <- NA
+      # 对照行在后
+      res[(ng + 1):nres, ] <- NA
 
-      # is_ck：对照行设为1
+      # is_ck：对照行=1
       is_ck_vec <- integer(nres)
       is_ck_vec[seq_len(ng)] <- 0L
-      is_ck_vec[nres] <- 1L
+      is_ck_vec[(ng + 1):nres] <- 1L
       res$is_ck <- is_ck_vec
 
-      # name 列：该组的 ck 品种名
+      # name 列：全部对照品种
       if ("name" %in% names(res)) {
         name_vec <- character(nres)
         name_vec[seq_len(ng)] <- as.character(sub_df$name)
-        name_vec[nres] <- this_ck
+        name_vec[(ng + 1):nres] <- ck
         res$name <- name_vec
       }
     }
