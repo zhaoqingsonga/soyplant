@@ -62,6 +62,11 @@ addrpckfixed <- function(my_primary,
     df_list$is_ck <- 0L
   }
 
+  # 确保 is_ck 列存在（当 ck 全为空字符串时 insert_ck_rows 不会生成此列）
+  if (!"is_ck" %in% names(df_list)) {
+    df_list$is_ck <- 0L
+  }
+
   #第一重复加stageid,rp,code（code直接取stageid的数字部分）
   df_list$stageid <-
     generate_stageid(
@@ -143,6 +148,11 @@ addrpck <- function(my_primary,
 
   } else{
     df_list <- mym
+    df_list$is_ck <- 0L
+  }
+
+  # 确保 is_ck 列存在（当 ck 全为空字符串时 insert_ck_rows 不会生成此列）
+  if (!"is_ck" %in% names(df_list)) {
     df_list$is_ck <- 0L
   }
 
@@ -302,18 +312,32 @@ ensure_and_reorder_columns <- function(df, required_columns) {
 #' 计划种植试验
 #'
 #' @param my_primary 数据框，数据框中需包含 id, stageid, name 三列（若无 stageid 列将自动补全）。
-#' @param ck 向量，对照名称。
+#' @param ck 对照名称。可以是：(1) 字符向量 → 所有地点统一对照；
+#'   (2) 命名列表 `list("地点A" = "对照1", "地点B" = c("对照1","对照2"))` → 每地独立对照。
 #' @param interval 插入对照的材料间隔数。
-#' @param s_prefix 材料前缀。
+#' @param s_prefix stageid 前缀。可以是：(1) 字符串 → 统一前缀；
+#'   (2) 命名列表 `list("地点A" = "SJZ", "地点B" = "DZ")` → 每地独立前缀。
 #' @param rp 种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同。
-#' @param place 向量，试验地点。
+#' @param place 向量，试验地点（ck 为命名列表时自动使用 names(ck) 作为地点）。
 #' @param treatment 向量，处理因素。
 #' @param ckfixed 逻辑值，是否固定插入对照。
 #' @param digits 整数，材料编号的位数。
 #' @param rows 每块的行数。
 #' @param restartfid 逻辑值，是否重新启动字段编号。
+#' @param startN 整数，起始编号。
+#' @param first_as_ck 逻辑值，首记录是否作为对照。
 #'
 #' @return 数据框，包含编号、对照插入、处理、地点等信息。
+#'
+#' @examples
+#' \dontrun{
+#' # 统一对照（原有方式）
+#' planting(my_primary, ck = c("冀豆12", "冀豆17"))
+#'
+#' # 每地独立对照
+#' planting(my_primary,
+#'   ck = list("石家庄" = "冀豆12", "德州" = c("冀豆17", "鲁豆1号")))
+#' }
 planting <- function(
     my_primary,
     ck = c("冀豆12", "冀豆17"),
@@ -340,17 +364,77 @@ planting <- function(
   # rows 防御性转换为数值型
   rows <- as.numeric(rows)
 
-  # 插入对照并添加处理和地点
-  result <- if (ckfixed) {
-    my_primary |>
-      addrpckfixed(ck, interval, s_prefix, rp, digits, startN, first_as_ck) |>
-      addtreatment(treatment) |>
-      addplace_addfieldid_addrows(place, restartfid, rows)
+  # ── 判断是否 per-place ck（named list） ──
+  per_place_ck <- is.list(ck) && !is.null(names(ck)) && length(ck) > 0
+  # per-place s_prefix（命名列表）：不同地点可用不同前缀
+  per_place_sp <- is.list(s_prefix) && !is.null(names(s_prefix))
+
+  if (per_place_ck) {
+    # ========================================================
+    # 不同地点不同对照：每个地点独立插入对照 → 合并
+    # ========================================================
+    ck_places  <- names(ck)
+    cur_startN <- startN
+    result_parts <- list()
+
+    # 固定随机种子：各地 2nd+ 重复的材料排列完全一致（便于备种）
+    per_place_seed <- sample.int(1e9, 1)
+
+    for (p in ck_places) {
+      set.seed(per_place_seed)
+      ck_p <- ck[[p]]
+      sp   <- if (per_place_sp) s_prefix[[p]] else s_prefix
+      part <- my_primary
+
+      if (ckfixed) {
+        part <- addrpckfixed(part, ck_p, interval, sp, rp, digits, cur_startN, first_as_ck)
+      } else {
+        part <- addrpck(part, ck_p, interval, sp, rp, digits, cur_startN, first_as_ck)
+      }
+
+      part <- addtreatment(part, treatment)
+      part$place <- p
+      # 推进起始编号：每地消耗的唯一 stageid 数 = 总行数 / 重复数
+      cur_startN <- cur_startN + nrow(part) / rp
+      result_parts[[p]] <- part
+    }
+
+    result <- do.call(rbind, result_parts)
+    rownames(result) <- NULL
+
+    # fieldid：按 restartfid 策略生成
+    if (restartfid) {
+      # 每地独立 fieldid（需延迟防碰撞，和 addplace_addfieldid_addrows 一致）
+      place_groups <- split(result, factor(result$place, levels = unique(result$place)))
+      result <- do.call(rbind, lapply(seq_along(place_groups), function(i) {
+        grp <- place_groups[[i]]
+        grp$fieldid <- generate_id(start_num = 1, end_num = nrow(grp), char = "f")
+        rownames(grp) <- NULL
+        if (i < length(place_groups)) Sys.sleep(1.1)
+        grp
+      }))
+    } else {
+      result <- addfieldid(result)
+    }
+
+    result$rows        <- rows
+    result$line_number <- rows_to_linenumber(result$rows)
+
   } else {
-    my_primary |>
-      addrpck(ck, interval, s_prefix, rp, digits, startN, first_as_ck) |>
-      addtreatment(treatment) |>
-      addplace_addfieldid_addrows(place, restartfid, rows)
+    # ========================================================
+    # 统一对照（原有逻辑，不变）
+    # ========================================================
+    result <- if (ckfixed) {
+      my_primary |>
+        addrpckfixed(ck, interval, s_prefix, rp, digits, startN, first_as_ck) |>
+        addtreatment(treatment) |>
+        addplace_addfieldid_addrows(place, restartfid, rows)
+    } else {
+      my_primary |>
+        addrpck(ck, interval, s_prefix, rp, digits, startN, first_as_ck) |>
+        addtreatment(treatment) |>
+        addplace_addfieldid_addrows(place, restartfid, rows)
+    }
   }
 
   # 对齐到field模式
