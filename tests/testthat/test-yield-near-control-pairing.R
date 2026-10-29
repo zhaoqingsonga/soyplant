@@ -16,7 +16,12 @@
 library(testthat)
 
 # ── 参考实现：朴素 for 循环，每个材料自己算自己的两个最近对照 ──────────
+#
+# ⚠️ 必须与被测函数保持同一前置处理：被测函数会先调用 remove_ck_outliers()
+#    把离群的对照产量置为 NA（IQR 规则），再参与计算。
+#    参考实现若不剔除离群对照，两者会在「恰好发生离群剔除」的轮次不一致。
 reference_near_increase <- function(df) {
+  df <- remove_ck_outliers(df)
   control_indices <- which(df$is_ck == 1 & !is.na(df$MuChan))
   control_avg <- mean(df$MuChan[control_indices])
   out <- rep(NA_real_, nrow(df))
