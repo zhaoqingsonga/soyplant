@@ -107,7 +107,20 @@ calculate_MuChan_increase_with_multiple_methods <- function(df) {
     if (n_controls == 1) {
       control_avg_near <- control_mu
     } else {
-      control_avg_near <- rowMeans(matrix(control_mu, nrow = length(non_ck_idx)))
+      # ⚠️ 配对必须按【列】而不是按【行】。
+      #
+      # closest_2_idx 是 2 x N 矩阵（行1=最近对照，行2=第二近对照），
+      # 对它做索引会【按列主序降维成向量】，于是 control_mu 的顺序是
+      #   [材料1的对照1, 材料1的对照2, 材料2的对照1, 材料2的对照2, ...]
+      # 即「每两个相邻元素属于同一份材料」。
+      #
+      # matrix(control_mu, nrow = length(non_ck_idx)) 会把这个向量按列主序
+      # 再切一次，第 k 行变成 (材料k的对照1, 材料k的对照2) 之外的交错组合，
+      # 导致 A 材料的对照1 与 B 材料的对照2 被配成一对 —— 结果系统性错位。
+      #
+      # 正确做法：按 nrow = 2 重建为 2 x N 矩阵，此时【每一列】才是一份材料
+      # 自己的两个对照，用 colMeans 逐列求均值即可。
+      control_avg_near <- colMeans(matrix(control_mu, nrow = 2))
     }
 
     # 计算增产百分比
