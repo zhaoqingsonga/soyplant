@@ -23,17 +23,19 @@ planting(
 \arguments{
 \item{my_primary}{数据框，数据框中需包含 id, stageid, name 三列（若无 stageid 列将自动补全）。}
 
-\item{ck}{向量，对照名称。}
+\item{ck}{对照名称。可以是：(1) 字符向量 → 所有地点统一对照；
+(2) 命名列表 `list("地点A" = "对照1", "地点B" = c("对照1","对照2"))` → 每地独立对照。}
 
 \item{interval}{插入对照的材料间隔数。}
 
-\item{s_prefix}{材料前缀。}
+\item{s_prefix}{stageid 前缀。可以是：(1) 字符串 → 统一前缀；
+(2) 命名列表 `list("地点A" = "SJZ", "地点B" = "DZ")` → 每地独立前缀。}
 
 \item{rp}{种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同。}
 
 \item{treatment}{向量，处理因素。}
 
-\item{place}{向量，试验地点。}
+\item{place}{向量，试验地点（ck 为命名列表时自动使用 names(ck) 作为地点）。}
 
 \item{ckfixed}{逻辑值，是否固定插入对照。}
 
@@ -42,10 +44,24 @@ planting(
 \item{rows}{每块的行数。}
 
 \item{restartfid}{逻辑值，是否重新启动字段编号。}
+
+\item{startN}{整数，起始编号。}
+
+\item{first_as_ck}{逻辑值，首记录是否作为对照。}
 }
 \value{
 数据框，包含编号、对照插入、处理、地点等信息。
 }
 \description{
 计划种植试验
+}
+\examples{
+\dontrun{
+# 统一对照（原有方式）
+planting(my_primary, ck = c("冀豆12", "冀豆17"))
+
+# 每地独立对照
+planting(my_primary,
+  ck = list("石家庄" = "冀豆12", "德州" = c("冀豆17", "鲁豆1号")))
+}
 }

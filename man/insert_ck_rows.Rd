@@ -16,4 +16,5 @@ insert_ck_rows(df, ck, first_as_ck = FALSE)
 }
 \description{
 在每个分组中插入对照行（NA行），用于田间试验设计。
+当有多个对照品种时，全部对照作为连续块插入，而不是轮流插入。
 }

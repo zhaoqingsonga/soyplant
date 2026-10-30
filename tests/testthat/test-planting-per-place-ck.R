@@ -4,16 +4,11 @@
 library(testthat)
 library(dplyr)
 
-# 加载包函数和全局数据
-devtools::load_all("E:/FangCloudSync/R_WD360/Project/soyplant", quiet = TRUE)
-field <- read.table(
-  "E:/FangCloudSync/R_WD360/Project/soyplant/data/field.txt",
-  header = TRUE, stringsAsFactors = FALSE
-)
-stage_prefix <- read.table(
-  "E:/FangCloudSync/R_WD360/Project/soyplant/data/stage_prefix.txt",
-  header = TRUE, stringsAsFactors = FALSE
-)
+# 包函数由外层加载：
+#   - R CMD check → tests/testthat.R 里的 library(soyplant) + test_check()
+#   - devtools::test() / testthat::test_local() → pkgload 自动 load_all()
+# 这里不再自己调 load_all()，避免硬编码本机路径、也避免重复加载。
+# 全局 field 由 tests/testthat/setup.R 统一准备（详见该文件注释）。
 
 # ── Helper: 构造最小测试数据 ──────────────────────────────────────────────
 make_test_primary <- function(n = 9) {
