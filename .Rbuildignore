@@ -1,4 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.claude$
 ^tests/_.*\.R$
 ^tests/testthat/_output\.txt$
+^使用说明\.md$
+^bug_is_ck_all_ones\.md$
+^soyplant$

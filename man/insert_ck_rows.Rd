@@ -10,6 +10,8 @@ insert_ck_rows(df, ck, first_as_ck = FALSE)
 \item{df}{数据框，分组后的数据}
 
 \item{ck}{字符向量，对照名称}
+
+\item{first_as_ck}{逻辑值，首记录是否作为对照插入}
 }
 \value{
 在每个分组末尾追加对照行的数据框

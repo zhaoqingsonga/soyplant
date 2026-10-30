@@ -7,11 +7,14 @@
 rows_to_linenumber(number = 1:10)
 }
 \arguments{
-\item{hangshu}{向量，各材料种植的行数}
+\item{number}{向量，各材料种植的行数}
 }
 \value{
 返回各材料的行号
 }
 \description{
 行数转行号
+}
+\examples{
+rows_to_linenumber(1:10)
 }

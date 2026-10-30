@@ -172,9 +172,18 @@ convert_string_numbers_to_numeric <- function(input_df) {
 #' }
 #'
 #' @examples
-#' df <- data.frame("唯一编号" = c(1, 2, 3), "性状1" = c(NA, 2, 3))
-#' updf <- data.frame("fieldid" = c(1, 2), "性状1" = c(10, NA))
-#' updated_df <- update_baiaoyun(df, updf)
+#' # 百奥云导出文件的格式：第 1 行是标题行，第 2 行是表头行
+#' # （表头行里要有"唯一编号"以及各性状的【中文名】）
+#' df <- data.frame(
+#'   id_col    = c("百奥云导出数据", "唯一编号", 1, 2, 3),
+#'   trait_col = c("百奥云导出数据", "亩产(kg)",  NA, 2, 3),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # 待更新数据：fieldid 对应主数据的唯一编号，列名为性状的【英文缩写】
+#' updf <- data.frame(fieldid = c(1, 2), MuChan = c(10, NA))
+#'
+#' updated_df <- update_baiaoyun_old(df, updf)
 #' print(updated_df)
 update_baiaoyun_old <- function(df, updf,overwrite=TRUE) {
   # 找到主数据集中唯一编号的列
@@ -240,6 +249,42 @@ update_baiaoyun_old <- function(df, updf,overwrite=TRUE) {
 
 
 
+#' 更新百奥云下载文件中的性状信息
+#'
+#' 依据更新数据集 `updf` 更新百奥云下载文件 `df` 中的性状值。
+#' 与 [update_baiaoyun_old()] 相比，本函数只保留本次需要更新的性状列，
+#' 并把逐行循环改为向量化的位置查找，在数据量较大时更快。
+#'
+#' @param df 百奥云下载文件。**第 2 行是表头行**（含"唯一编号"与各性状的英文缩写），
+#'   性状列从第 8 列开始；第 3 行起为数据行。
+#' @param updf 待更新的数据框。第 1 列须为 `fieldid`（对应 df 的唯一编号），
+#'   其余列为性状的英文缩写，值为该性状的更新值。
+#' @param overwrite 逻辑值，是否覆盖 df 中已有的值，TRUE 覆盖，FALSE 只填补空缺。
+#'
+#' @return 更新后的数据框 `df`；若 `updf` 中的性状在 df 中不存在，
+#'   则返回一条提示新增字段的字符向量。
+#'
+#' @examples
+#' # 百奥云下载文件：第 1 行标题行，第 2 行表头行，性状列从第 8 列开始
+#' df <- data.frame(
+#'   c1 = c("百奥云导出数据", "唯一编号", 1, 2),
+#'   c2 = c("百奥云导出数据", "说明",    "x", "y"),
+#'   c3 = c("百奥云导出数据", "说明",    "x", "y"),
+#'   c4 = c("百奥云导出数据", "说明",    "x", "y"),
+#'   c5 = c("百奥云导出数据", "说明",    "x", "y"),
+#'   c6 = c("百奥云导出数据", "说明",    "x", "y"),
+#'   c7 = c("百奥云导出数据", "说明",    "x", "y"),
+#'   c8 = c("百奥云导出数据", "MuChan",  NA,  2),
+#'   c9 = c("百奥云导出数据", "其他",    "x", "y"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' updf <- data.frame(fieldid = c(1, 2), MuChan = c(10, NA))
+#'
+#' updated_df <- update_baiaoyun(df, updf)
+#' print(updated_df)
+#'
+#' @export
 update_baiaoyun <- function(df, updf, overwrite = TRUE) {
   # 确保更新的字段在df中全有
   updfnames <- names(updf)[-1]

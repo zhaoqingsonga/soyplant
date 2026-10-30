@@ -1,5 +1,14 @@
 
 #获得电脑nodename
+#' 获取本机计算机名
+#'
+#' 返回 `Sys.info()` 中的 nodename，即当前机器的主机名。
+#'
+#' @return 字符向量，长度为 1 的计算机名
+#' @examples
+#' get_computer_nodename()
+#'
+#' @export
 get_computer_nodename <- function() {
   return(Sys.info()["nodename"])
 }
@@ -34,6 +43,19 @@ get_next_id <- function(my_primary) {
 
 
 # 将一个数字转换为62进制表示
+#' 将十进制数字转换为 62 进制字符串
+#'
+#' 依次使用数字、小写字母、大写字母共 62 个字符作为数位，
+#' 把十进制数字转换为等值的 62 进制表示（不足两位的补前导 0）。
+#'
+#' @param num 数值，要转换的数字
+#'
+#' @return 字符向量，62 进制表示
+#' @examples
+#' to_base62(10)
+#' to_base62(62)
+#'
+#' @export
 to_base62 <- function(num) {
   base62_chars <- c(0:9, letters, LETTERS)
   result <- ""
@@ -92,6 +114,20 @@ generate_id <- function(start_num = 1, end_num = 10, char = "g", digit_length = 
   return(ids)
 }
 
+#' 生成连续的阶段标识符（stageid）
+#'
+#' 按固定前缀与编号位数，批量生成 `前缀 + 补零编号` 形式的字符串。
+#'
+#' @param start_num 整数，起始编号
+#' @param end_num 整数，结束编号
+#' @param char 字符型，stageid 前缀
+#' @param digit_length 整数，编号的位数，不足时补前导 0
+#'
+#' @return 字符向量，生成的 stageid 序列
+#' @examples
+#' generate_stageid(1, 3)
+#'
+#' @export
 generate_stageid <- function(start_num = 1, end_num, char = "24GC", digit_length = 4) {
   # 向量化版本：直接生成所有ID
   nums <- start_num:end_num

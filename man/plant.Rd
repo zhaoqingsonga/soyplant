@@ -10,6 +10,8 @@ plant(fi = designPlot(), seed = makelist(), returnfi = TRUE)
 \item{fi}{矩阵，设计图矩阵，默认使用 \code{designPlot()} 生成。}
 
 \item{seed}{矩阵，种子列表，默认使用 \code{makelist()} 生成。}
+
+\item{returnfi}{逻辑值，是否返回处理后的设计图矩阵，默认为 TRUE。}
 }
 \value{
 矩阵，返回处理后的设计图矩阵。

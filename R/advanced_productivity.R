@@ -1,12 +1,21 @@
-#' @deprecated 请使用 `get_primary()` 替代，此函数仅作向后兼容保留。
+#' 筛选高级产比阶段的多点鉴定材料
 #'
-#' 处理晋级到高级产比阶段的数据
+#' 从初级产比记录中筛选出 next_stage 为「高级产比」的记录，晋级到「多点鉴定」阶段，
+#' 并为每条记录生成新的 id 与 fieldid。
 #'
 #' @param my_primary 数据框，包含晋级前阶段信息
 #' @param start_num 整数，起始编号，默认为1
 #' @param next_stage 字符，下一阶段名称，同时也是输入行的过滤条件，默认为"高级产比"
 #' @param target_stage 字符，晋级后的阶段名称，默认为"多点鉴定"
+#'
 #' @return 数据框，处理后的晋级数据
+#'
+#' @examples
+#' \dontrun{
+#' get_advanced(my_primary)
+#' }
+#'
+#' @note 已弃用：请使用 `get_primary()` 替代，此函数仅作向后兼容保留。
 #' @export
 get_advanced <- function(my_primary,
                          start_num = 1,

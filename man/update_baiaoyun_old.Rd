@@ -28,8 +28,17 @@ update_baiaoyun_old(df, updf, overwrite = TRUE)
 }
 }
 \examples{
-df <- data.frame("唯一编号" = c(1, 2, 3), "性状1" = c(NA, 2, 3))
-updf <- data.frame("fieldid" = c(1, 2), "性状1" = c(10, NA))
-updated_df <- update_baiaoyun(df, updf)
+# 百奥云导出文件的格式：第 1 行是标题行，第 2 行是表头行
+# （表头行里要有"唯一编号"以及各性状的【中文名】）
+df <- data.frame(
+  id_col    = c("百奥云导出数据", "唯一编号", 1, 2, 3),
+  trait_col = c("百奥云导出数据", "亩产(kg)",  NA, 2, 3),
+  stringsAsFactors = FALSE
+)
+
+# 待更新数据：fieldid 对应主数据的唯一编号，列名为性状的【英文缩写】
+updf <- data.frame(fieldid = c(1, 2), MuChan = c(10, NA))
+
+updated_df <- update_baiaoyun_old(df, updf)
 print(updated_df)
 }

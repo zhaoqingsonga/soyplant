@@ -16,6 +16,8 @@ addrpck(
 )
 }
 \arguments{
+\item{my_primary}{数据框，数据框中要包含id,stageid,name三列}
+
 \item{ck}{向量，对照名称}
 
 \item{interval}{插入对照的材料间隔数}
@@ -24,7 +26,11 @@ addrpck(
 
 \item{rp}{种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同}
 
-\item{my_plant}{数据框，数据框中要包含id,stageid,name三列}
+\item{digits}{整数，材料编号的位数}
+
+\item{startN}{整数，起始编号}
+
+\item{first_as_ck}{逻辑值，首记录是否作为对照插入}
 }
 \value{
 返回插入对照和重复的数据框，给材料进行了编号，对照随机

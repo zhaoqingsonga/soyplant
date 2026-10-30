@@ -8,6 +8,8 @@ get_population(my_combi, start_num = 1)
 }
 \arguments{
 \item{my_combi}{数据框，从get_combination或get_population函数所产生数据}
+
+\item{start_num}{整数，id 的起始编号}
 }
 \value{
 下阶段值为“群体”记录升级为群体

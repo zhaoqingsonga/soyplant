@@ -58,6 +58,19 @@ getWaterLaneProtected <- function(blockStructure = "w/23/2r/w/2p/w/2p/23/w") {
   return(mylist)
 }
 
+#' 调整小区间的过道（bridges）设置
+#'
+#' 对小区布局中的过道宽度进行调整。
+#'
+#' @param bridges 数值向量，各处过道的宽度
+#'
+#' @return 调整后的过道设置
+#' @examples
+#' \dontrun{
+#' modibridges(c(9, rep(6, 10), rep(3, 9)))
+#' }
+#'
+#' @export
 modibridges <- function(bridges) {
   # 将逗号分隔的字符串拆分成向量
   ori <- unlist(strsplit(bridges, ","))
@@ -132,7 +145,6 @@ plantByGroup <- function(ma=matrix(rep(0, 200), nrow = 10, ncol = 20), subg = 3,
 #'
 #' 设计一个包含水沟、道路和保护行的地块布局。
 #'
-#' @param blocks 地块数。默认值为20。
 #' @param y 每块地的列数。默认值为10。
 #' @param bridges 每块地的宽度。默认值为c(9, rep(6, 10), rep(3, 9))。
 #' @param distanceBetweenBlocks1 宽条间距，默认值为1。
@@ -276,12 +288,36 @@ designPlot <- function(y = 10,
 }
 
 
+#' 判断向量中是否存在非 NA 的元素
+#'
+#' 返回向量中是否存在至少一个非 NA 值。
+#'
+#' @param vec1 向量，要检查的数据
+#'
+#' @return 逻辑值，TRUE 表示存在非 NA 元素
+#' @examples
+#' myAny(c(NA, 1))
+#'
+#' @export
 myAny<-function(vec1){
   return(any(vec1%in%c(-77,-111,-9,-8,-6)))
 }
 
 #select special columns
 
+#' 选取小区设计中被选中的列
+#'
+#' 在小区设计结果中选出被选中的列。
+#'
+#' @param fi 数据框，小区设计结果
+#'
+#' @return 数据框，被选中的列
+#' @examples
+#' \dontrun{
+#' selectedCol()
+#' }
+#'
+#' @export
 selectedCol<-function(fi=designPlot()){
   nc<-ncol(fi)
   result<-which(apply(fi,2,myAny)==TRUE)
@@ -483,9 +519,6 @@ create_repeated_dataframe <- function(name, rp) {
 
 
 
-# 加载必要的包
-library(dplyr)
-
 #' 根据最后一列的值复制数据框的行
 #'
 #' 该函数根据数据框最后一列中的整数值来复制行。每一行将根据对应的
@@ -557,6 +590,7 @@ getSub <- function(j = 1, vec = c(0, 0, -77, 0, 0, 0), subg = 3) {
 #'
 #' @param fi 矩阵，设计图矩阵，默认使用 \code{designPlot()} 生成。
 #' @param seed 矩阵，种子列表，默认使用 \code{makelist()} 生成。
+#' @param returnfi 逻辑值，是否返回处理后的设计图矩阵，默认为 TRUE。
 #' @return 矩阵，返回处理后的设计图矩阵。
 #' @examples
 #' plant()

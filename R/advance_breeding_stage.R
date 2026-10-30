@@ -5,6 +5,8 @@
 #'
 #' @param candidates 数据框,要准备晋级的数据
 #' @param start_num 整数，起始编号，默认为1
+#' @param selection_key 字符型，被选中的候选记录在 next_stage 列中的取值
+#' @param target_key 字符型，晋级后记录在 next_stage 列中的取值
 #' @return 数据框，处理后的高级产比数据
 #' @export
 advance_breeding_stage <- function(candidates, start_num = 1,

@@ -295,6 +295,19 @@ summarize_data <- function(updated, soy_traits) {
 
 
 #将特定的字段转化为数据类型，columns_to_convert，为向量，为数据类型字段名。
+#' 将指定列转换为数值型
+#'
+#' 把数据框中指定的若干列转为数值型；无法转换为数值的取值置为 NA。
+#'
+#' @param input_df 数据框，要处理的数据
+#' @param columns_to_convert 字符向量，要转换的列名
+#'
+#' @return 数据框，指定列已转为数值型
+#' @examples
+#' df <- data.frame(a = c("1", "2"), b = c("x", "y"))
+#' convert_specified_columns_to_numeric(df, "a")
+#'
+#' @export
 convert_specified_columns_to_numeric <- function(input_df, columns_to_convert) {
   # 遍历数据框的列名
   for (col_name in columns_to_convert) {

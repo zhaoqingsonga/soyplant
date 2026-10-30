@@ -20,10 +20,12 @@ add_fields_to_table(db_path, table_name, new_field_names)
 这个函数将指定的新字段添加到 SQLite 数据库中的指定表。如果字段已经存在，则记录这些字段为失败。所有新字段的类型被设置为 TEXT。
 }
 \examples{
+\dontrun{
 db_path <- "path/to/your/database.sqlite"
 table_name <- "your_table"
 new_field_names <- c("new_column1", "new_column2")
 result <- add_fields_to_table(db_path, table_name, new_field_names)
 print(result)
+}
 
 }

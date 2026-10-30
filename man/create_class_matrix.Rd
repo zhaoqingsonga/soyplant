@@ -2,7 +2,7 @@
 % Please edit documentation in R/deal_trait.R
 \name{create_class_matrix}
 \alias{create_class_matrix}
-\title{根据 fieldid 和 xingzhuang 组合生成 class 展示矩阵}
+\title{将数据框转换为特定的宽格式数据框}
 \usage{
 create_class_matrix(df)
 }
@@ -10,26 +10,12 @@ create_class_matrix(df)
 \item{df}{输入的数据框，该数据框需要包含 `fieldid`、`name_code` 和 `level_C` 这几个列，用于后续的数据处理和格式转换操作。}
 }
 \value{
-返回一个宽格式的数据框，以 fieldid 和 xingzhuang 为行列，显示 class 值。
-
 返回一个宽格式的数据框，行索引为 `fieldid`，列名为 `name_code`，对应的值为 `level_C` 的值，若某 `(fieldid, name_code)` 组合不存在对应的值，则用 `NA` 填充。
 }
 \description{
-这个函数接受一个数据框，并生成一个以 fieldid 和 xingzhuang 为行列的宽格式数据框，
-其中包含每个组合的 class 值。如果有重复的 (fieldid, xingzhuang) 组合，将保留最后一个记录。
+该函数接受一个数据框作为输入，对其进行一系列的数据处理操作，包括检查列的完整性、去除重复组合以及转换为宽格式，最终返回处理后的宽格式数据框。主要用于根据 `fieldid` 和 `name_code` 列将数据展开，便于后续分析和展示。
 }
 \examples{
-df <- data.frame(
-  non_fieldid = c("12_2_Excellent", "20_2_Brown", "20_99_Segregating", "36_1_Lanceolate", "36_2_Ovate", "36_4_Round"),
-  fieldid = c("f246oa2H01028", "f246oa2H01028", "f246oa2H01028", "f246oa2H01059", "f246oa2H01059", "f246oa2H01059"),
-  xingzhuang = c("huaqipingjia", "rongmaose", "rongmaose", "yexing", "yexing", "yexing"),
-  class = c("优", "棕", "分离", "披针", "卵圆", "圆"),
-  class_C = c("Excellent", "Brown", "Segregating", "Lanceolate", "Ovate", "Round"),
-  trait_code = c(12, 20, 20, 36, 36, 36),
-  class_code = c(2, 2, 99, 1, 2, 4),
-  number = c(19, 51, 52, 88, 89, 91)
-)
-create_class_matrix(df)
 # 创建一个示例数据框（实际应用中替换为真实数据框）
 df_example <- data.frame(
   fieldid = c(1, 1, 2, 2),

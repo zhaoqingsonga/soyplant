@@ -15,6 +15,10 @@ advance_breeding_stage(
 \item{candidates}{数据框,要准备晋级的数据}
 
 \item{start_num}{整数，起始编号，默认为1}
+
+\item{selection_key}{字符型，被选中的候选记录在 next_stage 列中的取值}
+
+\item{target_key}{字符型，晋级后记录在 next_stage 列中的取值}
 }
 \value{
 数据框，处理后的高级产比数据

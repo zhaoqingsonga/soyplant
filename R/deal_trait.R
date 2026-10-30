@@ -1,7 +1,17 @@
-# 加载必要的包
-library(dplyr)
-
 # 定义函数
+#' 按 id 列左连接合并多个数据框
+#'
+#' 把传入的多个数据框依次按 `id` 列左连接合并。
+#'
+#' @param ... 若干数据框，均需含 `id` 列
+#'
+#' @return 数据框，合并结果
+#' @examples
+#' a <- data.frame(id = 1:2, x = c("a", "b"))
+#' b <- data.frame(id = 1:2, y = c("c", "d"))
+#' merge_data_frames_by_row(a, b)
+#'
+#' @export
 merge_data_frames_by_row <- function(...) {
   # 获取所有传入的参数（数据框）
   data_frames <- list(...)
@@ -59,35 +69,22 @@ create_multiple_pairs_from_df <- function(df) {
   return(result)
 }
 
+#' 读取剪贴板中的表格数据
+#'
+#' 从系统剪贴板读取以制表符分隔的表格，读入为数据框。
+#'
+#' @return 数据框，剪贴板中的表格内容
+#' @examples
+#' \dontrun{
+#' get_clipboard()
+#' }
+#'
+#' @export
 get_clipboard<-function(){
   read.table("clipboard",header=TRUE)
 }
 
 
-# 加载必要的包
-library(dplyr)
-library(tidyr)
-
-#' 根据 fieldid 和 xingzhuang 组合生成 class 展示矩阵
-#'
-#' 这个函数接受一个数据框，并生成一个以 fieldid 和 xingzhuang 为行列的宽格式数据框，
-#' 其中包含每个组合的 class 值。如果有重复的 (fieldid, xingzhuang) 组合，将保留最后一个记录。
-#'
-#' @param df 一个数据框，必须包含以下列：fieldid, xingzhuang 和 class。
-#' @return 返回一个宽格式的数据框，以 fieldid 和 xingzhuang 为行列，显示 class 值。
-#' @examples
-#' df <- data.frame(
-#'   non_fieldid = c("12_2_Excellent", "20_2_Brown", "20_99_Segregating", "36_1_Lanceolate", "36_2_Ovate", "36_4_Round"),
-#'   fieldid = c("f246oa2H01028", "f246oa2H01028", "f246oa2H01028", "f246oa2H01059", "f246oa2H01059", "f246oa2H01059"),
-#'   xingzhuang = c("huaqipingjia", "rongmaose", "rongmaose", "yexing", "yexing", "yexing"),
-#'   class = c("优", "棕", "分离", "披针", "卵圆", "圆"),
-#'   class_C = c("Excellent", "Brown", "Segregating", "Lanceolate", "Ovate", "Round"),
-#'   trait_code = c(12, 20, 20, 36, 36, 36),
-#'   class_code = c(2, 2, 99, 1, 2, 4),
-#'   number = c(19, 51, 52, 88, 89, 91)
-#' )
-#' create_class_matrix(df)
-#' @export
 
 #
 # create_class_matrix <- function(df) {
@@ -139,8 +136,8 @@ library(tidyr)
 #' result <- create_class_matrix(df_example)
 #' print(result)
 #'
-#' @importFrom dplyr group_by slice_tail ungroup select pivot_wider
-#' @importFrom rlang setdiff
+#' @importFrom dplyr group_by slice_tail ungroup select
+#' @importFrom tidyr pivot_wider
 #' @export
 create_class_matrix <- function(df) {
   # 确保输入是数据框
@@ -186,7 +183,7 @@ create_class_matrix <- function(df) {
 #' @export
 read_and_process_planting_tables <- function(folder_path) {
   # 定义所需字段的顺序
-  required_columns <- as.character(field$name)
+  required_columns <- as.character(.get_field_table()$name)
 
   # 获取文件夹中所有 Excel 文件的文件路径
   file_list <- list.files(folder_path, pattern = "\\.xlsx$", full.names = TRUE)

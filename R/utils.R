@@ -1,3 +1,17 @@
+# ── 非标准求值（NSE）用到的列名 / 变量名 ────────────────────────────────
+# dplyr、tidyr 等包在 group_by() / select() / pivot_wider() 里以裸名引用列，
+# codetools 静态分析时看不到这些绑定，会报 "no visible binding for global
+# variable"。这里集中声明，避免 R CMD check 产生 NOTE。
+utils::globalVariables(c(
+  # dplyr / tidyr 的列名
+  "fieldid", "name_code", "level_C", "next_stage", "sele", "rp", "code",
+  "mapa", "field",
+  # 函数参数经由 ... 传递时无法静态识别
+  "origin", "ck", "interval", "s_prefix", "treatment", "place", "ckfixed",
+  "digits", "rows", "restartfid", "FIELDS", "filename", "overwrite",
+  "my_pop", "my_plant", "my_primary", "my_combi"
+))
+
 #' 增加名称中的世代数字
 #'
 #' 当名称末尾已有冒号分隔的世代号时，替换它；否则追加新的世代号。
@@ -35,16 +49,36 @@ increment_generation_name <- function(names, f_vals, max_gen = 9) {
 }
 
 
+#' 读取包内置的 field 字段定义表
+#'
+#' `field` 随包以 lazy-load 方式安装（`data/field.txt`），其所在环境
+#' **不在包命名空间的父链上**。因此包内代码直接写裸名 `field` 时，
+#' 只有在包被 attach（`library(soyplant)`）后、依靠搜索路径上的
+#' `package:soyplant` 才能解析到；若只用 `soyplant::func()` 调用
+#' （未 attach），会报 `object 'field' not found`。
+#'
+#' 本函数从包自身的 lazydata 环境中显式取出 `field`，
+#' 使得无论包是否被 attach 都能正确解析。
+#'
+#' @return field 字段定义表（数据框）
+#' @noRd
+.get_field_table <- function() {
+  ns <- asNamespace("soyplant")
+  lazydata <- getNamespaceInfo(ns, "lazydata")
+  get("field", envir = lazydata)
+}
+
+
 #' 对齐数据框字段到field模式
 #'
 #' 根据field表定义，补齐缺失的字段并按field顺序排列列。
 #'
 #' @param df 数据框，要对齐的数据
-#' @param field_df field数据框，默认使用全局field变量
+#' @param field_df field数据框，默认使用包内置的 field 表
 #' @param table_pattern 字符向量，匹配table列的正则表达式
 #'
 #' @return 按field顺序排列的数据框
-align_to_field_schema <- function(df, field_df = field, table_pattern) {
+align_to_field_schema <- function(df, field_df = .get_field_table(), table_pattern) {
   field_subset <- subset(field_df, grepl(table_pattern, table, ignore.case = TRUE))
   for (col in as.character(field_subset$name)) {
     if (!col %in% names(df)) {
@@ -64,6 +98,7 @@ align_to_field_schema <- function(df, field_df = field, table_pattern) {
 #'
 #' @param df 数据框，分组后的数据
 #' @param ck 字符向量，对照名称
+#' @param first_as_ck 逻辑值，首记录是否作为对照插入
 #'
 #' @return 在每个分组末尾追加对照行的数据框
 insert_ck_rows <- function(df, ck, first_as_ck = FALSE) {

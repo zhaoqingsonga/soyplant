@@ -5,64 +5,60 @@
  #   }
 #说明：不能利用python函数，关于reticulate,use_python,pyf,level_E等
 #关于拼音转写的部分注释掉
-library(dplyr)
-library(stringr)
 #library(reticulate)
-library(tidyr)
-library(openxlsx)
 #use_python("c:/ProgramData/Anaconda3")
 #use_python("C:/Users/zhaoq/anaconda3/python.exe")
 
 #py_config()
 #pyf<- py_run_file("inst/python/pyfunction.py")
-bay<-read.xlsx("inst/extdata/temp_traits_baiaoyun.xlsx",startRow = 2)
-level_C <- str_replace_all(bay$列表值LIST_VALUES,",","_")
-minmax <- paste(bay$最小值MIN_VALUE,bay$最大值MAX_VALUE,sep="_")
-minmax[minmax=="NA_NA"]<-NA
-level_C <-coalesce(level_C,minmax)
+.bay_internal<-openxlsx::read.xlsx("inst/extdata/temp_traits_baiaoyun.xlsx",startRow = 2)
+.level_C_internal <- str_replace_all(.bay_internal$列表值LIST_VALUES,",","_")
+.minmax_internal <- paste(.bay_internal$最小值MIN_VALUE,.bay_internal$最大值MAX_VALUE,sep="_")
+.minmax_internal[.minmax_internal=="NA_NA"]<-NA
+.level_C_internal <-coalesce(.level_C_internal,.minmax_internal)
 # level_E=pyf$chinese_to_pinyin(level_C)
 # level_E[level_E=="Na"]<-NA
 
 soy_traits<-data.frame(
-  ID=1:nrow(bay),
-  name_C = bay$性状名称TRAIT_NAME,
-  name_lib = bay$名称缩写ABBR_NAME,
-  level_C = level_C,
-  order = bay$排序ORDER,
+  ID=1:nrow(.bay_internal),
+  name_C = .bay_internal$性状名称TRAIT_NAME,
+  name_lib = .bay_internal$名称缩写ABBR_NAME,
+  level_C = .level_C_internal,
+  order = .bay_internal$排序ORDER,
   name_E=NA,
   #level_E=level_E,
   species="soybean",
-  field_type=recode(bay$性状类型TRAIT_TYPE, "1" = "N","2" = "D","3" = "C","4" = "any"),
-  name_code=bay$编码TRAIT_CODE,
-  name_baiaoyun=bay$性状名称TRAIT_NAME,
+  field_type=recode(.bay_internal$性状类型TRAIT_TYPE, "1" = "N","2" = "D","3" = "C","4" = "any"),
+  name_code=.bay_internal$编码TRAIT_CODE,
+  name_baiaoyun=.bay_internal$性状名称TRAIT_NAME,
   class_standard=0
 )
 
 # Only write data files if they don't exist (use lazy-loaded data in production)
 if (!file.exists("data/baiaoyun_traits.txt")) {
-  write.table(bay, "data/baiaoyun_traits.txt", row.names = FALSE)
+  write.table(.bay_internal, "data/baiaoyun_traits.txt", row.names = FALSE)
 }
 if (!file.exists("data/field.txt")) {
-  write.table(read.xlsx("inst/extdata/temp_field.xlsx"), "data/field.txt", row.names = FALSE)
+  write.table(openxlsx::read.xlsx("inst/extdata/temp_field.xlsx"), "data/field.txt", row.names = FALSE)
 }
 if (!file.exists("data/mapa.txt")) {
-  write.table(read.xlsx("inst/extdata/temp_soy_mapa.xlsx"), "data/mapa.txt", row.names = FALSE)
+  write.table(openxlsx::read.xlsx("inst/extdata/temp_soy_mapa.xlsx"), "data/mapa.txt", row.names = FALSE)
 }
 
 
 
 
 # 使用separate_rows函数按照_分割level_C字段，并展开成多行，其他字段保持不变
-data <- soy_traits %>%
+.data_expanded <- soy_traits %>%
   separate_rows(level_C, sep = "_")
 # 使用mutate函数新增level_code字段，并使用gsub函数去除level_C中的非数字部分
-new_data <- data %>%
+.new_data_internal <- .data_expanded %>%
   mutate(level_code = gsub("[^0-9-]", "", level_C))
 # 使用mutate函数将name_code和level_code字段用-连接，并更新level_code字段的值
-new_data <- new_data %>%
+.new_data_internal <- .new_data_internal %>%
   mutate(level_code = paste(name_code, level_code, sep = "-"))
 if (!file.exists("data/qr_trait.txt")) {
-  write.table(new_data, "data/qr_trait.txt", row.names = FALSE)
+  write.table(.new_data_internal, "data/qr_trait.txt", row.names = FALSE)
 }
 
 

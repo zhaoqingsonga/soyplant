@@ -4,12 +4,12 @@
 \alias{align_to_field_schema}
 \title{对齐数据框字段到field模式}
 \usage{
-align_to_field_schema(df, field_df = field, table_pattern)
+align_to_field_schema(df, field_df = .get_field_table(), table_pattern)
 }
 \arguments{
 \item{df}{数据框，要对齐的数据}
 
-\item{field_df}{field数据框，默认使用全局field变量}
+\item{field_df}{field数据框，默认使用包内置的 field 表}
 
 \item{table_pattern}{字符向量，匹配table列的正则表达式}
 }

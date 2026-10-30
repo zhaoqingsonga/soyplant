@@ -43,8 +43,6 @@ designPlot(
 \item{plantFromLeft}{是否从左侧种植，默认值为TRUE。}
 
 \item{subg}{子组，默认值为3。}
-
-\item{blocks}{地块数。默认值为20。}
 }
 \value{
 返回设计的地块布局矩阵。

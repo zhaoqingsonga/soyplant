@@ -1,3 +1,15 @@
+#' 转换字段名为中文名
+#'
+#' 把数据框中的英文字段名转换为对应的中文名称。
+#'
+#' @param code 字符向量，要转换的字段名
+#' @param toenglish 逻辑值，TRUE 返回中文名，FALSE 返回英文名
+#'
+#' @return 字符向量，与 `code` 等长的转换结果
+#' @examples
+#' transname(c("id", "name", "ma"))
+#'
+#' @export
 transname <- function(code = c("fieldid", "id", "user", "stageid", "ma"), toenglish = TRUE) {
   # 使用命名向量：en2ch 的names是英文，values是中文
   en2ch <- c(

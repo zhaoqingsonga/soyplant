@@ -1,10 +1,10 @@
 
 #' 行数转行号
 #'
-#' @param hangshu 向量，各材料种植的行数
+#' @param number 向量，各材料种植的行数
 #' @return 返回各材料的行号
-#' @example
-#' number_to_linenumber(1:10)
+#' @examples
+#' rows_to_linenumber(1:10)
 
 rows_to_linenumber <- function(number = 1:10) {
   number <- as.numeric(number)
@@ -23,6 +23,9 @@ rows_to_linenumber <- function(number = 1:10) {
 #' @param s_prefix 材料前缀
 #' @param rp 种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同
 #' @return 返回插入对照和重复的数据框，给材料进行了编号
+#' @param digits 整数，材料编号的位数
+#' @param startN 整数，起始编号
+#' @param first_as_ck 逻辑值，首记录是否作为对照插入
 addrpckfixed <- function(my_primary,
                          ck = "JD12",
                          interval = 3,
@@ -104,11 +107,14 @@ addrpckfixed <- function(my_primary,
 #' 添加编码重复对照（对照随机）
 #'
 #'
-#' @param my_plant 数据框，数据框中要包含id,stageid,name三列
+#' @param my_primary 数据框，数据框中要包含id,stageid,name三列
 #' @param ck 向量，对照名称
 #' @param interval 插入对照的材料间隔数
 #' @param s_prefix 材料前缀
 #' @param rp 种植材料重复数，第一重复顺序，其它重复随机，并排两列材料不相同
+#' @param digits 整数，材料编号的位数
+#' @param startN 整数，起始编号
+#' @param first_as_ck 逻辑值，首记录是否作为对照插入
 #' @return 返回插入对照和重复的数据框，给材料进行了编号，对照随机
 
 #ck随机,相邻两个重复，并排时不会相同
@@ -205,6 +211,18 @@ addrpck <- function(my_primary,
 }
 
 
+#' 添加试验地点列
+#'
+#' 为数据框添加 `place` 列；地点向量有多个时循环填充。
+#'
+#' @param my_primary 数据框，要添加地点的数据
+#' @param place 字符向量，试验地点
+#'
+#' @return 数据框，含 place 列
+#' @examples
+#' addplace(data.frame(id = 1:3), c("石家庄", "德州"))
+#'
+#' @export
 addplace <- function(my_primary, place = c("石家庄", "德州")) {
   # 向量化版本：使用lapply + do.call(rbind)
   myd <- do.call(rbind, lapply(place, function(iname) {
@@ -215,6 +233,18 @@ addplace <- function(my_primary, place = c("石家庄", "德州")) {
   return(myd)
 }
 
+#' 添加处理列
+#'
+#' 为数据框添加 `treatment` 列；处理向量有多个水平时循环填充。
+#'
+#' @param my_primary 数据框，要添加处理的数据
+#' @param treatment 字符向量，处理水平
+#'
+#' @return 数据框，含 treatment 列
+#' @examples
+#' addtreatment(data.frame(id = 1:3), c("高密", "低密"))
+#'
+#' @export
 addtreatment <- function(my_primary, treatment = c("高密", "低密")) {
   # 向量化版本：使用lapply + do.call(rbind)
   myd <- do.call(rbind, lapply(treatment, function(iname) {
@@ -227,6 +257,17 @@ addtreatment <- function(my_primary, treatment = c("高密", "低密")) {
 
 
 
+#' 生成田间标识号
+#'
+#' 为数据框生成 `fieldid`（田间标识号）列。
+#'
+#' @param my_primary 数据框，要生成田间标识号的数据
+#'
+#' @return 数据框，含 fieldid 列
+#' @examples
+#' addfieldid(data.frame(id = 1:3))
+#'
+#' @export
 addfieldid <- function(my_primary) {
   fieldid <-
     data.frame(fieldid = generate_id(start_num = 1,end_num  = nrow(my_primary),char = "f"))
@@ -236,6 +277,21 @@ addfieldid <- function(my_primary) {
 
 ##
 ##考虑了不同地点是否重新编写FID
+#' 依次添加地点、田间标识号与每块行数
+#'
+#' 依次执行：添加 `place` 列 → 生成 `fieldid` 列 → 按 `rows` 计算
+#' 每块的行号区间 `line_number`。
+#'
+#' @param my_primary 数据框，要处理的数据
+#' @param place 字符向量，试验地点
+#' @param restartfid 逻辑值，不同地点是否重新从 1 开始编号
+#' @param rows 数值，每块的行数
+#'
+#' @return 数据框，含 place、fieldid、rows、line_number 列
+#' @examples
+#' addplace_addfieldid_addrows(data.frame(id = 1:3))
+#'
+#' @export
 addplace_addfieldid_addrows <- function(my_primary, place = c("石家庄", "德州"), restartfid = FALSE, rows = 6) {
   # 确保 rows 为数值型，避免 rows_to_linenumber 中 cumsum/subtract 失败
   rows_num <- as.numeric(rows)
@@ -353,8 +409,6 @@ planting <- function(
     startN = 1,
     first_as_ck = FALSE
 ) {
-  library(dplyr)
-
   # 如果没有 stageid 列，添加默认值为 NA
   if (!"stageid" %in% names(my_primary)) {
     my_primary <- my_primary |>

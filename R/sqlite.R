@@ -14,10 +14,6 @@
 #' write_df_to_sqlite(df, "my_database.sqlite", "my_table", overwrite = TRUE)
 #' }
 write_df_to_sqlite <- function(df, db_path, table_name, overwrite = FALSE, append = FALSE) {
-  # Load necessary packages
-  library(DBI)
-  library(RSQLite)
-
   # Connect to the SQLite database
   con <- dbConnect(RSQLite::SQLite(), dbname = db_path)
 
@@ -48,10 +44,6 @@ write_df_to_sqlite <- function(df, db_path, table_name, overwrite = FALSE, appen
 #' print(df)
 #' }
 read_df_from_sqlite <- function(db_path, table_name) {
-  # Load necessary packages
-  library(DBI)
-  library(RSQLite)
-
   # Connect to the SQLite database
   con <- dbConnect(RSQLite::SQLite(), dbname = db_path)
 
@@ -148,11 +140,13 @@ update_table_from_df <- function(db_path, table_name, data_df) {
 #' @return 一个列表，其中包含两个字符型向量：`success` 和 `failed`。`success` 向量包含成功添加的字段名称，`failed` 向量包含失败的字段名称及其失败原因。
 #'
 #' @examples
+#' \dontrun{
 #' db_path <- "path/to/your/database.sqlite"
 #' table_name <- "your_table"
 #' new_field_names <- c("new_column1", "new_column2")
 #' result <- add_fields_to_table(db_path, table_name, new_field_names)
 #' print(result)
+#' }
 #'
 #' @import DBI
 #' @import RSQLite
