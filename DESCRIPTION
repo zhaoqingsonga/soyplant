@@ -1,7 +1,7 @@
 Package: soyplant
 Type: Package
 Title: Planting soy and soy experiment design
-Version: 1.0.0
+Version: 1.1.0
 Author: Qingsong Zhao
 Maintainer: The package maintainer <zhaoqingsonga@163.com>
 Description: This is a package for soybean planting and design.
